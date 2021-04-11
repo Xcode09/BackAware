@@ -3,19 +3,33 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1313F39326235525003383FB /* ModeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1313F39126235525003383FB /* ModeVC.swift */; };
+		1313F39426235525003383FB /* ModeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1313F39226235525003383FB /* ModeVC.xib */; };
+		1313F3992623676B003383FB /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1313F3972623676B003383FB /* AboutVC.swift */; };
+		1313F39A2623676B003383FB /* AboutVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1313F3982623676B003383FB /* AboutVC.xib */; };
 		133FC13D26206DA60067B061 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133FC13C26206DA60067B061 /* AppDelegate.swift */; };
 		133FC13F26206DA60067B061 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133FC13E26206DA60067B061 /* SceneDelegate.swift */; };
 		133FC14126206DA60067B061 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133FC14026206DA60067B061 /* ViewController.swift */; };
 		133FC14426206DA60067B061 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 133FC14226206DA60067B061 /* Main.storyboard */; };
 		133FC14626206DAB0067B061 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 133FC14526206DAB0067B061 /* Assets.xcassets */; };
 		133FC14926206DAB0067B061 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 133FC14726206DAB0067B061 /* LaunchScreen.storyboard */; };
+		13536EB226233FCE00B3CEB0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13536EB126233FCE00B3CEB0 /* Constants.swift */; };
+		13536EB92623405100B3CEB0 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13536EB82623405100B3CEB0 /* TabBarVC.swift */; };
+		13536EBE2623410300B3CEB0 /* PlanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13536EBD2623410300B3CEB0 /* PlanVC.swift */; };
+		13536EC9262343AD00B3CEB0 /* PlanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13536EC7262343AD00B3CEB0 /* PlanCell.swift */; };
+		13536ECA262343AD00B3CEB0 /* PlanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13536EC8262343AD00B3CEB0 /* PlanCell.xib */; };
+		1BEE761BD15C22B1C0EC061C /* Pods_BackAware.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34F1616AF0B492BCBA27BB41 /* Pods_BackAware.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1313F39126235525003383FB /* ModeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeVC.swift; sourceTree = "<group>"; };
+		1313F39226235525003383FB /* ModeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModeVC.xib; sourceTree = "<group>"; };
+		1313F3972623676B003383FB /* AboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
+		1313F3982623676B003383FB /* AboutVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutVC.xib; sourceTree = "<group>"; };
 		133FC13926206DA60067B061 /* BackAware.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackAware.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		133FC13C26206DA60067B061 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		133FC13E26206DA60067B061 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +38,14 @@
 		133FC14526206DAB0067B061 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		133FC14826206DAB0067B061 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		133FC14A26206DAB0067B061 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		13536EB126233FCE00B3CEB0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		13536EB82623405100B3CEB0 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
+		13536EBD2623410300B3CEB0 /* PlanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanVC.swift; sourceTree = "<group>"; };
+		13536EC7262343AD00B3CEB0 /* PlanCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanCell.swift; sourceTree = "<group>"; };
+		13536EC8262343AD00B3CEB0 /* PlanCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlanCell.xib; sourceTree = "<group>"; };
+		34F1616AF0B492BCBA27BB41 /* Pods_BackAware.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BackAware.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4022E8CD9F4BBEE37170F59B /* Pods-BackAware.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BackAware.debug.xcconfig"; path = "Target Support Files/Pods-BackAware/Pods-BackAware.debug.xcconfig"; sourceTree = "<group>"; };
+		D8CD02C2144EEBE16EC8872A /* Pods-BackAware.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BackAware.release.xcconfig"; path = "Target Support Files/Pods-BackAware/Pods-BackAware.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +53,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BEE761BD15C22B1C0EC061C /* Pods_BackAware.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0CE01E3157516A723528B528 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4022E8CD9F4BBEE37170F59B /* Pods-BackAware.debug.xcconfig */,
+				D8CD02C2144EEBE16EC8872A /* Pods-BackAware.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		1313F39626236731003383FB /* AboutVC */ = {
+			isa = PBXGroup;
+			children = (
+				1313F3972623676B003383FB /* AboutVC.swift */,
+				1313F3982623676B003383FB /* AboutVC.xib */,
+			);
+			path = AboutVC;
+			sourceTree = "<group>";
+		};
 		133FC13026206DA60067B061 = {
 			isa = PBXGroup;
 			children = (
 				133FC13B26206DA60067B061 /* BackAware */,
 				133FC13A26206DA60067B061 /* Products */,
+				0CE01E3157516A723528B528 /* Pods */,
+				F271022874F5F652214E7BC0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,8 +99,10 @@
 		133FC13B26206DA60067B061 /* BackAware */ = {
 			isa = PBXGroup;
 			children = (
-				133FC13C26206DA60067B061 /* AppDelegate.swift */,
-				133FC13E26206DA60067B061 /* SceneDelegate.swift */,
+				13536EB62623401100B3CEB0 /* MainTabBarVC */,
+				13536EB026233F9300B3CEB0 /* Constants */,
+				13536EAF26233F7700B3CEB0 /* AuthenticationVC */,
+				13536EB526233FED00B3CEB0 /* DelegateFiles */,
 				133FC14026206DA60067B061 /* ViewController.swift */,
 				133FC14226206DA60067B061 /* Main.storyboard */,
 				133FC14526206DAB0067B061 /* Assets.xcassets */,
@@ -67,6 +112,68 @@
 			path = BackAware;
 			sourceTree = "<group>";
 		};
+		13536EAF26233F7700B3CEB0 /* AuthenticationVC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AuthenticationVC;
+			sourceTree = "<group>";
+		};
+		13536EB026233F9300B3CEB0 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				13536EB126233FCE00B3CEB0 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		13536EB526233FED00B3CEB0 /* DelegateFiles */ = {
+			isa = PBXGroup;
+			children = (
+				133FC13C26206DA60067B061 /* AppDelegate.swift */,
+				133FC13E26206DA60067B061 /* SceneDelegate.swift */,
+			);
+			path = DelegateFiles;
+			sourceTree = "<group>";
+		};
+		13536EB62623401100B3CEB0 /* MainTabBarVC */ = {
+			isa = PBXGroup;
+			children = (
+				1313F39626236731003383FB /* AboutVC */,
+				13536EBC262340B000B3CEB0 /* PlansVC */,
+				13536EBB262340A300B3CEB0 /* ModeVC */,
+				13536EB82623405100B3CEB0 /* TabBarVC.swift */,
+			);
+			path = MainTabBarVC;
+			sourceTree = "<group>";
+		};
+		13536EBB262340A300B3CEB0 /* ModeVC */ = {
+			isa = PBXGroup;
+			children = (
+				1313F39126235525003383FB /* ModeVC.swift */,
+				1313F39226235525003383FB /* ModeVC.xib */,
+			);
+			path = ModeVC;
+			sourceTree = "<group>";
+		};
+		13536EBC262340B000B3CEB0 /* PlansVC */ = {
+			isa = PBXGroup;
+			children = (
+				13536EBD2623410300B3CEB0 /* PlanVC.swift */,
+				13536EC7262343AD00B3CEB0 /* PlanCell.swift */,
+				13536EC8262343AD00B3CEB0 /* PlanCell.xib */,
+			);
+			path = PlansVC;
+			sourceTree = "<group>";
+		};
+		F271022874F5F652214E7BC0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				34F1616AF0B492BCBA27BB41 /* Pods_BackAware.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +181,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 133FC14D26206DAB0067B061 /* Build configuration list for PBXNativeTarget "BackAware" */;
 			buildPhases = (
+				6B0E4B8D3C76F9E27CC8AC6D /* [CP] Check Pods Manifest.lock */,
 				133FC13526206DA60067B061 /* Sources */,
 				133FC13626206DA60067B061 /* Frameworks */,
 				133FC13726206DA60067B061 /* Resources */,
+				02EB8D666C4CABFFBF9231EC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -124,13 +233,58 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13536ECA262343AD00B3CEB0 /* PlanCell.xib in Resources */,
+				1313F39426235525003383FB /* ModeVC.xib in Resources */,
 				133FC14926206DAB0067B061 /* LaunchScreen.storyboard in Resources */,
 				133FC14626206DAB0067B061 /* Assets.xcassets in Resources */,
+				1313F39A2623676B003383FB /* AboutVC.xib in Resources */,
 				133FC14426206DA60067B061 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		02EB8D666C4CABFFBF9231EC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BackAware/Pods-BackAware-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BackAware/Pods-BackAware-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BackAware/Pods-BackAware-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6B0E4B8D3C76F9E27CC8AC6D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BackAware-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		133FC13526206DA60067B061 /* Sources */ = {
@@ -138,8 +292,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				133FC14126206DA60067B061 /* ViewController.swift in Sources */,
+				13536EBE2623410300B3CEB0 /* PlanVC.swift in Sources */,
 				133FC13D26206DA60067B061 /* AppDelegate.swift in Sources */,
+				13536EB92623405100B3CEB0 /* TabBarVC.swift in Sources */,
 				133FC13F26206DA60067B061 /* SceneDelegate.swift in Sources */,
+				1313F3992623676B003383FB /* AboutVC.swift in Sources */,
+				1313F39326235525003383FB /* ModeVC.swift in Sources */,
+				13536EC9262343AD00B3CEB0 /* PlanCell.swift in Sources */,
+				13536EB226233FCE00B3CEB0 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,12 +443,14 @@
 		};
 		133FC14E26206DAB0067B061 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4022E8CD9F4BBEE37170F59B /* Pods-BackAware.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8TRWBBRCRY;
 				INFOPLIST_FILE = BackAware/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -296,18 +458,20 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Muhammad-Ali.BackAware";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		133FC14F26206DAB0067B061 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8CD02C2144EEBE16EC8872A /* Pods-BackAware.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8TRWBBRCRY;
 				INFOPLIST_FILE = BackAware/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -315,7 +479,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Muhammad-Ali.BackAware";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
