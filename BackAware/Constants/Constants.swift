@@ -7,6 +7,15 @@
 
 import UIKit
 
+let APP_DATE_FORMATE = "yyyy-MM-dd"
+struct FirebaseDbPaths{
+    static let baseUrl = "FuY5fZroeygH7wybpWbWAGjb0tJ3"
+    static let calibrate = "Calibrate"
+    static let sensorData = "SensorData"
+    static let statistics = "Statistics"
+    static let trackingTime = "TrackingTime"
+    static let trainingTest = "TrainingTest"
+}
 
 struct AppColors {
     static let bgColor = UIColor.systemBackground

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import FirebaseCore
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupNavigationAppearance()
         setupTabBarAppearance()
+        FirebaseApp.configure()
+        //FirebaseDataService.instance.getData()
         return true
     }
 

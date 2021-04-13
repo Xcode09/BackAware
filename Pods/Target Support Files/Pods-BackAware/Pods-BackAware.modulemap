@@ -1,0 +1,6 @@
+framework module Pods_BackAware {
+  umbrella header "Pods-BackAware-umbrella.h"
+
+  export *
+  module * { export * }
+}

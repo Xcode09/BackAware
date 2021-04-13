@@ -22,6 +22,11 @@
 		13536EBE2623410300B3CEB0 /* PlanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13536EBD2623410300B3CEB0 /* PlanVC.swift */; };
 		13536EC9262343AD00B3CEB0 /* PlanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13536EC7262343AD00B3CEB0 /* PlanCell.swift */; };
 		13536ECA262343AD00B3CEB0 /* PlanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13536EC8262343AD00B3CEB0 /* PlanCell.xib */; };
+		13BB85522625F3B9003FAB2D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13BB85512625F3B9003FAB2D /* GoogleService-Info.plist */; };
+		13BB85562625F7E4003FAB2D /* FirebaseDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB85552625F7E4003FAB2D /* FirebaseDataService.swift */; };
+		13BB855B2625FF3F003FAB2D /* CalibrationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB85592625FF3F003FAB2D /* CalibrationSettings.swift */; };
+		13BB855C2625FF3F003FAB2D /* CalibrationSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13BB855A2625FF3F003FAB2D /* CalibrationSettings.xib */; };
+		13BB856026260F0F003FAB2D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB855F26260F0F003FAB2D /* Extensions.swift */; };
 		1BEE761BD15C22B1C0EC061C /* Pods_BackAware.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34F1616AF0B492BCBA27BB41 /* Pods_BackAware.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +48,11 @@
 		13536EBD2623410300B3CEB0 /* PlanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanVC.swift; sourceTree = "<group>"; };
 		13536EC7262343AD00B3CEB0 /* PlanCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanCell.swift; sourceTree = "<group>"; };
 		13536EC8262343AD00B3CEB0 /* PlanCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlanCell.xib; sourceTree = "<group>"; };
+		13BB85512625F3B9003FAB2D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		13BB85552625F7E4003FAB2D /* FirebaseDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDataService.swift; sourceTree = "<group>"; };
+		13BB85592625FF3F003FAB2D /* CalibrationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrationSettings.swift; sourceTree = "<group>"; };
+		13BB855A2625FF3F003FAB2D /* CalibrationSettings.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalibrationSettings.xib; sourceTree = "<group>"; };
+		13BB855F26260F0F003FAB2D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		34F1616AF0B492BCBA27BB41 /* Pods_BackAware.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BackAware.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4022E8CD9F4BBEE37170F59B /* Pods-BackAware.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BackAware.debug.xcconfig"; path = "Target Support Files/Pods-BackAware/Pods-BackAware.debug.xcconfig"; sourceTree = "<group>"; };
 		D8CD02C2144EEBE16EC8872A /* Pods-BackAware.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BackAware.release.xcconfig"; path = "Target Support Files/Pods-BackAware/Pods-BackAware.release.xcconfig"; sourceTree = "<group>"; };
@@ -99,6 +109,8 @@
 		133FC13B26206DA60067B061 /* BackAware */ = {
 			isa = PBXGroup;
 			children = (
+				13BB855E26260EF3003FAB2D /* Extensions */,
+				13BB85542625F7C3003FAB2D /* FirebaseDataService */,
 				13536EB62623401100B3CEB0 /* MainTabBarVC */,
 				13536EB026233F9300B3CEB0 /* Constants */,
 				13536EAF26233F7700B3CEB0 /* AuthenticationVC */,
@@ -107,6 +119,7 @@
 				133FC14226206DA60067B061 /* Main.storyboard */,
 				133FC14526206DAB0067B061 /* Assets.xcassets */,
 				133FC14726206DAB0067B061 /* LaunchScreen.storyboard */,
+				13BB85512625F3B9003FAB2D /* GoogleService-Info.plist */,
 				133FC14A26206DAB0067B061 /* Info.plist */,
 			);
 			path = BackAware;
@@ -139,6 +152,7 @@
 		13536EB62623401100B3CEB0 /* MainTabBarVC */ = {
 			isa = PBXGroup;
 			children = (
+				13BB85582625FF04003FAB2D /* CalibrationSettings */,
 				1313F39626236731003383FB /* AboutVC */,
 				13536EBC262340B000B3CEB0 /* PlansVC */,
 				13536EBB262340A300B3CEB0 /* ModeVC */,
@@ -164,6 +178,31 @@
 				13536EC8262343AD00B3CEB0 /* PlanCell.xib */,
 			);
 			path = PlansVC;
+			sourceTree = "<group>";
+		};
+		13BB85542625F7C3003FAB2D /* FirebaseDataService */ = {
+			isa = PBXGroup;
+			children = (
+				13BB85552625F7E4003FAB2D /* FirebaseDataService.swift */,
+			);
+			path = FirebaseDataService;
+			sourceTree = "<group>";
+		};
+		13BB85582625FF04003FAB2D /* CalibrationSettings */ = {
+			isa = PBXGroup;
+			children = (
+				13BB85592625FF3F003FAB2D /* CalibrationSettings.swift */,
+				13BB855A2625FF3F003FAB2D /* CalibrationSettings.xib */,
+			);
+			path = CalibrationSettings;
+			sourceTree = "<group>";
+		};
+		13BB855E26260EF3003FAB2D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				13BB855F26260F0F003FAB2D /* Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		F271022874F5F652214E7BC0 /* Frameworks */ = {
@@ -234,11 +273,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				13536ECA262343AD00B3CEB0 /* PlanCell.xib in Resources */,
+				13BB855C2625FF3F003FAB2D /* CalibrationSettings.xib in Resources */,
 				1313F39426235525003383FB /* ModeVC.xib in Resources */,
 				133FC14926206DAB0067B061 /* LaunchScreen.storyboard in Resources */,
 				133FC14626206DAB0067B061 /* Assets.xcassets in Resources */,
 				1313F39A2623676B003383FB /* AboutVC.xib in Resources */,
 				133FC14426206DA60067B061 /* Main.storyboard in Resources */,
+				13BB85522625F3B9003FAB2D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,10 +334,13 @@
 			files = (
 				133FC14126206DA60067B061 /* ViewController.swift in Sources */,
 				13536EBE2623410300B3CEB0 /* PlanVC.swift in Sources */,
+				13BB855B2625FF3F003FAB2D /* CalibrationSettings.swift in Sources */,
 				133FC13D26206DA60067B061 /* AppDelegate.swift in Sources */,
 				13536EB92623405100B3CEB0 /* TabBarVC.swift in Sources */,
 				133FC13F26206DA60067B061 /* SceneDelegate.swift in Sources */,
 				1313F3992623676B003383FB /* AboutVC.swift in Sources */,
+				13BB856026260F0F003FAB2D /* Extensions.swift in Sources */,
+				13BB85562625F7E4003FAB2D /* FirebaseDataService.swift in Sources */,
 				1313F39326235525003383FB /* ModeVC.swift in Sources */,
 				13536EC9262343AD00B3CEB0 /* PlanCell.swift in Sources */,
 				13536EB226233FCE00B3CEB0 /* Constants.swift in Sources */,
@@ -455,7 +499,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Muhammad-Ali.BackAware";
+				PRODUCT_BUNDLE_IDENTIFIER = com.devomech.backawareiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -476,7 +520,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Muhammad-Ali.BackAware";
+				PRODUCT_BUNDLE_IDENTIFIER = com.devomech.backawareiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

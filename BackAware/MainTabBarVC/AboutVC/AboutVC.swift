@@ -12,7 +12,7 @@ class AboutVC: UITableViewController {
     private let identifer = "cell"
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = AppColors.bgColor
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: identifer)
         
         
