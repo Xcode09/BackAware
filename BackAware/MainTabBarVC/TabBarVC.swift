@@ -15,7 +15,9 @@ class TabBarVC: UITabBarController {
         // Do any additional setup after loading the view.
         
         
-        self.viewControllers = [setupModeVC(),setupPlanVC(),setupAboutVC()]
+        self.viewControllers = [setupModeVC(),setupPlanVC(),
+                                setupStatisticsVC(),
+                                setupAboutVC()]
         
         
     }
@@ -25,15 +27,6 @@ class TabBarVC: UITabBarController {
         self.selectedIndex = 1
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     
     private func setupPlanVC()->UINavigationController{
@@ -58,6 +51,15 @@ class TabBarVC: UITabBarController {
         
         let nav = UINavigationController(rootViewController: AboutVC(nibName: "AboutVC", bundle: nil))
         let tabBar = UITabBarItem(title: "Mode", image: UIImage.init(systemName: "house.fill"), selectedImage: UIImage.init(systemName: "house.fill"))
+        nav.tabBarItem.tag = 4
+        nav.tabBarItem = tabBar
+        return nav
+    }
+    
+    private func setupStatisticsVC()->UINavigationController{
+        
+        let nav = UINavigationController(rootViewController: StatisticsVC(nibName: "StatisticsVC", bundle: nil))
+        let tabBar = UITabBarItem(title: "Statistics", image: UIImage.init(systemName: "house.fill"), selectedImage: UIImage.init(systemName: "house.fill"))
         nav.tabBarItem.tag = 3
         nav.tabBarItem = tabBar
         return nav

@@ -11,6 +11,10 @@
 		1313F39426235525003383FB /* ModeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1313F39226235525003383FB /* ModeVC.xib */; };
 		1313F3992623676B003383FB /* AboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1313F3972623676B003383FB /* AboutVC.swift */; };
 		1313F39A2623676B003383FB /* AboutVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1313F3982623676B003383FB /* AboutVC.xib */; };
+		1322FFA526273B940042608B /* StatisticsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1322FFA326273B940042608B /* StatisticsVC.swift */; };
+		1322FFA626273B940042608B /* StatisticsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1322FFA426273B940042608B /* StatisticsVC.xib */; };
+		1322FFAC2627565E0042608B /* TrackTimeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1322FFAA2627565E0042608B /* TrackTimeGraph.swift */; };
+		1322FFAD2627565E0042608B /* TrackTimeGraph.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1322FFAB2627565E0042608B /* TrackTimeGraph.xib */; };
 		133FC13D26206DA60067B061 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133FC13C26206DA60067B061 /* AppDelegate.swift */; };
 		133FC13F26206DA60067B061 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133FC13E26206DA60067B061 /* SceneDelegate.swift */; };
 		133FC14126206DA60067B061 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133FC14026206DA60067B061 /* ViewController.swift */; };
@@ -35,6 +39,10 @@
 		1313F39226235525003383FB /* ModeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModeVC.xib; sourceTree = "<group>"; };
 		1313F3972623676B003383FB /* AboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVC.swift; sourceTree = "<group>"; };
 		1313F3982623676B003383FB /* AboutVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutVC.xib; sourceTree = "<group>"; };
+		1322FFA326273B940042608B /* StatisticsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsVC.swift; sourceTree = "<group>"; };
+		1322FFA426273B940042608B /* StatisticsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatisticsVC.xib; sourceTree = "<group>"; };
+		1322FFAA2627565E0042608B /* TrackTimeGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackTimeGraph.swift; sourceTree = "<group>"; };
+		1322FFAB2627565E0042608B /* TrackTimeGraph.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackTimeGraph.xib; sourceTree = "<group>"; };
 		133FC13926206DA60067B061 /* BackAware.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackAware.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		133FC13C26206DA60067B061 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		133FC13E26206DA60067B061 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +94,25 @@
 				1313F3982623676B003383FB /* AboutVC.xib */,
 			);
 			path = AboutVC;
+			sourceTree = "<group>";
+		};
+		1322FFA226273B5B0042608B /* StatisticsVcs */ = {
+			isa = PBXGroup;
+			children = (
+				1322FFA92627560C0042608B /* TrackGraphVC */,
+				1322FFA326273B940042608B /* StatisticsVC.swift */,
+				1322FFA426273B940042608B /* StatisticsVC.xib */,
+			);
+			path = StatisticsVcs;
+			sourceTree = "<group>";
+		};
+		1322FFA92627560C0042608B /* TrackGraphVC */ = {
+			isa = PBXGroup;
+			children = (
+				1322FFAA2627565E0042608B /* TrackTimeGraph.swift */,
+				1322FFAB2627565E0042608B /* TrackTimeGraph.xib */,
+			);
+			path = TrackGraphVC;
 			sourceTree = "<group>";
 		};
 		133FC13026206DA60067B061 = {
@@ -152,6 +179,7 @@
 		13536EB62623401100B3CEB0 /* MainTabBarVC */ = {
 			isa = PBXGroup;
 			children = (
+				1322FFA226273B5B0042608B /* StatisticsVcs */,
 				13BB85582625FF04003FAB2D /* CalibrationSettings */,
 				1313F39626236731003383FB /* AboutVC */,
 				13536EBC262340B000B3CEB0 /* PlansVC */,
@@ -278,8 +306,10 @@
 				133FC14926206DAB0067B061 /* LaunchScreen.storyboard in Resources */,
 				133FC14626206DAB0067B061 /* Assets.xcassets in Resources */,
 				1313F39A2623676B003383FB /* AboutVC.xib in Resources */,
+				1322FFA626273B940042608B /* StatisticsVC.xib in Resources */,
 				133FC14426206DA60067B061 /* Main.storyboard in Resources */,
 				13BB85522625F3B9003FAB2D /* GoogleService-Info.plist in Resources */,
+				1322FFAD2627565E0042608B /* TrackTimeGraph.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,8 +368,10 @@
 				133FC13D26206DA60067B061 /* AppDelegate.swift in Sources */,
 				13536EB92623405100B3CEB0 /* TabBarVC.swift in Sources */,
 				133FC13F26206DA60067B061 /* SceneDelegate.swift in Sources */,
+				1322FFA526273B940042608B /* StatisticsVC.swift in Sources */,
 				1313F3992623676B003383FB /* AboutVC.swift in Sources */,
 				13BB856026260F0F003FAB2D /* Extensions.swift in Sources */,
+				1322FFAC2627565E0042608B /* TrackTimeGraph.swift in Sources */,
 				13BB85562625F7E4003FAB2D /* FirebaseDataService.swift in Sources */,
 				1313F39326235525003383FB /* ModeVC.swift in Sources */,
 				13536EC9262343AD00B3CEB0 /* PlanCell.swift in Sources */,

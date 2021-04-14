@@ -12,4 +12,5 @@ target 'BackAware' do
    pod 'RxCocoa'
    pod 'Firebase/Auth'
    pod 'Firebase/Database'
+   pod 'Charts'
 end

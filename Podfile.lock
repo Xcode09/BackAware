@@ -1,4 +1,7 @@
 PODS:
+  - Charts (3.6.0):
+    - Charts/Core (= 3.6.0)
+  - Charts/Core (3.6.0)
   - Firebase/Auth (7.4.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 7.4.0)
@@ -57,6 +60,7 @@ PODS:
   - RxSwift (6.0.0)
 
 DEPENDENCIES:
+  - Charts
   - Firebase/Auth
   - Firebase/Database
   - RxCocoa
@@ -64,6 +68,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Charts
     - Firebase
     - FirebaseAuth
     - FirebaseCore
@@ -80,6 +85,7 @@ SPEC REPOS:
     - RxSwift
 
 SPEC CHECKSUMS:
+  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   Firebase: 09fb40287b6dfc8ee65f726fa0b788719d3f2a07
   FirebaseAuth: d8dba8db90a1705ee2493857047282ca4f6e7598
   FirebaseCore: 99c06e5a1e8d6952e75cb1f0a6d0b23c0f5ccdcf
@@ -95,6 +101,6 @@ SPEC CHECKSUMS:
   RxRelay: 8d593be109c06ea850df027351beba614b012ffb
   RxSwift: c14e798c59b9f6e9a2df8fd235602e85cc044295
 
-PODFILE CHECKSUM: 1de8b66f87b32a8677237f687ed468dc52ae08d6
+PODFILE CHECKSUM: 1098c6e358bb9479a1dfc84709047d587cfe94ab
 
 COCOAPODS: 1.8.4
