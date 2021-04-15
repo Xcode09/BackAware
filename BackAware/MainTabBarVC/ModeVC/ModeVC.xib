@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ModeVC" customModule="BackAware" customModuleProvider="target">
             <connections>
+                <outlet property="tableView" destination="Qxv-fP-N6e" id="Y1B-xE-5SM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -169,13 +170,21 @@
                         <constraint firstAttribute="bottom" secondItem="bPU-AK-Xa5" secondAttribute="bottom" id="ngS-Q7-Ho1"/>
                     </constraints>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qxv-fP-N6e">
+                    <rect key="frame" x="8" y="298" width="398" height="564"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="gKN-Dw-ztq" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="0vw-Ya-BnG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Qxv-fP-N6e" secondAttribute="bottom" id="2Mj-RT-tlL"/>
                 <constraint firstItem="gKN-Dw-ztq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="4nf-0F-RRm"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="gKN-Dw-ztq" secondAttribute="trailing" constant="16" id="Inj-u6-Jlb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Qxv-fP-N6e" secondAttribute="trailing" constant="8" id="ZcB-jC-YlN"/>
+                <constraint firstItem="Qxv-fP-N6e" firstAttribute="top" secondItem="gKN-Dw-ztq" secondAttribute="bottom" constant="4" id="rs8-q8-DgJ"/>
+                <constraint firstItem="Qxv-fP-N6e" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="xg5-eN-Uqz"/>
             </constraints>
             <point key="canvasLocation" x="69.565217391304358" y="61.607142857142854"/>
         </view>
