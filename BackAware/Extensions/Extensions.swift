@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVKit
 class CheckBox: UIButton {
     // Images
     let checkedImage = UIImage(named: "checkbox")!
@@ -21,15 +22,29 @@ class CheckBox: UIButton {
             }
         }
     }
-        
+    
+    var isTapped:((Bool)->Void)?
+    
+    
     override func awakeFromNib() {
         self.addTarget(self, action:#selector(buttonClicked(sender:)), for: UIControl.Event.touchUpInside)
-        self.isChecked = false
     }
-        
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if let isTrue = UserDefaults.standard.value(forKey: "\(self.tag)") as? String,isTrue == "true"{
+            self.setImage(checkedImage, for: .normal)
+            self.isChecked = true
+        }else{
+            self.isChecked = false
+        }
+    }
+    
     @objc func buttonClicked(sender: UIButton) {
         if sender == self {
             isChecked = !isChecked
+            UserDefaults.standard.set("\(isChecked)", forKey: "\(self.tag)")
+            UserDefaults.standard.synchronize()
+            isTapped?(isChecked)
         }
     }
 }
@@ -43,5 +58,39 @@ struct TimeAndDateHelper {
         formatter.dateFormat = APP_DATE_FORMATE
         // get the date time String from the date object
         return formatter.string(from: currentDateTime)
+    }
+}
+
+extension UIView{
+    func applyCardView(cornerRadius:CGFloat=10.0){
+        layer.cornerRadius = cornerRadius
+        layer.shadowColor = UIColor.gray.cgColor
+        layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        layer.shadowRadius = 12.0
+        layer.shadowOpacity = 0.7
+    }
+}
+
+extension UICollectionViewCell{
+    func genarateThumbnailFromYouTubeID(youTubeID: String)->UIImage?
+    {
+        let urlString = "http://img.youtube.com/vi/\(youTubeID)/1.jpg"
+        let image = UIImage(contentsOfFile: urlString)
+        return image
+    }
+    
+    
+    //From VideoUrl
+    func getThumbnailFromVideoUrl(urlString: String)->UIImage{
+        let asset = AVAsset(url: URL(string: urlString)!)
+        let assetImgGenerate : AVAssetImageGenerator = AVAssetImageGenerator(asset: asset)
+        assetImgGenerate.appliesPreferredTrackTransform = true
+        let time = CMTimeMake(value: 1, timescale: 20)
+        let img = try? assetImgGenerate.copyCGImage(at: time, actualTime: nil)
+        if img != nil {
+            let frameImg  = UIImage(cgImage: img!)
+            return frameImg
+        }
+        return UIImage()
     }
 }

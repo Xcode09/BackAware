@@ -12,45 +12,119 @@ class ModeVC: UIViewController {
     private var characteristicUUID = CBUUID(string: "4AC8A682-9736-4E5D-932B-E9B31405049C")
     private var readUUID = CBUUID(string: "0972EF8C-7613-4075-AD52-756F33D4DA91")
     private var writeUUID = CBUUID(string: "4AC8A682-9736-4E5D-932B-E9B31405049C")
-    var peripherals:[CBPeripheral] = []
-    var manager:CBCentralManager? = nil
+    private var peripherals:[CBPeripheral] = []
+    private var manager:CBCentralManager? = nil
     var parentView:UIViewController? = nil
+    private var sensorValue = 0
+    private var secondsArr = [Int]()
+    private var defualtColor : UIColor?
+    private var isConnected = false
+    @IBOutlet weak private var poorPostionCheckBox:CheckBox!
+    @IBOutlet weak private var poorPostionlabel:UILabel!
+    @IBOutlet weak private var microBreakCheckBox:CheckBox!
+    @IBOutlet weak var timePicker:UITextField!{
+        didSet{
+            let picker = UIPickerView()
+            picker.delegate = self
+            picker.dataSource = self
+            timePicker.isEnabled = false
+            
+            timePicker.inputView = picker
+        }
+    }
     @IBOutlet weak var tableView:UITableView!{
         didSet{
             tableView.delegate = self
             tableView.dataSource = self
+            tableView.tableFooterView = UIView()
+            tableView.backgroundColor = AppColors.tableViewColor
             tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = AppColors.bgColor
         // Do any additional setup after loading the view.
         manager?.delegate = self
-        let centralQueue: DispatchQueue = DispatchQueue(label: "com.iosbrain.centralQueueName", attributes: .concurrent)
-        // STEP 2: create a central to scan for, connect to,
-        // manage, and collect data from peripherals
-        manager = CBCentralManager(delegate: self, queue: centralQueue)
+        
+        
+        for i in 0..<59{
+            secondsArr.append(i)
+        }
+        
+        poorPostionCheckBox.isTapped = {
+            [weak self] (done) in
+            if done{
+                self?.poorPostionlabel.textColor = self?.defualtColor
+                self?.timePicker.isEnabled = true
+                self?.timePicker.resignFirstResponder()
+            }else{
+                self?.defualtColor = self?.poorPostionlabel.textColor
+                self?.poorPostionlabel.textColor = .lightGray
+                self?.timePicker.isEnabled = false
+                self?.timePicker.resignFirstResponder()
+            }
+            
+        }
+        
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(setData), userInfo:nil, repeats: true)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = "Mode"
+    }
+    
+    
+    
+    @IBAction private func startScanTapped(_ sender:UIButton){
         scanBLEDevices()
     }
     
+    @IBAction private func disconnectScanTapped(_ sender:UIButton){
+        peripherals.forEach { (peripheral) in
+            manager?.cancelPeripheralConnection(peripheral)
+        }
+        isConnected = false
+        peripherals.removeAll()
+        tableView.reloadData()
+        
+    }
+    
+    @IBAction private func calibrationBtnTapped(_ sender:UIButton){
+        let vc = CalibrationSettings(nibName: "CalibrationSettings", bundle: nil)
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     // MARK: BLE Scanning
     func scanBLEDevices() {
         //manager?.scanForPeripherals(withServices: [CBUUID.init(string: parentView!.BLEService)], options: nil)
-        
+        Toast.showToast(superView: self.view, message: "Scanning Start..")
         //if you pass nil in the first parameter, then scanForPeriperals will look for any devices.
+        
+        let centralQueue: DispatchQueue = DispatchQueue(label: "com.iosbrain.centralQueueName", attributes: .concurrent)
+        // STEP 2: create a central to scan for, connect to,
+        // manage, and collect data from peripherals
+        manager = CBCentralManager(delegate: self, queue: centralQueue)
         manager?.scanForPeripherals(withServices: nil)
         
         //stop scanning after 3 seconds
-        //        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-        //            self.stopScanForBLEDevices()
-        //        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.stopScanForBLEDevices()
+        }
     }
     func stopScanForBLEDevices() {
         manager?.stopScan()
+        Toast.showToast(superView: self.view, message: "Finished Scanning")
     }
     
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.tableView.endEditing(true)
+        self.view.endEditing(true)
+    }
 }
 
 extension ModeVC:UITableViewDelegate,UITableViewDataSource{
@@ -64,7 +138,12 @@ extension ModeVC:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let peripheral = peripherals[indexPath.row]
-        cell.textLabel?.text = peripheral.name
+        if isConnected{
+            cell.textLabel?.text = "\(peripheral.name ?? "Unknown Device") \t \t \t \t \t Connected"
+        }else{
+            cell.textLabel?.text = "\(peripheral.name ?? "Unknown Device")"
+        }
+        
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -84,30 +163,47 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
         
         case .unknown:
             print("Bluetooth status is UNKNOWN")
+//            Toast.showToast(superView: self.view, message: "Bluetooth status is UNKNOWN")
         //bluetoothOffLabel.alpha = 1.0
         case .resetting:
             print("Bluetooth status is RESETTING")
+//            Toast.showToast(superView: self.view, message: "Bluetooth status is RESETTING")
         //bluetoothOffLabel.alpha = 1.0
         case .unsupported:
-            print("Bluetooth status is UNSUPPORTED")
+            DispatchQueue.main.async { () -> Void in
+                print("Bluetooth status is UNSUPPORTED")
+//                Toast.showToast(superView: self.view, message: "Bluetooth status is UNSUPPORTED")
+            }
+            
         //bluetoothOffLabel.alpha = 1.0
         case .unauthorized:
-            print("Bluetooth status is UNAUTHORIZED")
+            DispatchQueue.main.async { () -> Void in
+                print("Bluetooth status is UNAUTHORIZED")
+//                Toast.showToast(superView: self.view, message: "Bluetooth status is UNAUTHORIZED")
+            }
+            
         //bluetoothOffLabel.alpha = 1.0
         case .poweredOff:
-            print("Bluetooth status is POWERED OFF")
+            DispatchQueue.main.async { () -> Void in
+//                Toast.showToast(superView: self.view, message: "Bluetooth status is POWERED OFF")
+                print("Bluetooth status is POWERED OFF")
+            }
+            
         //bluetoothOffLabel.alpha = 1.0
         case .poweredOn:
+            
             print("Bluetooth status is POWERED ON")
             
             DispatchQueue.main.async { () -> Void in
-                //                self.bluetoothOffLabel.alpha = 0.0
-                //                self.connectingActivityIndicator.startAnimating()
+                
+//                Toast.showToast(superView: self.view, message: "Bluetooth status is POWERED ON")
             }
             
             // STEP 3.2: scan for peripherals that we're interested in
             manager?.scanForPeripherals(withServices:nil)
             
+        @unknown default:
+            print("")
         } // END switch
         
     }
@@ -123,18 +219,6 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
         }
         //self.tableView.reloadData()
     }
-    
-    //    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : AnyObject], rssi RSSI: NSNumber) {
-    //
-    //        if(!peripherals.contains(peripheral)) {
-    //            peripherals.append(peripheral)
-    //        }
-    //
-    //        self.tableView.reloadData()
-    //    }
-    
-    
-    
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         
         //pass reference to connected peripheral to parent view
@@ -144,12 +228,20 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
         
         //set the manager's delegate view to parent so it can call relevant disconnect methods
         //        manager?.delegate = self
-        
+        DispatchQueue.main.async {
+            [weak self] in
+            self?.isConnected = true
+            self?.tableView.reloadData()
+        }
         print("Connected to " +  peripheral.name!)
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        print(error!)
+        DispatchQueue.main.async {
+            
+            Toast.showToast(superView: self.view, message: error?.localizedDescription ?? "Error")
+        }
+        
     }
     
     
@@ -162,14 +254,14 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
             print(service.uuid)
             
             if service.uuid == serviceId {
-
+                
                 print("Service: \(service)")
-
+                
                 // STEP 9: look for characteristics of interest
                 // within services of interest
                 peripheral.discoverServices([serviceId])
                 peripheral.discoverCharacteristics(nil, for: service)
-
+                
             }
             
         }
@@ -177,7 +269,10 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
     }
     
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
-        print(characteristic)
+        DispatchQueue.main.async {
+            
+            Toast.showToast(superView: self.view, message: error?.localizedDescription ?? "Error")
+        }
     }
     
     
@@ -195,46 +290,9 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
             if characteristic.properties.contains(.notify) {
                 peripheral.setNotifyValue(true, for: characteristic)
             }
-          }
+        }
         
         
-//        for characteristic in service.characteristics! {
-//            print(characteristic)
-//
-//            if characteristic.uuid == writeUUID {
-//
-//                // STEP 11: subscribe to a single notification
-//                // for characteristic of interest;
-//                // "When you call this method to read
-//                // the value of a characteristic, the peripheral
-//                // calls ... peripheral:didUpdateValueForCharacteristic:error:
-//                //
-//                // Read    Mandatory
-//                //
-//
-//                peripheral.setNotifyValue(true, for: characteristic)
-//                peripheral.readValue(for: characteristic)
-//                //peripheral.setNotifyValue(true, for: characteristic)
-//
-//            }
-//            if characteristic.uuid == readUUID {
-//
-//                // STEP 11: subscribe to a single notification
-//                // for characteristic of interest;
-//                // "When you call this method to read
-//                // the value of a characteristic, the peripheral
-//                // calls ... peripheral:didUpdateValueForCharacteristic:error:
-//                //
-//                // Read    Mandatory
-//                //
-//                //peripheral.readValue(for: characteristic)
-//                peripheral.setNotifyValue(true, for: characteristic)
-//                peripheral.readValue(for: characteristic)
-//
-//            }
-//
-//
-//        } // END for
     }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
@@ -245,32 +303,34 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
             
             // STEP 13: we generally have to decode BLE
             // data into human readable format
-            let heartRate = deriveBeatsPerMinute(using: characteristic)
+            sensorValue = deriveBeatsPerMinute(using: characteristic)
             
-            print(heartRate)
+            print(sensorValue)
             
-            DispatchQueue.main.async { () -> Void in
-                
-                UIView.animate(withDuration: 1.0, animations: {
-//                    self.beatsPerMinuteLabel.alpha = 1.0
-//                    self.beatsPerMinuteLabel.text = String(heartRate)
-                }, completion: { (true) in
-                    //self.beatsPerMinuteLabel.alpha = 0.0
-                })
-                
-            } // END DispatchQueue.main.async...
- 
+            
+            
         }
         // END if characteristic.uuid ==..
     }
     
+    @objc private func setData(){
+        if sensorValue != 0 {
+            let dic = ["Data1":sensorValue,"Data2":"","Time":TimeAndDateHelper.getDate()] as [String : Any]
+            FirebaseDataService.instance.setData(value: dic)
+        }
+        
+    }
     
     func deriveBeatsPerMinute(using heartRateMeasurementCharacteristic: CBCharacteristic) -> Int {
         
         guard let heartRateValue = heartRateMeasurementCharacteristic.value else { return -00 }
         // convert to an array of unsigned 8-bit integers
+        print("VALUES",heartRateValue)
+        
         let buffer = [UInt8](heartRateValue)
- 
+        
+        print("Buffer",buffer)
+        
         // UInt8: "An 8-bit unsigned integer value type."
         
         // the first byte (8 bits) in the buffer is flags
@@ -284,13 +344,31 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
             // healthKitInterface.writeHeartRateData(heartRate: Int(buffer[1]))
             return Int(buffer[1])
         } else { // I've never seen this use case, so I'll
-                 // leave it to theoroticians to argue
+            // leave it to theoroticians to argue
             // 2nd and 3rd bytes: "Heart Rate Value Format is set to UINT16."
             print("BPM is UInt16")
-            return -1
+            return 0
         }
         
     }
 }
-//4AC8A682-9736-4E5D-932B-E9B31405049C
-//0972EF8C-7613-4075-AD52-756F33D4DA91
+extension ModeVC:UIPickerViewDelegate,UIPickerViewDataSource{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return secondsArr.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return "\(secondsArr[row])"
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        timePicker.text = "\(secondsArr[row]) min"
+        timePicker.resignFirstResponder()
+    }
+    
+    
+}

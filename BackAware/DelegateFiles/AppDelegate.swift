@@ -40,12 +40,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UINavigationBar.appearance().barTintColor = AppColors.navBarColor
 //        UINavigationBar.appearance().tintColor = AppColors.navBarColor
        UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: AppColors.labelColor!,NSAttributedString.Key.font: UIFont.systemFont(ofSize: 22, weight: .bold)]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: AppColors.labelColor!,NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .bold)]
     }
     
     private func setupTabBarAppearance()
     {
         UITabBar.appearance().barTintColor = AppColors.tabBarTintColor
+        UITabBar.appearance().shadowImage = UIImage()
         UITabBar.appearance().tintColor = AppColors.tabTintColor
         UITabBar.appearance().isTranslucent = false
 //        UITabBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]

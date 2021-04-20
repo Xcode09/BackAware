@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 import FirebaseDatabase
 final class FirebaseDataService{
     
@@ -14,14 +15,33 @@ final class FirebaseDataService{
     private init(){}
     
     
-    func getData(complicationHandler:@escaping ((Int)->Void))
+    func getData(eventType:DataEventType = .value,complicationHandler:@escaping ((Int)->Void))
     {
-        ref.child(FirebaseDbPaths.sensorData).observeSingleEvent(of: .value, with: { (snapshot) in
-            if let dic = snapshot.value as? [String:Any]{
-                let data1 = dic["Data1"] as? Int ?? 0
-                complicationHandler(data1)
+    
+        ref.child(FirebaseDbPaths.sensorData).observe(eventType, with: { (snapshot) in
+            if let dic = snapshot.value as? Int{
+                //let data1 = dic["Data1"] as? Int ?? 0
+                complicationHandler(dic)
             }
         })
+    }
+    
+    func getCalibrationData(eventType:DataEventType = .value,complicationHandler:@escaping (((Int,Int))->Void))
+    {
+    
+        ref.child(FirebaseDbPaths.calibrate).observeSingleEvent(of: eventType, with: { (snapshot) in
+            if let dic = snapshot.value as? [String:Any]{
+                let data1 = dic["Flex1Limit"] as? Int ?? 0
+                let data2 = dic["Flex2Limit"] as? Int ?? 0
+//                let data3 = dic["poorFlex"] as? Int ?? 0
+                complicationHandler((data1,data2))
+            }
+        })
+    }
+    
+    func setData(path:String=FirebaseDbPaths.sensorData,value:[String:Any])
+    {
+      ref.child(path).setValue(value)
     }
     
     

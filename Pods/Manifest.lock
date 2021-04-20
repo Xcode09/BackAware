@@ -45,6 +45,7 @@ PODS:
   - GoogleUtilities/Reachability (7.2.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.5.0)
+  - Kingfisher (6.0.1)
   - leveldb-library (1.22)
   - nanopb (2.30907.0):
     - nanopb/decode (= 2.30907.0)
@@ -58,13 +59,18 @@ PODS:
   - RxRelay (6.0.0):
     - RxSwift (= 6.0.0)
   - RxSwift (6.0.0)
+  - Toast-Swift (5.0.1)
+  - ViewAnimator (3.0.2)
 
 DEPENDENCIES:
   - Charts
   - Firebase/Auth
   - Firebase/Database
+  - Kingfisher
   - RxCocoa
   - RxSwift
+  - Toast-Swift (~> 5.0.1)
+  - ViewAnimator
 
 SPEC REPOS:
   trunk:
@@ -77,12 +83,15 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleUtilities
     - GTMSessionFetcher
+    - Kingfisher
     - leveldb-library
     - nanopb
     - PromisesObjC
     - RxCocoa
     - RxRelay
     - RxSwift
+    - Toast-Swift
+    - ViewAnimator
 
 SPEC CHECKSUMS:
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
@@ -94,13 +103,16 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 1024b1a4dfbd7a0e92cb20d7e0a6f1fb66b449a4
   GoogleUtilities: d866834472f1324d080496bc67ab3ce5d0d46027
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
+  Kingfisher: adde87a4f74f6a3845395769354efff593581740
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   RxCocoa: 3f79328fafa3645b34600f37c31e64c73ae3a80e
   RxRelay: 8d593be109c06ea850df027351beba614b012ffb
   RxSwift: c14e798c59b9f6e9a2df8fd235602e85cc044295
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
+  ViewAnimator: 16435576cd44fca0b0d63147d5031fd3e91d295a
 
-PODFILE CHECKSUM: 1098c6e358bb9479a1dfc84709047d587cfe94ab
+PODFILE CHECKSUM: fefd48d3c0dcd2fe56f92fbd5509f098963865c6
 
 COCOAPODS: 1.8.4

@@ -15,7 +15,7 @@ class TrackTimeGraph: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        navigationItem.title = "Track your workout!"
         lineChart.chartDescription?.enabled = false
         lineChart.dragEnabled = true
         lineChart.setScaleEnabled(true)

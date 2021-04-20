@@ -20,6 +20,7 @@ class StatisticsVC: UIViewController {
         super.viewDidLoad()
 
         pieChart.delegate = self
+        
         var enteries = [ChartDataEntry]()
         
         FirebaseDataService.instance.getPieStatisticsData { [weak self](dataArr) in
@@ -31,9 +32,14 @@ class StatisticsVC: UIViewController {
         }
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = "Statistics"
+    }
     
     @objc private func goToTrackTime(){
         let vc = TrackTimeGraph(nibName: "TrackTimeGraph", bundle: nil)
+        navigationItem.title = nil
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -13,4 +13,7 @@ target 'BackAware' do
    pod 'Firebase/Auth'
    pod 'Firebase/Database'
    pod 'Charts'
+   pod 'Toast-Swift', '~> 5.0.1'
+   pod 'ViewAnimator'
+   pod 'Kingfisher'
 end
