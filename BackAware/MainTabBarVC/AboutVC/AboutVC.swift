@@ -47,20 +47,30 @@ class AboutVC: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: identifer, for: indexPath)
 
             cell.textLabel?.text = AboutUsModel.contactItems[indexPath.row].title
+            cell.imageView?.tintColor = .white
             cell.imageView?.image = AboutUsModel.contactItems[indexPath.row].ImageView
+            cell.backgroundColor = AppColors.bgColor
+            cell.contentView.backgroundColor = AppColors.bgColor
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: identifer, for: indexPath)
             cell.textLabel?.text = AboutUsModel.rateAppItems[indexPath.row].title
             cell.imageView?.image = AboutUsModel.rateAppItems[indexPath.row].ImageView
+            cell.backgroundColor = AppColors.bgColor
+            cell.contentView.backgroundColor = AppColors.bgColor
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: identifer, for: indexPath)
             cell.textLabel?.text = AboutUsModel.developByItems[indexPath.row].title
+            cell.imageView?.tintColor = .white
             cell.imageView?.image = AboutUsModel.developByItems[indexPath.row].ImageView
+            cell.backgroundColor = AppColors.bgColor
+            cell.contentView.backgroundColor = AppColors.bgColor
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: identifer, for: indexPath)
+            cell.backgroundColor = AppColors.bgColor
+            cell.contentView.backgroundColor = AppColors.bgColor
             return cell
         }
     }

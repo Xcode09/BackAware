@@ -47,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     {
         UITabBar.appearance().barTintColor = AppColors.tabBarTintColor
         UITabBar.appearance().shadowImage = UIImage()
+        UITabBar.appearance().unselectedItemTintColor = AppColors.labelColor
         UITabBar.appearance().tintColor = AppColors.tabTintColor
         UITabBar.appearance().isTranslucent = false
 //        UITabBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]

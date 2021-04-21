@@ -46,6 +46,10 @@ class CalibrationSettings: UIViewController {
     }
     
     @IBAction private func calibrateTapped(_ sender:UIButton){
+        guard Int(pickerUpperLimit) ?? 0 > Int(pickerLowerLimit) ?? 0 else {
+            Toast.showToast(superView: self.view, message: "Upper Limit should be getter than lower limit")
+            return
+        }
         if pickerUpperLimit != "" && pickerLowerLimit != ""
         {
             let para : [String:Any] =  ["Flex1Limit":Int(pickerUpperLimit) ?? 0,"Flex2Limit":Int(pickerLowerLimit) ?? 0,"Time":TimeAndDateHelper.getDate()]
@@ -58,6 +62,8 @@ class CalibrationSettings: UIViewController {
             let lowerLimit = Int(sensorDataLb.text ?? "") ?? 0 - 150
             let para : [String:Any] =  ["Flex1Limit":upperLimit,"Flex2Limit":lowerLimit,"Time":TimeAndDateHelper.getDate()]
             FirebaseDataService.instance.setData(path: FirebaseDbPaths.calibrate, value: para)
+        }else{
+            Toast.showToast(superView: self.view, message: "No sensor data")
         }
         
     }
@@ -67,6 +73,8 @@ class CalibrationSettings: UIViewController {
             let lowerLimit = Int(sensorDataLb.text ?? "") ?? 0 - 75
             let para : [String:Any] =  ["Flex1Limit":upperLimit,"Flex2Limit":lowerLimit,"Time":TimeAndDateHelper.getDate()]
             FirebaseDataService.instance.setData(path: FirebaseDbPaths.calibrate, value:para)
+        }else{
+            Toast.showToast(superView: self.view, message: "No sensor data")
         }
     }
 

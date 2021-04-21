@@ -37,13 +37,13 @@ struct InfoModel {
 struct AboutUsModel {
     static let contactItems = [
         InfoModel(title: "Email", ImageView: UIImage.init(systemName: "envelope.fill")!),
-        InfoModel(title: "Facebook", ImageView: UIImage()),
-        InfoModel(title: "Instagram", ImageView: UIImage()),
+        InfoModel(title: "Facebook", ImageView: UIImage(named: "fab")?.withRenderingMode(.alwaysOriginal) ?? UIImage()),
+        InfoModel(title: "Instagram", ImageView: UIImage(named: "insta")?.withRenderingMode(.alwaysOriginal) ?? UIImage()),
         InfoModel(title: "Visit our site", ImageView: UIImage.init(systemName: "link")!)
     ]
     
     static let rateAppItems = [
-        InfoModel(title: "BackAware", ImageView: UIImage()),
+        InfoModel(title: "BackAware", ImageView: UIImage(named: "rate")?.withRenderingMode(.alwaysOriginal) ?? UIImage()),
     ]
     static let developByItems = [
         InfoModel(title: "Devomech Solutions", ImageView: UIImage.init(systemName: "link")!),

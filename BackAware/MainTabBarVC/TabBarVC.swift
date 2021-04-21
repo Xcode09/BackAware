@@ -29,6 +29,7 @@ class TabBarVC: UITabBarController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //self.tabBar.unselectedItemTintColor = .white
         self.selectedIndex = 1
     }
 
@@ -37,7 +38,7 @@ class TabBarVC: UITabBarController {
     private func setupPlanVC()->UINavigationController{
         
         let nav = UINavigationController(rootViewController: PlanVC(collectionViewLayout: UICollectionViewFlowLayout()))
-        let tabBar = UITabBarItem(title: "Plans", image: UIImage.init(systemName: "calendar"), selectedImage: UIImage.init(systemName: "calendar"))
+        let tabBar = UITabBarItem(title: "Plans", image: UIImage(named: "plan"), selectedImage: UIImage(named: "plan"))
         nav.tabBarItem.tag = 1
         nav.tabBarItem = tabBar
         return nav
@@ -46,7 +47,7 @@ class TabBarVC: UITabBarController {
     private func setupTrainingVC()->UINavigationController{
         
         let nav = UINavigationController(rootViewController: TrainningVC(collectionViewLayout: UICollectionViewFlowLayout()))
-        let tabBar = UITabBarItem(title: "Trainings", image: UIImage(named: "training"), selectedImage: UIImage(named: "training"))
+        let tabBar = UITabBarItem(title: "Trainings", image: UIImage(named: "fitness")?.withRenderingMode(.alwaysTemplate), selectedImage: UIImage(named: "fitness")?.withRenderingMode(.alwaysTemplate))
         nav.tabBarItem.tag = 2
         nav.tabBarItem = tabBar
         return nav
@@ -55,7 +56,7 @@ class TabBarVC: UITabBarController {
     private func setupModeVC()->UINavigationController{
         
         let nav = UINavigationController(rootViewController: ModeVC(nibName: "ModeVC", bundle: nil))
-        let tabBar = UITabBarItem(title: "Mode", image: UIImage.init(systemName: "gearshape.fill"), selectedImage: UIImage.init(systemName: "gearshape.fill"))
+        let tabBar = UITabBarItem(title: "Mode", image: UIImage(named: "mode")?.withRenderingMode(.alwaysTemplate), selectedImage: UIImage(named: "mode")?.withRenderingMode(.alwaysTemplate))
         nav.tabBarItem.tag = 1
         nav.tabBarItem = tabBar
         return nav
@@ -64,7 +65,7 @@ class TabBarVC: UITabBarController {
     private func setupAboutVC()->UINavigationController{
         
         let nav = UINavigationController(rootViewController: AboutVC(nibName: "AboutVC", bundle: nil))
-        let tabBar = UITabBarItem(title: "About", image: UIImage.init(systemName: "info.circle.fill"), selectedImage: UIImage(named: "info.circle.fill"))
+        let tabBar = UITabBarItem(title: "About", image: UIImage(named: "info00")?.withRenderingMode(.alwaysTemplate), selectedImage: UIImage(named: "info00")?.withRenderingMode(.alwaysTemplate))
         nav.tabBarItem.tag = 4
         nav.tabBarItem = tabBar
         return nav
@@ -73,7 +74,7 @@ class TabBarVC: UITabBarController {
     private func setupStatisticsVC()->UINavigationController{
         
         let nav = UINavigationController(rootViewController: StatisticsVC(nibName: "StatisticsVC", bundle: nil))
-        let tabBar = UITabBarItem(title: "Statistics", image: UIImage.init(systemName: "chart.bar.fill"), selectedImage: UIImage.init(systemName: "chart.bar.fill"))
+        let tabBar = UITabBarItem(title: "Statistics", image:UIImage(named: "stat"), selectedImage: UIImage(named: "stat"))
         nav.tabBarItem.tag = 3
         nav.tabBarItem = tabBar
         return nav

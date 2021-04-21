@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "icons8-instagram-32.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "baseline_info_black_24dp.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
