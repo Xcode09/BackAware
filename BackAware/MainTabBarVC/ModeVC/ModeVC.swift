@@ -27,7 +27,13 @@ class ModeVC: UIViewController {
             let picker = UIPickerView()
             picker.delegate = self
             picker.dataSource = self
-            timePicker.isEnabled = false
+            if let tr = UserDefaults.standard.value(forKey: "0") as? String,tr == "true"
+            {
+                timePicker.isEnabled = true
+            }else{
+                timePicker.isEnabled = false
+            }
+            
             
             timePicker.inputView = picker
         }
@@ -38,7 +44,7 @@ class ModeVC: UIViewController {
             tableView.dataSource = self
             tableView.tableFooterView = UIView()
             tableView.backgroundColor = AppColors.tableViewColor
-            tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+            tableView.register(SettingCell.self, forCellReuseIdentifier: "cell")
         }
     }
     override func viewDidLoad() {
@@ -58,13 +64,22 @@ class ModeVC: UIViewController {
                 self?.poorPostionlabel.textColor = self?.defualtColor
                 self?.timePicker.isEnabled = true
                 self?.timePicker.resignFirstResponder()
-            }else{
+            }
+            else
+            {
                 self?.defualtColor = self?.poorPostionlabel.textColor
                 self?.poorPostionlabel.textColor = .lightGray
                 self?.timePicker.isEnabled = false
                 self?.timePicker.resignFirstResponder()
             }
             
+        }
+        
+        microBreakCheckBox.isTapped = {
+            [weak self] (done) in
+            if done{
+                self?.showAlert()
+            }
         }
         
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(setData), userInfo:nil, repeats: true)
@@ -136,12 +151,14 @@ extension ModeVC:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SettingCell
+        cell.backgroundColor = AppColors.tableViewColor
         let peripheral = peripherals[indexPath.row]
         if isConnected{
-            cell.textLabel?.text = "\(peripheral.name ?? "Unknown Device") \t \t \t \t \t Connected"
+            cell.bleNameLabel.text = peripheral.name ?? "Unknwon Device"
+            cell.detailLabel.text = "Connected"
         }else{
-            cell.textLabel?.text = "\(peripheral.name ?? "Unknown Device")"
+            cell.bleNameLabel.text = "\(peripheral.name ?? "Unknown Device")"
         }
         
         return cell
@@ -150,6 +167,17 @@ extension ModeVC:UITableViewDelegate,UITableViewDataSource{
         let peripheral = peripherals[indexPath.row]
         
         manager?.connect(peripheral, options: nil)
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    }
+    
+    private func showAlert(){
+        let alert = UIAlertController(title: "You enabled microbreaks notification", message: "A microbreak is any short break you take from your work during the day.This could be anything from standing up to stretch to chatting with a coworker for 2 mintues or even going to grab a coffee.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
     
@@ -163,29 +191,29 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
         
         case .unknown:
             print("Bluetooth status is UNKNOWN")
-//            Toast.showToast(superView: self.view, message: "Bluetooth status is UNKNOWN")
+        //            Toast.showToast(superView: self.view, message: "Bluetooth status is UNKNOWN")
         //bluetoothOffLabel.alpha = 1.0
         case .resetting:
             print("Bluetooth status is RESETTING")
-//            Toast.showToast(superView: self.view, message: "Bluetooth status is RESETTING")
+        //            Toast.showToast(superView: self.view, message: "Bluetooth status is RESETTING")
         //bluetoothOffLabel.alpha = 1.0
         case .unsupported:
             DispatchQueue.main.async { () -> Void in
                 print("Bluetooth status is UNSUPPORTED")
-//                Toast.showToast(superView: self.view, message: "Bluetooth status is UNSUPPORTED")
+                //                Toast.showToast(superView: self.view, message: "Bluetooth status is UNSUPPORTED")
             }
             
         //bluetoothOffLabel.alpha = 1.0
         case .unauthorized:
             DispatchQueue.main.async { () -> Void in
                 print("Bluetooth status is UNAUTHORIZED")
-//                Toast.showToast(superView: self.view, message: "Bluetooth status is UNAUTHORIZED")
+                //                Toast.showToast(superView: self.view, message: "Bluetooth status is UNAUTHORIZED")
             }
             
         //bluetoothOffLabel.alpha = 1.0
         case .poweredOff:
             DispatchQueue.main.async { () -> Void in
-//                Toast.showToast(superView: self.view, message: "Bluetooth status is POWERED OFF")
+                //                Toast.showToast(superView: self.view, message: "Bluetooth status is POWERED OFF")
                 print("Bluetooth status is POWERED OFF")
             }
             
@@ -196,7 +224,7 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
             
             DispatchQueue.main.async { () -> Void in
                 
-//                Toast.showToast(superView: self.view, message: "Bluetooth status is POWERED ON")
+                //                Toast.showToast(superView: self.view, message: "Bluetooth status is POWERED ON")
             }
             
             // STEP 3.2: scan for peripherals that we're interested in
@@ -367,8 +395,69 @@ extension ModeVC:UIPickerViewDelegate,UIPickerViewDataSource{
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         timePicker.text = "\(secondsArr[row]) min"
-        timePicker.resignFirstResponder()
+        
+        UserDefaults.standard.set(secondsArr[row], forKey: "notify")
+        UserDefaults.standard.synchronize()
+        NotificationCenter.default.post(name: notifyNotification, object: self)
+        DispatchQueue.main.asyncAfter(deadline: .now()+2) {
+            [weak self] in
+            self?.timePicker.resignFirstResponder()
+        }
+        
     }
     
     
+}
+
+
+class SettingCell:UITableViewCell{
+    let bleNameLabel : UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.textColor = AppColors.labelColor
+        lbl.font = UIFont.boldSystemFont(ofSize: 16)
+        lbl.textAlignment = .left
+        return lbl
+    }()
+    
+    
+    let detailLabel : UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.textColor = .green
+        lbl.font = UIFont.systemFont(ofSize: 16)
+        lbl.textAlignment = .left
+        lbl.numberOfLines = 0
+        return lbl
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        addSubview(bleNameLabel)
+        addSubview(detailLabel)
+        
+        let stack = UIStackView(arrangedSubviews: [bleNameLabel,UIView(),detailLabel])
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.distribution = .fill
+        stack.axis = .horizontal
+        stack.spacing =  5
+        addSubview(stack)
+        
+        detailLabel.frame.size.width = self.frame.width/3
+        stack.topAnchor.constraint(equalTo: self.topAnchor,constant: 0).isActive = true
+        stack.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: 8).isActive = true
+        stack.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: 0).isActive = true
+        stack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
+//        detailLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+//        detailLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor,constant: 8).isActive = true
+//
+//        detailLabel.topAnchor.constraint(equalTo: self.topAnchor,constant: 8).isActive = true
+//
+//        detailLabel.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

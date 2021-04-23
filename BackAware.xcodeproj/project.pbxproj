@@ -15,12 +15,16 @@
 		1322FFA626273B940042608B /* StatisticsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1322FFA426273B940042608B /* StatisticsVC.xib */; };
 		1322FFAC2627565E0042608B /* TrackTimeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1322FFAA2627565E0042608B /* TrackTimeGraph.swift */; };
 		1322FFAD2627565E0042608B /* TrackTimeGraph.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1322FFAB2627565E0042608B /* TrackTimeGraph.xib */; };
+		132DDA5326318B5500DE53A1 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132DDA5226318B5500DE53A1 /* NotificationService.swift */; };
 		133FC13D26206DA60067B061 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133FC13C26206DA60067B061 /* AppDelegate.swift */; };
 		133FC13F26206DA60067B061 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133FC13E26206DA60067B061 /* SceneDelegate.swift */; };
 		133FC14126206DA60067B061 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133FC14026206DA60067B061 /* ViewController.swift */; };
 		133FC14426206DA60067B061 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 133FC14226206DA60067B061 /* Main.storyboard */; };
 		133FC14626206DAB0067B061 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 133FC14526206DAB0067B061 /* Assets.xcassets */; };
 		133FC14926206DAB0067B061 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 133FC14726206DAB0067B061 /* LaunchScreen.storyboard */; };
+		1347B808263347EE0053CCD2 /* TrainingDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347B807263347EE0053CCD2 /* TrainingDetailVC.swift */; };
+		1347B80C263348290053CCD2 /* TrainingDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1347B80A263348290053CCD2 /* TrainingDetailHeader.swift */; };
+		1347B80D263348290053CCD2 /* TrainingDetailHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1347B80B263348290053CCD2 /* TrainingDetailHeader.xib */; };
 		13536EB226233FCE00B3CEB0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13536EB126233FCE00B3CEB0 /* Constants.swift */; };
 		13536EB92623405100B3CEB0 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13536EB82623405100B3CEB0 /* TabBarVC.swift */; };
 		13536EBE2623410300B3CEB0 /* PlanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13536EBD2623410300B3CEB0 /* PlanVC.swift */; };
@@ -57,6 +61,7 @@
 		1322FFA426273B940042608B /* StatisticsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatisticsVC.xib; sourceTree = "<group>"; };
 		1322FFAA2627565E0042608B /* TrackTimeGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackTimeGraph.swift; sourceTree = "<group>"; };
 		1322FFAB2627565E0042608B /* TrackTimeGraph.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackTimeGraph.xib; sourceTree = "<group>"; };
+		132DDA5226318B5500DE53A1 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		133FC13926206DA60067B061 /* BackAware.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackAware.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		133FC13C26206DA60067B061 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		133FC13E26206DA60067B061 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +70,9 @@
 		133FC14526206DAB0067B061 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		133FC14826206DAB0067B061 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		133FC14A26206DAB0067B061 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1347B807263347EE0053CCD2 /* TrainingDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailVC.swift; sourceTree = "<group>"; };
+		1347B80A263348290053CCD2 /* TrainingDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingDetailHeader.swift; sourceTree = "<group>"; };
+		1347B80B263348290053CCD2 /* TrainingDetailHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainingDetailHeader.xib; sourceTree = "<group>"; };
 		13536EB126233FCE00B3CEB0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		13536EB82623405100B3CEB0 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		13536EBD2623410300B3CEB0 /* PlanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanVC.swift; sourceTree = "<group>"; };
@@ -143,6 +151,14 @@
 			path = TrackGraphVC;
 			sourceTree = "<group>";
 		};
+		132DDA5126318B2900DE53A1 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				132DDA5226318B5500DE53A1 /* NotificationService.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
 		133FC13026206DA60067B061 = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +180,7 @@
 		133FC13B26206DA60067B061 /* BackAware */ = {
 			isa = PBXGroup;
 			children = (
+				132DDA5126318B2900DE53A1 /* Notification */,
 				135FEAEA262C46E50010844F /* Models */,
 				135FEAE6262C463A0010844F /* JsonFiles */,
 				13D3F3F22629F677005AEE16 /* ToastShow */,
@@ -181,6 +198,16 @@
 				133FC14A26206DAB0067B061 /* Info.plist */,
 			);
 			path = BackAware;
+			sourceTree = "<group>";
+		};
+		1347B806263347AB0053CCD2 /* TrainingDetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				1347B807263347EE0053CCD2 /* TrainingDetailVC.swift */,
+				1347B80A263348290053CCD2 /* TrainingDetailHeader.swift */,
+				1347B80B263348290053CCD2 /* TrainingDetailHeader.xib */,
+			);
+			path = TrainingDetailVC;
 			sourceTree = "<group>";
 		};
 		13536EAF26233F7700B3CEB0 /* AuthenticationVC */ = {
@@ -308,6 +335,7 @@
 		13D3F3D62629EA7F005AEE16 /* TrainingVC */ = {
 			isa = PBXGroup;
 			children = (
+				1347B806263347AB0053CCD2 /* TrainingDetailVC */,
 				13D3F3D72629EACC005AEE16 /* TrainningVC.swift */,
 				13D3F3DB2629EB6B005AEE16 /* TrainingCell.swift */,
 				13D3F3DC2629EB6B005AEE16 /* TrainingCell.xib */,
@@ -403,6 +431,7 @@
 				1313F39A2623676B003383FB /* AboutVC.xib in Resources */,
 				1322FFA626273B940042608B /* StatisticsVC.xib in Resources */,
 				133FC14426206DA60067B061 /* Main.storyboard in Resources */,
+				1347B80D263348290053CCD2 /* TrainingDetailHeader.xib in Resources */,
 				13BB85522625F3B9003FAB2D /* GoogleService-Info.plist in Resources */,
 				1322FFAD2627565E0042608B /* TrackTimeGraph.xib in Resources */,
 				135FEAE4262C42C40010844F /* YTVideoCell.xib in Resources */,
@@ -475,9 +504,12 @@
 				1313F3992623676B003383FB /* AboutVC.swift in Sources */,
 				13D3F3DD2629EB6B005AEE16 /* TrainingCell.swift in Sources */,
 				135FEAF2262C51430010844F /* PlayYTVideoVC.swift in Sources */,
+				1347B80C263348290053CCD2 /* TrainingDetailHeader.swift in Sources */,
 				13BB856026260F0F003FAB2D /* Extensions.swift in Sources */,
+				1347B808263347EE0053CCD2 /* TrainingDetailVC.swift in Sources */,
 				1322FFAC2627565E0042608B /* TrackTimeGraph.swift in Sources */,
 				13BB85562625F7E4003FAB2D /* FirebaseDataService.swift in Sources */,
+				132DDA5326318B5500DE53A1 /* NotificationService.swift in Sources */,
 				1313F39326235525003383FB /* ModeVC.swift in Sources */,
 				13536EC9262343AD00B3CEB0 /* PlanCell.swift in Sources */,
 				13536EB226233FCE00B3CEB0 /* Constants.swift in Sources */,

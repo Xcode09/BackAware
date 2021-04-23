@@ -14,12 +14,12 @@ class TrainingCell: UICollectionViewCell {
     //@IBOutlet weak private var freePlan : UILabel!
     @IBOutlet weak private var bgImage : UIImageView!
     
-    var data : TrainningModel?{
+    var data : Plan?{
         didSet{
-            title.text = data?.title ?? "N/A"
-            descriptionTitle.text = data?.descriptionTitle ?? "N/A"
+            title.text = data?.name ?? "N/A"
+            descriptionTitle.text = data?.shortDescription ?? "N/A"
             //freePlan.text = data?.freePlan ?? "N/A"
-            bgImage.image = data?.image ?? UIImage()
+            //bgImage.image = data?.image ?? UIImage()
         }
     }
     override func awakeFromNib() {

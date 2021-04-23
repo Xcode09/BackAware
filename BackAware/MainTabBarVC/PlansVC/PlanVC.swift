@@ -107,6 +107,7 @@ class PlanVC: UICollectionViewController,UICollectionViewDelegateFlowLayout
         
     }
     
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = PlanDetailVC(collectionViewLayout: UICollectionViewFlowLayout())
         vc.plan = items[indexPath.item]

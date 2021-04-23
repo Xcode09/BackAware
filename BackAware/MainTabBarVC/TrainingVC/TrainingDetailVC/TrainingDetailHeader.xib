@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TrainingDetailHeader" id="KgD-P9-xlz" customClass="TrainingDetailHeader" customModule="BackAware" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="501" height="200"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="501" height="200"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BACK CARE ESSENTIALS" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lG3-Xo-x46">
+                        <rect key="frame" x="8" y="8" width="485" height="21.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                        <color key="textColor" name="LabelTitle"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NdS-1y-w0B">
+                        <rect key="frame" x="8" y="198" width="485" height="2"/>
+                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="Sc0-kn-sOi"/>
+                            <constraint firstAttribute="height" constant="2" id="dhC-VO-7fe"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="vus-R7-vRY"/>
+            <color key="backgroundColor" name="BGColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="lG3-Xo-x46" secondAttribute="trailing" constant="8" id="2yA-dY-pS7"/>
+                <constraint firstItem="NdS-1y-w0B" firstAttribute="leading" secondItem="KgD-P9-xlz" secondAttribute="leading" constant="8" id="Dwn-lv-u7t"/>
+                <constraint firstItem="lG3-Xo-x46" firstAttribute="leading" secondItem="KgD-P9-xlz" secondAttribute="leading" constant="8" id="O6a-cD-WwM"/>
+                <constraint firstAttribute="bottom" secondItem="NdS-1y-w0B" secondAttribute="bottom" symbolic="YES" id="fzu-dU-lQQ"/>
+                <constraint firstItem="lG3-Xo-x46" firstAttribute="top" secondItem="KgD-P9-xlz" secondAttribute="top" constant="8" id="qXQ-Uf-s5f"/>
+                <constraint firstAttribute="trailing" secondItem="NdS-1y-w0B" secondAttribute="trailing" constant="8" id="zzg-Ch-9xb"/>
+            </constraints>
+            <size key="customSize" width="501" height="478"/>
+            <connections>
+                <outlet property="title" destination="lG3-Xo-x46" id="uT0-E5-4ta"/>
+            </connections>
+            <point key="canvasLocation" x="174.63768115942031" y="118.52678571428571"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="BGColor">
+            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="LabelTitle">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

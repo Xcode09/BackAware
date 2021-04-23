@@ -9,6 +9,7 @@ import UIKit
 
 class TabBarVC: UITabBarController {
 
+    var timer:Timer?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,6 +26,15 @@ class TabBarVC: UITabBarController {
         FirebaseDataService.instance.getData(eventType: .childChanged) { [weak self]  (sensorValue) in
             self?.getCalibrationData(sensorValue: sensorValue)
         }
+        if let isTrue = UserDefaults.standard.value(forKey: "0") as? String,isTrue == "true"{
+            let time = (UserDefaults.standard.value(forKey: "notify") as? Int ?? 60) * 60
+            
+            let userInfo = ["t":Double(time)]
+            timer = Timer.scheduledTimer(timeInterval: Double(time), target: self, selector: #selector(sendPoorNotifications(timer:)), userInfo:userInfo, repeats: true)
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTimerNotify), name: notifyNotification, object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,4 +110,39 @@ class TabBarVC: UITabBarController {
         }
     }
     
+    
+    @objc private func sendPoorNotifications(timer:Timer){
+        let dic = timer.userInfo as! [String:Any]
+        let duration = dic["t"] as? Double ?? 4
+        FirebaseDataService.instance.getData(eventType: .value) { (sensorValue) in
+            FirebaseDataService.instance.getCalibrationData(eventType: .value) { (tuple) in
+                let rangeNumber = tuple.1...tuple.0
+                if rangeNumber ~= sensorValue {
+                    return
+                }
+                else if tuple.0 > sensorValue{
+                    NotificationService.shared.sendNotification(title: "Poor Position", body: "You are in Poor Position", timeDuration: duration, repeats: false)
+                }
+                else if tuple.1 < sensorValue
+                {
+                    NotificationService.shared.sendNotification(title: "Poor Position", body: "You are in Poor Position", timeDuration: duration, repeats: false)
+                }
+            }
+        }
+    }
+    
+    
+    @objc private func updateTimerNotify(){
+        timer?.invalidate()
+        if let isTrue = UserDefaults.standard.value(forKey: "0") as? String,isTrue == "true"{
+            let time = (UserDefaults.standard.value(forKey: "notify") as? Int ?? 60) * 60
+            let userInfo = ["t":Double(time)]
+            timer = Timer.scheduledTimer(timeInterval: Double(time), target: self, selector: #selector(sendPoorNotifications(timer:)), userInfo:userInfo, repeats: true)
+        }
+    }
+    
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }

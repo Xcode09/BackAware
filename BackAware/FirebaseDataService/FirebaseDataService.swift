@@ -17,13 +17,22 @@ final class FirebaseDataService{
     
     func getData(eventType:DataEventType = .value,complicationHandler:@escaping ((Int)->Void))
     {
-    
-        ref.child(FirebaseDbPaths.sensorData).observe(eventType, with: { (snapshot) in
-            if let dic = snapshot.value as? Int{
-                //let data1 = dic["Data1"] as? Int ?? 0
-                complicationHandler(dic)
-            }
-        })
+        if eventType == .value {
+            ref.child(FirebaseDbPaths.sensorData).observe(eventType, with: { (snapshot) in
+                if let dic = snapshot.value as? [String:Any]{
+                    let data1 = dic["Data1"] as? Int ?? 0
+                    complicationHandler(data1)
+                }
+            })
+        }else{
+            ref.child(FirebaseDbPaths.sensorData).observe(eventType, with: { (snapshot) in
+                if let dic = snapshot.value as? Int{
+                    //let data1 = dic["Data1"] as? Int ?? 0
+                    complicationHandler(dic)
+                }
+            })
+        }
+        
     }
     
     func getCalibrationData(eventType:DataEventType = .value,complicationHandler:@escaping (((Int,Int))->Void))

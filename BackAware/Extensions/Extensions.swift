@@ -94,3 +94,19 @@ extension UICollectionViewCell{
         return UIImage()
     }
 }
+
+extension String{
+    func getAttributedString(alignment:NSTextAlignment = .left ,color:UIColor = .white)->NSAttributedString{
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = alignment
+        paragraphStyle.firstLineHeadIndent = 5.0
+
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: color,
+            .paragraphStyle: paragraphStyle
+        ]
+
+        let attributedQuote = NSAttributedString(string: self, attributes: attributes)
+        return attributedQuote
+    }
+}

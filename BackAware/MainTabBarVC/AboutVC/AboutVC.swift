@@ -61,11 +61,17 @@ class AboutVC: UITableViewController {
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: identifer, for: indexPath)
+            cell.backgroundColor = AppColors.bgColor
+            cell.contentView.backgroundColor = AppColors.bgColor
             cell.textLabel?.text = AboutUsModel.developByItems[indexPath.row].title
             cell.imageView?.tintColor = .white
             cell.imageView?.image = AboutUsModel.developByItems[indexPath.row].ImageView
-            cell.backgroundColor = AppColors.bgColor
-            cell.contentView.backgroundColor = AppColors.bgColor
+            if indexPath.row == 1{
+                cell.textLabel?.textAlignment = .center
+                cell.textLabel?.text = AboutUsModel.developByItems[indexPath.row].title
+                cell.imageView?.tintColor = .white
+                cell.imageView?.image = AboutUsModel.developByItems[indexPath.row].ImageView
+            }
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: identifer, for: indexPath)
@@ -75,8 +81,34 @@ class AboutVC: UITableViewController {
         }
     }
     
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            if indexPath.row == 0 {
+                // Email
+                guard let url = URL(string:AboutUsModel.contactItems[indexPath.row].link) else { return }
+                UIApplication.shared.open(url)
+            }else{
+                guard let url = URL(string:AboutUsModel.contactItems[indexPath.row].link) else { return }
+                UIApplication.shared.open(url)
+            }
+        case 1:
+            guard let url = URL(string:AboutUsModel.rateAppItems[indexPath.row].link) else { return }
+            UIApplication.shared.open(url)
+        case 2:
+            guard let url = URL(string:AboutUsModel.rateAppItems[indexPath.row].link) else { return }
+            UIApplication.shared.open(url)
+        case 3:
+            guard let url = URL(string:AboutUsModel.developByItems[indexPath.row].link) else { return }
+            UIApplication.shared.open(url)
+        default:
+            break
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 60
     }
     
     

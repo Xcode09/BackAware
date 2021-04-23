@@ -18,13 +18,27 @@ struct TrainningModel {
 }
 
 private struct TrainningViewModel {
-    var items = PublishSubject<[TrainningModel]>()
+    var items = PublishSubject<[Plan]>()
     
     func fetchData(){
-        let arr = [TrainningModel(title: "Title", freePlan: "Free Plan", descriptionTitle: "Some Short of description", image: #imageLiteral(resourceName: "fitness")),TrainningModel(title: "Title", freePlan: "Free Plan", descriptionTitle: "Some Short of description", image: #imageLiteral(resourceName: "fitness")),TrainningModel(title: "Title", freePlan: "Free Plan", descriptionTitle: "Some Short of description", image: #imageLiteral(resourceName: "fitness")),TrainningModel(title: "Title", freePlan: "Free Plan", descriptionTitle: "Some Short of description", image: #imageLiteral(resourceName: "fitness"))]
+        guard let path = Bundle.main.path(forResource: "trainings", ofType: "json") else { print("Errr")
+            return
+        }
+        do{
+            let uri = URL(fileURLWithPath: path)
+            let data = try Data(contentsOf:uri)
+            let js = try JSONDecoder.init().decode(PlanModel.self, from: data)
+            if let plansArr = js.trainings{
+                items.onNext(plansArr)
+                items.onCompleted()
+                
+            }
+        }
+        catch let err{
+            print("Err",err)
+        }
         
-        items.onNext(arr)
-        items.onCompleted()
+
     }
 }
 private let reuseIdentifier = "TrainingCell"
@@ -53,6 +67,14 @@ class TrainningVC: UICollectionViewController,UICollectionViewDelegateFlowLayout
         configureCollectionView()
 
         // Do any additional setup after loading the view.
+        
+        collectionView.rx.modelSelected(Plan.self)
+            .subscribe(onNext: { [weak self] model in
+                guard let self = self else { return }
+                let vc = TrainingDetailVC(collectionViewLayout: UICollectionViewFlowLayout())
+                vc.plan = model
+                self.navigationController?.pushViewController(vc, animated: true)
+            }).disposed(by: bag)
         
         dataSource.items.bind(to: collectionView.rx.items(cellIdentifier: reuseIdentifier, cellType: TrainingCell.self))
         {

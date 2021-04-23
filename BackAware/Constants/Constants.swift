@@ -8,6 +8,9 @@
 import UIKit
 
 let APP_DATE_FORMATE = "yyyy-MM-dd"
+let notifyNotification = Notification.Name(rawValue: "notifyTimer")
+let poorPositionCheckNotification = Notification.Name(rawValue: "poorPositionCheckNotification")
+
 struct FirebaseDbPaths{
     static let baseUrl = "cJJoxX6SfRfSgoylos5KeFHL0SO2"
     static let calibrate = "Calibrate"
@@ -33,19 +36,21 @@ struct AppColors {
 struct InfoModel {
     let title:String
     let ImageView:UIImage
+    let link:String
 }
 struct AboutUsModel {
     static let contactItems = [
-        InfoModel(title: "Email", ImageView: UIImage.init(systemName: "envelope.fill")!),
-        InfoModel(title: "Facebook", ImageView: UIImage(named: "fab")?.withRenderingMode(.alwaysOriginal) ?? UIImage()),
-        InfoModel(title: "Instagram", ImageView: UIImage(named: "insta")?.withRenderingMode(.alwaysOriginal) ?? UIImage()),
-        InfoModel(title: "Visit our site", ImageView: UIImage.init(systemName: "link")!)
+        InfoModel(title: "Email", ImageView: UIImage.init(systemName: "envelope.fill")!,link:"backawarebelt@gmail.com"),
+        InfoModel(title: "Facebook", ImageView: UIImage(named: "fab")?.withRenderingMode(.alwaysOriginal) ?? UIImage(),link: ""),
+        InfoModel(title: "Instagram", ImageView: UIImage(named: "insta")?.withRenderingMode(.alwaysOriginal) ?? UIImage(),link: ""),
+        InfoModel(title: "Visit our site", ImageView: UIImage.init(systemName: "link")!,link: "https://everardpilates.com/")
     ]
     
     static let rateAppItems = [
-        InfoModel(title: "BackAware", ImageView: UIImage(named: "rate")?.withRenderingMode(.alwaysOriginal) ?? UIImage()),
+        InfoModel(title: "BackAware", ImageView: UIImage(named: "rate")?.withRenderingMode(.alwaysOriginal) ?? UIImage(),link: ""),
     ]
     static let developByItems = [
-        InfoModel(title: "Devomech Solutions", ImageView: UIImage.init(systemName: "link")!),
+        InfoModel(title: "Devomech Solutions", ImageView: UIImage.init(systemName: "link")!,link: "https://devomech.com/"),
+        InfoModel(title: "© Copyrights © 2021", ImageView: UIImage(),link: "")
     ]
 }

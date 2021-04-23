@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 import FirebaseCore
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupNavigationAppearance()
         setupTabBarAppearance()
+        NotificationService.shared.requestNotificationAuthorization(delegate: self)
+        
         FirebaseApp.configure()
         //FirebaseDataService.instance.getData()
         return true
@@ -33,6 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
        
     }
+    
+    
+    
 
 
     private func setupNavigationAppearance()
@@ -56,3 +62,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 }
 
+extension AppDelegate:UNUserNotificationCenterDelegate{
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
+    }
+}
