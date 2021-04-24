@@ -60,7 +60,7 @@ class TrainningVC: UICollectionViewController,UICollectionViewDelegateFlowLayout
         self.collectionView.backgroundColor = AppColors.bgColor
         self.collectionView!.register(UINib(nibName:reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView.register(MyHeaderFooterClass.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: myHeaderFooterClass)
-        self.collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        self.collectionView.contentInset = UIEdgeInsets(top: 5, left: 10, bottom: 10, right: 10)
     }
     
     override func viewDidLoad() {

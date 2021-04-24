@@ -316,6 +316,7 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
         
         for characteristic in characteristics {
             if characteristic.properties.contains(.read) {
+                print("DDDD",characteristic.value)
                 peripheral.readValue(for: characteristic)
             }
             if characteristic.properties.contains(.notify) {
@@ -336,7 +337,7 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
             // data into human readable format
             sensorValue = deriveBeatsPerMinute(using: characteristic)
             
-            print(sensorValue)
+            print("Sensor Value",sensorValue)
             
             
             
@@ -354,33 +355,20 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
     
     func deriveBeatsPerMinute(using heartRateMeasurementCharacteristic: CBCharacteristic) -> Int {
         
-        guard let heartRateValue = heartRateMeasurementCharacteristic.value else { return -00 }
+        guard let heartRateValue = heartRateMeasurementCharacteristic.value else { return 0 }
         // convert to an array of unsigned 8-bit integers
         print("VALUES",heartRateValue)
         
         let buffer = [UInt8](heartRateValue)
         
-        print("Buffer",buffer)
-        
-        // UInt8: "An 8-bit unsigned integer value type."
-        
-        // the first byte (8 bits) in the buffer is flags
-        // (meta data governing the rest of the packet);
-        // if the least significant bit (LSB) is 0,
-        // the heart rate (bpm) is UInt8, if LSB is 1, BPM is UInt16
-        if ((buffer[0] & 0x01) == 0) {
-            // second byte: "Heart Rate Value Format is set to UINT8."
-            print("BPM is UInt8")
-            // write heart rate to HKHealthStore
-            // healthKitInterface.writeHeartRateData(heartRate: Int(buffer[1]))
-            return Int(buffer[1])
-        } else { // I've never seen this use case, so I'll
-            // leave it to theoroticians to argue
-            // 2nd and 3rd bytes: "Heart Rate Value Format is set to UINT16."
-            print("BPM is UInt16")
-            return 0
-        }
-        
+        let firstBitValue = buffer[0] & 0x01
+          if firstBitValue == 0 {
+            // Heart Rate Value Format is in the 2nd byte
+            return Int(buffer[1] << 6) + Int(buffer[2])
+          } else {
+            // Heart Rate Value Format is in the 2nd and 3rd bytes
+            return (Int(buffer[2]) << 5) //(Int(buffer[1]) << 8) + Int(buffer[2])
+          }
     }
 }
 extension ModeVC:UIPickerViewDelegate,UIPickerViewDataSource{
