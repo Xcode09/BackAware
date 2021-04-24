@@ -46,17 +46,22 @@ class PlanVC: UICollectionViewController,UICollectionViewDelegateFlowLayout
         self.collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
     var items = [Plan]()
-    private let animations = [AnimationType.vector((CGVector(dx: 30, dy: -30)))]
+    private let animations = [AnimationType.vector((CGVector(dx:0, dy:-70)))]
     var initiallyAnimates = false
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        
+//        DispatchQueue.main.asyncAfter(deadline:.now()) {
+//            [weak self] in
+//            guard let this = self else {return}
+//            UIView.animate(views: this.collectionView.orderedVisibleCells, animations:this.animations,delay: 0.5)
+//        }
         fetchData()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.title = "Plans"
+        UIView.animate(views: collectionView.orderedVisibleCells, animations:animations,delay: 0.5)
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -71,18 +76,21 @@ class PlanVC: UICollectionViewController,UICollectionViewDelegateFlowLayout
         
         
         if initiallyAnimates {
-            UIView.animate(views: collectionView.orderedVisibleCells, animations:animations,delay: 1)
+            UIView.animate(views: collectionView.visibleCells, animations:animations,delay: 1)
             DispatchQueue.main.asyncAfter(deadline: .now()+3, execute: {
                 self.initiallyAnimates = false
             })
-            
+
         }
+        cell.applyCardView(cornerRadius: 10)
         cell.data = items[indexPath.item]
         return cell
     }
     
+    
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: collectionView.frame.width - 20, height: collectionView.frame.width/2)
+        return .init(width: collectionView.frame.width - 20, height: collectionView.frame.width/1.5)
     }
     
     private func fetchData(){
@@ -96,8 +104,11 @@ class PlanVC: UICollectionViewController,UICollectionViewDelegateFlowLayout
                 items = plansArr
                 initiallyAnimates = true
                 DispatchQueue.main.async {
+                    [weak self] in
+                    guard let this = self else {return}
+//                    UIView.animate(views: this.collectionView.visibleCells, animations:this.animations,delay: 0.5)
+                    this.collectionView.reloadData()
                     
-                    self.collectionView.reloadData()
                 }
             }
         }

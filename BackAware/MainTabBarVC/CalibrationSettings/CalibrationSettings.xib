@@ -49,6 +49,9 @@
                                             <state key="normal" title="Show Live Data">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="showLiveDataTapped:" destination="-1" eventType="touchUpInside" id="9jD-6U-Y6J"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>

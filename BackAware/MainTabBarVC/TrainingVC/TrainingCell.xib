@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="388" height="251"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iXy-Bi-Z8z">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fitness1" translatesAutoresizingMaskIntoConstraints="NO" id="iXy-Bi-Z8z">
                         <rect key="frame" x="0.0" y="0.0" width="388" height="171"/>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yaN-L5-iZI">
@@ -43,7 +43,7 @@
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="LUv-NM-xNV"/>
-            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="iXy-Bi-Z8z" secondAttribute="trailing" id="0YF-mI-cEv"/>
                 <constraint firstItem="iXy-Bi-Z8z" firstAttribute="leading" secondItem="8dy-7b-uI2" secondAttribute="leading" id="FJe-iW-gqz"/>
@@ -62,4 +62,7 @@
             <point key="canvasLocation" x="113.04347826086958" y="33.816964285714285"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="fitness1" width="235" height="133"/>
+    </resources>
 </document>

@@ -25,6 +25,7 @@ struct AppColors {
     static let tabBarColor = UIColor(named: "TabBarColor")
     static let navBarColor = UIColor.white
     static let tabBarTintColor = UIColor(named: "TabBarColor")
+    static let connectStatus = UIColor(named: "connected")
     static let tabTintColor = UIColor.red
     
     static let settingPageColor = UIColor(named: "SettingPageColor")

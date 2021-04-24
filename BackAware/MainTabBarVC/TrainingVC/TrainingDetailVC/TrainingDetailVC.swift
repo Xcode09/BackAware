@@ -64,7 +64,7 @@ class TrainingDetailVC: UICollectionViewController,UICollectionViewDelegateFlowL
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.section {
         case 0:
-            return .init(width: self.collectionView.frame.width - 10, height: 150)
+            return .init(width: self.collectionView.frame.width - 10, height: 180)
         default:
             return .init(width: self.collectionView.frame.width - 10, height:70)
         }

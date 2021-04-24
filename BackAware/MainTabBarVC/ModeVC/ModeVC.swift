@@ -42,6 +42,7 @@ class ModeVC: UIViewController {
         didSet{
             tableView.delegate = self
             tableView.dataSource = self
+            tableView.separatorStyle = .none
             tableView.tableFooterView = UIView()
             tableView.backgroundColor = AppColors.tableViewColor
             tableView.register(SettingCell.self, forCellReuseIdentifier: "cell")
@@ -155,10 +156,12 @@ extension ModeVC:UITableViewDelegate,UITableViewDataSource{
         cell.backgroundColor = AppColors.tableViewColor
         let peripheral = peripherals[indexPath.row]
         if isConnected{
-            cell.bleNameLabel.text = peripheral.name ?? "Unknwon Device"
+            cell.bleNameLabel.text = "\(peripheral.name ?? "Unknown Device")"
+            cell.bleAddressLabel.text = "80:7D:3A:B7:6E:82"
             cell.detailLabel.text = "Connected"
         }else{
             cell.bleNameLabel.text = "\(peripheral.name ?? "Unknown Device")"
+            cell.bleAddressLabel.text = "80:7D:3A:B7:6E:82"
         }
         
         return cell
@@ -169,7 +172,7 @@ extension ModeVC:UITableViewDelegate,UITableViewDataSource{
         manager?.connect(peripheral, options: nil)
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
+        return 50
     }
     
     private func showAlert(){
@@ -419,12 +422,19 @@ class SettingCell:UITableViewCell{
         lbl.textAlignment = .left
         return lbl
     }()
-    
+    let bleAddressLabel : UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.textColor = AppColors.labelColor
+        lbl.font = UIFont.systemFont(ofSize: 12)
+        lbl.textAlignment = .left
+        return lbl
+    }()
     
     let detailLabel : UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.textColor = .green
+        lbl.textColor = AppColors.connectStatus
         lbl.font = UIFont.systemFont(ofSize: 16)
         lbl.textAlignment = .left
         lbl.numberOfLines = 0
@@ -434,9 +444,14 @@ class SettingCell:UITableViewCell{
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(bleNameLabel)
+        addSubview(bleAddressLabel)
         addSubview(detailLabel)
+        let container = UIStackView(arrangedSubviews: [bleNameLabel,bleAddressLabel])
+        container.axis = .vertical
+        container.distribution = .fillProportionally
+        container.translatesAutoresizingMaskIntoConstraints = false
         
-        let stack = UIStackView(arrangedSubviews: [bleNameLabel,UIView(),detailLabel])
+        let stack = UIStackView(arrangedSubviews: [container,UIView(),detailLabel])
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.distribution = .fill
         stack.axis = .horizontal

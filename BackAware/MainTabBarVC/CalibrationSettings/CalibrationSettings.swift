@@ -33,9 +33,7 @@ class CalibrationSettings: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        FirebaseDataService.instance.getData(eventType: .childChanged) { [weak self]  (sensorValue) in
-            self?.sensorDataLb.text = "\(sensorValue)"
-        }
+        
         for i in 0..<3400{
             limitArr.append("\(i)")
         }
@@ -43,6 +41,28 @@ class CalibrationSettings: UIViewController {
         lowerLimitPicker.reloadAllComponents()
         
         navigationItem.title = "Calibration Settings"
+    }
+    
+    @IBAction private func showLiveDataTapped(_ sender:UIButton){
+        FirebaseDataService.instance.getData(eventType: .value) { [weak self]  (sensorValue) in
+            guard let this = self else {return}
+            guard sensorValue > 0 else {
+                Toast.showToast(superView: this.view
+                                , message: "No sensor data found")
+                return
+            }
+            this.sensorDataLb.text = "\(sensorValue)"
+        }
+        
+        FirebaseDataService.instance.getData(eventType: .childChanged) { [weak self]  (sensorValue) in
+            guard let this = self else {return}
+            guard sensorValue > 0 else {
+                Toast.showToast(superView: this.view
+                                , message: "No sensor data found")
+                return
+            }
+            this.sensorDataLb.text = "\(sensorValue)"
+        }
     }
     
     @IBAction private func calibrateTapped(_ sender:UIButton){
@@ -60,6 +80,11 @@ class CalibrationSettings: UIViewController {
         if sensorDataLb.text != "0" {
             let upperLimit = Int(sensorDataLb.text ?? "") ?? 0 + 200
             let lowerLimit = Int(sensorDataLb.text ?? "") ?? 0 - 150
+            guard upperLimit > lowerLimit else {
+                Toast.showToast(superView: self.view, message: "Upper Limit should be getter than lower limit")
+                return
+            }
+            
             let para : [String:Any] =  ["Flex1Limit":upperLimit,"Flex2Limit":lowerLimit,"Time":TimeAndDateHelper.getDate()]
             FirebaseDataService.instance.setData(path: FirebaseDbPaths.calibrate, value: para)
         }else{
@@ -71,6 +96,10 @@ class CalibrationSettings: UIViewController {
         if sensorDataLb.text != "0" {
             let upperLimit = Int(sensorDataLb.text ?? "") ?? 0 + 115
             let lowerLimit = Int(sensorDataLb.text ?? "") ?? 0 - 75
+            guard upperLimit > lowerLimit else {
+                Toast.showToast(superView: self.view, message: "Upper Limit should be getter than lower limit")
+                return
+            }
             let para : [String:Any] =  ["Flex1Limit":upperLimit,"Flex2Limit":lowerLimit,"Time":TimeAndDateHelper.getDate()]
             FirebaseDataService.instance.setData(path: FirebaseDbPaths.calibrate, value:para)
         }else{
