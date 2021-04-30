@@ -52,6 +52,10 @@ final class FirebaseDataService{
     {
       ref.child(path).setValue(value)
     }
+    func updateData(path:String=FirebaseDbPaths.sensorData,value:[String:Any])
+    {
+        ref.child(path).updateChildValues(value)
+    }
     
     
     

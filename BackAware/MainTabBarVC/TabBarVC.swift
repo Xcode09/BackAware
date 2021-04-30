@@ -32,6 +32,10 @@ class TabBarVC: UITabBarController {
             let userInfo = ["t":Double(time)]
             timer = Timer.scheduledTimer(timeInterval: Double(time), target: self, selector: #selector(sendPoorNotifications(timer:)), userInfo:userInfo, repeats: true)
         }
+        if let isTrue = UserDefaults.standard.value(forKey: "1") as? String,isTrue == "true"
+        {
+//            NotificationService.shared.sendNotification(title: "", body: <#T##String#>, timeDuration: <#T##TimeInterval#>, repeats: <#T##Bool#>)
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateTimerNotify), name: notifyNotification, object: nil)
         
@@ -94,18 +98,18 @@ class TabBarVC: UITabBarController {
         FirebaseDataService.instance.getCalibrationData(eventType: .value) { (tuple) in
             let rangeNumber = tuple.1...tuple.0
             if rangeNumber ~= sensorValue {
-                let para : [String:Any] = ["Time":TimeAndDateHelper.getDate(),"good":sensorValue,"poorExtension":0,"poorFlex":0]
-                FirebaseDataService.instance.setData(path: FirebaseDbPaths.statistics, value: para)
+                let para : [String:Any] = ["Time":TimeAndDateHelper.getDate(),"good":sensorValue]
+                FirebaseDataService.instance.updateData(path: FirebaseDbPaths.statistics, value: para)
             }
             else if tuple.0 > sensorValue{
-                let para : [String:Any] = ["Time":TimeAndDateHelper.getDate(),"good":0,"poorExtension":0,"poorFlex":sensorValue]
-                FirebaseDataService.instance.setData(path: FirebaseDbPaths.statistics, value: para)
+                let para : [String:Any] = ["Time":TimeAndDateHelper.getDate(),"poorFlex":sensorValue]
+                FirebaseDataService.instance.updateData(path: FirebaseDbPaths.statistics, value: para)
                 
             }
             else if tuple.1 < sensorValue
             {
-                let para : [String:Any] = ["Time":TimeAndDateHelper.getDate(),"good":0,"poorExtension":sensorValue,"poorFlex":0]
-                FirebaseDataService.instance.setData(path: FirebaseDbPaths.statistics, value: para)
+                let para : [String:Any] = ["Time":TimeAndDateHelper.getDate(),"poorExtension":sensorValue]
+                FirebaseDataService.instance.updateData(path: FirebaseDbPaths.statistics, value: para)
             }
         }
     }

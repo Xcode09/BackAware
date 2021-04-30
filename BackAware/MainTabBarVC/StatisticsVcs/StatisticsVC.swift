@@ -25,8 +25,12 @@ class StatisticsVC: UIViewController {
         
         FirebaseDataService.instance.getPieStatisticsData { [weak self](dataArr) in
             _ = dataArr.map({enteries.append(ChartDataEntry(x: Double($0), y: Double($0)))})
+            
             let set = PieChartDataSet(entries: enteries)
-            set.colors = ChartColorTemplates.colorful()
+            let green = UIColor(red: 0, green: 255, blue: 0, alpha: 1).cgColor
+            let red = UIColor(red: 254, green: 0, blue: 0, alpha: 1).cgColor
+            let black = UIColor.black.cgColor
+            set.colors = [NSUIColor(cgColor: green),NSUIColor(cgColor: red),NSUIColor(cgColor: black)]
             let data = PieChartData(dataSet: set)
             self?.pieChart.data = data
         }

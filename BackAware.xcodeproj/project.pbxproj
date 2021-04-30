@@ -39,6 +39,7 @@
 		135FEAEC262C46FB0010844F /* PlanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135FEAEB262C46FB0010844F /* PlanModel.swift */; };
 		135FEAF2262C51430010844F /* PlayYTVideoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135FEAF0262C51430010844F /* PlayYTVideoVC.swift */; };
 		135FEAF3262C51430010844F /* PlayYTVideoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 135FEAF1262C51430010844F /* PlayYTVideoVC.xib */; };
+		136842A6263B254C0019D022 /* MotionDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136842A5263B254C0019D022 /* MotionDetection.swift */; };
 		13B8C832262C9C8C001AB312 /* trainings.json in Resources */ = {isa = PBXBuildFile; fileRef = 13B8C831262C9C8C001AB312 /* trainings.json */; };
 		13BB85522625F3B9003FAB2D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13BB85512625F3B9003FAB2D /* GoogleService-Info.plist */; };
 		13BB85562625F7E4003FAB2D /* FirebaseDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB85552625F7E4003FAB2D /* FirebaseDataService.swift */; };
@@ -87,6 +88,7 @@
 		135FEAEB262C46FB0010844F /* PlanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanModel.swift; sourceTree = "<group>"; };
 		135FEAF0262C51430010844F /* PlayYTVideoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayYTVideoVC.swift; sourceTree = "<group>"; };
 		135FEAF1262C51430010844F /* PlayYTVideoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayYTVideoVC.xib; sourceTree = "<group>"; };
+		136842A5263B254C0019D022 /* MotionDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDetection.swift; sourceTree = "<group>"; };
 		13B8C831262C9C8C001AB312 /* trainings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = trainings.json; path = "../../../../../Downloads/res/video links in gson/trainings.json"; sourceTree = "<group>"; };
 		13BB85512625F3B9003FAB2D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		13BB85552625F7E4003FAB2D /* FirebaseDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDataService.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 		133FC13B26206DA60067B061 /* BackAware */ = {
 			isa = PBXGroup;
 			children = (
+				136842A4263B24C70019D022 /* MotionDetecting */,
 				132DDA5126318B2900DE53A1 /* Notification */,
 				135FEAEA262C46E50010844F /* Models */,
 				135FEAE6262C463A0010844F /* JsonFiles */,
@@ -305,6 +308,14 @@
 				135FEAF1262C51430010844F /* PlayYTVideoVC.xib */,
 			);
 			path = PlayYTVideoVC;
+			sourceTree = "<group>";
+		};
+		136842A4263B24C70019D022 /* MotionDetecting */ = {
+			isa = PBXGroup;
+			children = (
+				136842A5263B254C0019D022 /* MotionDetection.swift */,
+			);
+			path = MotionDetecting;
 			sourceTree = "<group>";
 		};
 		13BB85542625F7C3003FAB2D /* FirebaseDataService */ = {
@@ -503,6 +514,7 @@
 				1322FFA526273B940042608B /* StatisticsVC.swift in Sources */,
 				1313F3992623676B003383FB /* AboutVC.swift in Sources */,
 				13D3F3DD2629EB6B005AEE16 /* TrainingCell.swift in Sources */,
+				136842A6263B254C0019D022 /* MotionDetection.swift in Sources */,
 				135FEAF2262C51430010844F /* PlayYTVideoVC.swift in Sources */,
 				1347B80C263348290053CCD2 /* TrainingDetailHeader.swift in Sources */,
 				13BB856026260F0F003FAB2D /* Extensions.swift in Sources */,

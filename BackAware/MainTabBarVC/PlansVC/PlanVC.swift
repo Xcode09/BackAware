@@ -43,6 +43,7 @@ class PlanVC: UICollectionViewController,UICollectionViewDelegateFlowLayout
         //self.collectionView.dataSource = sel
         self.collectionView.backgroundColor = AppColors.bgColor
         self.collectionView!.register(UINib(nibName:reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+        
         self.collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
     var items = [Plan]()
@@ -74,9 +75,8 @@ class PlanVC: UICollectionViewController,UICollectionViewDelegateFlowLayout
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PlanCell
         
-        
         if initiallyAnimates {
-            UIView.animate(views: collectionView.visibleCells, animations:animations,delay: 1)
+            UIView.animate(views: collectionView.orderedVisibleCells, animations:animations,delay: 0)
             DispatchQueue.main.asyncAfter(deadline: .now()+3, execute: {
                 self.initiallyAnimates = false
             })

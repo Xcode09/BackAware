@@ -24,6 +24,8 @@
 	<string>This App wants bluetooth</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>This App wants bluetooth</string>
+	<key>NSMotionUsageDescription</key>
+	<string>This app wants to detect your motion</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -48,7 +50,8 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>
-		<string>bluetooth-peripheral</string>
+		<string>external-accessory</string>
+		<string>fetch</string>
 		<string>processing</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
@@ -62,6 +65,10 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>com.devomech.backawareiOS</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

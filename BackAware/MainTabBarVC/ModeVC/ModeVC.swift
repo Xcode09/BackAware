@@ -30,8 +30,14 @@ class ModeVC: UIViewController {
             if let tr = UserDefaults.standard.value(forKey: "0") as? String,tr == "true"
             {
                 timePicker.isEnabled = true
+                timePicker.textColor = #colorLiteral(red: 0.4509803922, green: 0.4509803922, blue: 0.4509803922, alpha: 1)
+                poorPostionlabel.textColor = #colorLiteral(red: 0.4509803922, green: 0.4509803922, blue: 0.4509803922, alpha: 1)
+                
             }else{
+                
                 timePicker.isEnabled = false
+                timePicker.textColor = #colorLiteral(red: 0.4509803922, green: 0.4509803922, blue: 0.4509803922, alpha: 1).withAlphaComponent(0.2)
+                poorPostionlabel.textColor = #colorLiteral(red: 0.4509803922, green: 0.4509803922, blue: 0.4509803922, alpha: 1).withAlphaComponent(0.2)
             }
             
             
@@ -64,12 +70,14 @@ class ModeVC: UIViewController {
             if done{
                 self?.poorPostionlabel.textColor = self?.defualtColor
                 self?.timePicker.isEnabled = true
+                self?.timePicker.textColor = #colorLiteral(red: 0.4509803922, green: 0.4509803922, blue: 0.4509803922, alpha: 1)
                 self?.timePicker.resignFirstResponder()
             }
             else
             {
                 self?.defualtColor = self?.poorPostionlabel.textColor
-                self?.poorPostionlabel.textColor = .lightGray
+                self?.timePicker.textColor = #colorLiteral(red: 0.4509803922, green: 0.4509803922, blue: 0.4509803922, alpha: 1).withAlphaComponent(0.2)
+                self?.poorPostionlabel.textColor = #colorLiteral(red: 0.4509803922, green: 0.4509803922, blue: 0.4509803922, alpha: 1).withAlphaComponent(0.2)
                 self?.timePicker.isEnabled = false
                 self?.timePicker.resignFirstResponder()
             }
@@ -90,6 +98,10 @@ class ModeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.title = "Mode"
+        if let tr = UserDefaults.standard.value(forKey: "0") as? String,tr == "true",let value = UserDefaults.standard.value(forKey: "notify") as? Int
+        {
+            timePicker.text = "\(value) min"
+        }
     }
     
     
@@ -155,13 +167,13 @@ extension ModeVC:UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SettingCell
         cell.backgroundColor = AppColors.tableViewColor
         let peripheral = peripherals[indexPath.row]
+        cell.bleNameLabel.text = "\(peripheral.name ?? "Unknown Device")"
+        cell.bleAddressLabel.text = "80:7D:3A:B7:6E:82"
+        cell.detailLabel.text = "Disconnected"
         if isConnected{
             cell.bleNameLabel.text = "\(peripheral.name ?? "Unknown Device")"
             cell.bleAddressLabel.text = "80:7D:3A:B7:6E:82"
             cell.detailLabel.text = "Connected"
-        }else{
-            cell.bleNameLabel.text = "\(peripheral.name ?? "Unknown Device")"
-            cell.bleAddressLabel.text = "80:7D:3A:B7:6E:82"
         }
         
         return cell
@@ -241,7 +253,7 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
     
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        if(!peripherals.contains(peripheral)) {
+        if(peripherals.count > 0) {
             peripherals.append(peripheral)
         }
         

@@ -20,7 +20,7 @@ struct FirebaseDbPaths{
     static let trainingTest = "TrainingTest"
 }
 
-struct AppColors {
+public struct AppColors {
     static let bgColor = UIColor(named: "BGColor", in: Bundle.main, compatibleWith: .current)
     static let tabBarColor = UIColor(named: "TabBarColor")
     static let navBarColor = UIColor.white

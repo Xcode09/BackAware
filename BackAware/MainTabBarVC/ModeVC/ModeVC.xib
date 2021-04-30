@@ -38,16 +38,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="359" height="43.5"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="posture" translatesAutoresizingMaskIntoConstraints="NO" id="m9h-OX-5af">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="43.5"/>
                                                     <color key="tintColor" name="LabelTitle"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="Zm4-Yn-5hV"/>
+                                                        <constraint firstAttribute="width" constant="30" id="Zm4-Yn-5hV"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Poor posture ping" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNQ-Nx-7Dd">
-                                                    <rect key="frame" x="60" y="0.0" width="229" height="43.5"/>
+                                                    <rect key="frame" x="40" y="0.0" width="249" height="43.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="0.45098039215686275" green="0.45098039215686275" blue="0.45098039215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQK-wp-wYT" customClass="CheckBox" customModule="BackAware" customModuleProvider="target">
@@ -80,20 +80,20 @@
                                             <rect key="frame" x="0.0" y="0.0" width="359" height="43.5"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="Ef4-ZA-UCU">
-                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="43.5"/>
                                                     <color key="tintColor" name="LabelTitle"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="zq9-Qb-EcO"/>
+                                                        <constraint firstAttribute="width" constant="30" id="zq9-Qb-EcO"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If in poor position notify me after" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="iWh-bK-Vn9">
-                                                    <rect key="frame" x="50" y="0.0" width="236" height="43.5"/>
+                                                    <rect key="frame" x="40" y="0.0" width="236" height="43.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="0.45098039215686275" green="0.45098039215686275" blue="0.45098039215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="4 min" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ff7-iC-o3J">
-                                                    <rect key="frame" x="296" y="0.0" width="63" height="43.5"/>
+                                                    <rect key="frame" x="286" y="0.0" width="73" height="43.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
@@ -115,16 +115,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="359" height="43"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="walk" translatesAutoresizingMaskIntoConstraints="NO" id="oVz-DR-LYz">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="43"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="43"/>
                                                     <color key="tintColor" name="LabelTitle"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="50" id="92X-UR-wZK"/>
+                                                        <constraint firstAttribute="width" constant="30" id="92X-UR-wZK"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Microbreaks-Get notification for microbreaks" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="IUt-Se-eKc">
-                                                    <rect key="frame" x="60" y="0.0" width="229" height="43"/>
+                                                    <rect key="frame" x="40" y="0.0" width="249" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="0.45098039215686275" green="0.45098039215686275" blue="0.45098039215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8vB-CJ-MOp" customClass="CheckBox" customModule="BackAware" customModuleProvider="target">
@@ -251,7 +251,7 @@
     </objects>
     <resources>
         <image name="posture" width="1600" height="1600"/>
-        <image name="time" width="18" height="18"/>
+        <image name="time" width="30" height="30"/>
         <image name="walk" width="36" height="36"/>
         <namedColor name="BGColor">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

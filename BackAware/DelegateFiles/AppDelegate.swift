@@ -7,6 +7,7 @@
 
 import UIKit
 import UserNotifications
+import BackgroundTasks
 import FirebaseCore
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,10 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupNavigationAppearance()
         setupTabBarAppearance()
+       
         NotificationService.shared.requestNotificationAuthorization(delegate: self)
         
         FirebaseApp.configure()
         //FirebaseDataService.instance.getData()
+        //MotionDetection.instance.startTrackingActivityType()
+        
+        
+//        BGTaskScheduler.shared.register(
+//          forTaskWithIdentifier: "com.devomech.backawareiOS",
+//            using:nil) { [weak self](task) in
+//            self?.handleAppRefreshTask(task: task as! BGProcessingTask)
+//        }
         return true
     }
 
@@ -38,13 +48,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
+    func handleAppRefreshTask(task: BGProcessingTask) {
+        task.expirationHandler = {
+         ///Stop Backgound
+        }
+        //MotionDetection.instance.startTrackingActivityType()
+    }
+
+    func scheduleBackgroundFetch() {
+        let fetchTask = BGProcessingTaskRequest(identifier: "com.devomech.backawareiOS")
+
+        fetchTask.earliestBeginDate = Date(timeIntervalSinceNow: 5)
+        do {
+          try BGTaskScheduler.shared.submit(fetchTask)
+        } catch {
+          print("Unable to submit task: \(error.localizedDescription)")
+        }
+    }
     
-
-
     private func setupNavigationAppearance()
     {
-//        UINavigationBar.appearance().barTintColor = AppColors.navBarColor
-//        UINavigationBar.appearance().tintColor = AppColors.navBarColor
+//        UINavigationBar.appearance().barTintColor = AppColors.bgColor
+        UINavigationBar.appearance().tintColor = AppColors.labelColor
        UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: AppColors.labelColor!,NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .bold)]
     }
@@ -52,7 +77,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupTabBarAppearance()
     {
         UITabBar.appearance().barTintColor = AppColors.tabBarTintColor
-        UITabBar.appearance().shadowImage = UIImage()
+        UITabBar.appearance().shadowImage = nil
+        UITabBar.appearance().backgroundImage = nil
+        UITabBar.appearance().layer.borderWidth = 0.0
+        UITabBar.appearance().clipsToBounds = true
         UITabBar.appearance().unselectedItemTintColor = AppColors.labelColor
         UITabBar.appearance().tintColor = AppColors.tabTintColor
         UITabBar.appearance().isTranslucent = false

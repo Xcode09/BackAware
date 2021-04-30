@@ -83,6 +83,7 @@ class AboutVC: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.section {
         case 0:
             if indexPath.row == 0 {
@@ -97,9 +98,6 @@ class AboutVC: UITableViewController {
             guard let url = URL(string:AboutUsModel.rateAppItems[indexPath.row].link) else { return }
             UIApplication.shared.open(url)
         case 2:
-            guard let url = URL(string:AboutUsModel.rateAppItems[indexPath.row].link) else { return }
-            UIApplication.shared.open(url)
-        case 3:
             guard let url = URL(string:AboutUsModel.developByItems[indexPath.row].link) else { return }
             UIApplication.shared.open(url)
         default:
