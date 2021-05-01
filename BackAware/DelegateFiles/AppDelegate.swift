@@ -72,6 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = AppColors.labelColor
        UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: AppColors.labelColor!,NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .bold)]
+        
     }
     
     private func setupTabBarAppearance()
