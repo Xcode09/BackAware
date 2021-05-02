@@ -23,15 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationService.shared.requestNotificationAuthorization(delegate: self)
         
         FirebaseApp.configure()
-        //FirebaseDataService.instance.getData()
-        //MotionDetection.instance.startTrackingActivityType()
-        
-        
-//        BGTaskScheduler.shared.register(
-//          forTaskWithIdentifier: "com.devomech.backawareiOS",
-//            using:nil) { [weak self](task) in
-//            self?.handleAppRefreshTask(task: task as! BGProcessingTask)
-//        }
         return true
     }
 

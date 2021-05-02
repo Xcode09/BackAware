@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 import FirebaseDatabase
+import FirebaseAuth
 final class FirebaseDataService{
     
     static let instance = FirebaseDataService()
@@ -34,7 +35,10 @@ final class FirebaseDataService{
         }
         
     }
-    
+    func storeUserDevice(path:String,value:[String:Any])
+    {
+        Database.database().reference(withPath: path).childByAutoId().setValue(value)
+    }
     func getCalibrationData(eventType:DataEventType = .value,complicationHandler:@escaping (((Int,Int))->Void))
     {
     
@@ -57,6 +61,49 @@ final class FirebaseDataService{
         ref.child(path).updateChildValues(value)
     }
     
+    
+    func verifyPhoneNumber(with phoneNumber:String,complicationHandler:@escaping ((Result<String,Error>)->Void))
+    {
+        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationId, error) in
+            if let error = error{
+                complicationHandler(.failure(error))
+            }else{
+                guard let id = verificationId else{
+                    let error = NSError(domain: "", code: 405, userInfo: [NSLocalizedDescriptionKey:"Invalid Verification Id"])
+                    return complicationHandler(.failure(error))
+                }
+                complicationHandler(.success(id))
+            }
+        }
+    }
+    
+    func verifyOTP(with id:String,verificationCode:String,complicationHandler:@escaping ((Result<String,Error>)->Void))
+    {
+        let provider = PhoneAuthProvider.provider().credential(withVerificationID: id, verificationCode: verificationCode)
+        Auth.auth().signIn(with: provider) { (authResult, error) in
+          if let error = error {
+            let authError = error as NSError
+            complicationHandler(.failure(authError))
+            return
+          }else{
+            complicationHandler(.success(Auth.auth().currentUser?.uid ?? ""))
+          }
+        }
+    }
+    
+    func checkUserSession(complicationHandler:@escaping ((Result<Bool,Error>)->Void)){
+        Database.database().reference(withPath: "+923049360080").observe(.value) { (snapshot) in
+            if let _ = snapshot.value as? [String:Any]{
+                complicationHandler(.success(true))
+            }else{
+                let error = NSError(domain: "", code: 405, userInfo: [NSLocalizedDescriptionKey:"No User Found"])
+                complicationHandler(.failure(error))
+            }
+        } withCancel: { (err) in
+            complicationHandler(.failure(err))
+        }
+
+    }
     
     
     func getPieStatisticsData(complicationHandler:@escaping (([Int])->Void))

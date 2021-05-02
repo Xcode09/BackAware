@@ -40,8 +40,12 @@
 		135FEAF2262C51430010844F /* PlayYTVideoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135FEAF0262C51430010844F /* PlayYTVideoVC.swift */; };
 		135FEAF3262C51430010844F /* PlayYTVideoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 135FEAF1262C51430010844F /* PlayYTVideoVC.xib */; };
 		136842A6263B254C0019D022 /* MotionDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136842A5263B254C0019D022 /* MotionDetection.swift */; };
+		136BBA05263F08E900330C1D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 136BBA04263F08E900330C1D /* GoogleService-Info.plist */; };
+		137F6F17263EF85200C8A7A0 /* VerifyPhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137F6F15263EF85200C8A7A0 /* VerifyPhoneNumber.swift */; };
+		137F6F18263EF85200C8A7A0 /* VerifyPhoneNumber.xib in Resources */ = {isa = PBXBuildFile; fileRef = 137F6F16263EF85200C8A7A0 /* VerifyPhoneNumber.xib */; };
+		137F6F49263EFBDD00C8A7A0 /* OTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137F6F47263EFBDD00C8A7A0 /* OTPVC.swift */; };
+		137F6F4A263EFBDD00C8A7A0 /* OTPVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 137F6F48263EFBDD00C8A7A0 /* OTPVC.xib */; };
 		13B8C832262C9C8C001AB312 /* trainings.json in Resources */ = {isa = PBXBuildFile; fileRef = 13B8C831262C9C8C001AB312 /* trainings.json */; };
-		13BB85522625F3B9003FAB2D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13BB85512625F3B9003FAB2D /* GoogleService-Info.plist */; };
 		13BB85562625F7E4003FAB2D /* FirebaseDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB85552625F7E4003FAB2D /* FirebaseDataService.swift */; };
 		13BB855B2625FF3F003FAB2D /* CalibrationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB85592625FF3F003FAB2D /* CalibrationSettings.swift */; };
 		13BB855C2625FF3F003FAB2D /* CalibrationSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13BB855A2625FF3F003FAB2D /* CalibrationSettings.xib */; };
@@ -89,8 +93,13 @@
 		135FEAF0262C51430010844F /* PlayYTVideoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayYTVideoVC.swift; sourceTree = "<group>"; };
 		135FEAF1262C51430010844F /* PlayYTVideoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayYTVideoVC.xib; sourceTree = "<group>"; };
 		136842A5263B254C0019D022 /* MotionDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDetection.swift; sourceTree = "<group>"; };
+		136BBA04263F08E900330C1D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../BackAwareIcons/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		136BBA07263F19C600330C1D /* BackAware.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BackAware.entitlements; sourceTree = "<group>"; };
+		137F6F15263EF85200C8A7A0 /* VerifyPhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumber.swift; sourceTree = "<group>"; };
+		137F6F16263EF85200C8A7A0 /* VerifyPhoneNumber.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VerifyPhoneNumber.xib; sourceTree = "<group>"; };
+		137F6F47263EFBDD00C8A7A0 /* OTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPVC.swift; sourceTree = "<group>"; };
+		137F6F48263EFBDD00C8A7A0 /* OTPVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OTPVC.xib; sourceTree = "<group>"; };
 		13B8C831262C9C8C001AB312 /* trainings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = trainings.json; path = "../../../../../Downloads/res/video links in gson/trainings.json"; sourceTree = "<group>"; };
-		13BB85512625F3B9003FAB2D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		13BB85552625F7E4003FAB2D /* FirebaseDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDataService.swift; sourceTree = "<group>"; };
 		13BB85592625FF3F003FAB2D /* CalibrationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrationSettings.swift; sourceTree = "<group>"; };
 		13BB855A2625FF3F003FAB2D /* CalibrationSettings.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalibrationSettings.xib; sourceTree = "<group>"; };
@@ -182,6 +191,7 @@
 		133FC13B26206DA60067B061 /* BackAware */ = {
 			isa = PBXGroup;
 			children = (
+				136BBA07263F19C600330C1D /* BackAware.entitlements */,
 				136842A4263B24C70019D022 /* MotionDetecting */,
 				132DDA5126318B2900DE53A1 /* Notification */,
 				135FEAEA262C46E50010844F /* Models */,
@@ -197,7 +207,7 @@
 				133FC14226206DA60067B061 /* Main.storyboard */,
 				133FC14526206DAB0067B061 /* Assets.xcassets */,
 				133FC14726206DAB0067B061 /* LaunchScreen.storyboard */,
-				13BB85512625F3B9003FAB2D /* GoogleService-Info.plist */,
+				136BBA04263F08E900330C1D /* GoogleService-Info.plist */,
 				133FC14A26206DAB0067B061 /* Info.plist */,
 			);
 			path = BackAware;
@@ -216,6 +226,10 @@
 		13536EAF26233F7700B3CEB0 /* AuthenticationVC */ = {
 			isa = PBXGroup;
 			children = (
+				137F6F15263EF85200C8A7A0 /* VerifyPhoneNumber.swift */,
+				137F6F16263EF85200C8A7A0 /* VerifyPhoneNumber.xib */,
+				137F6F47263EFBDD00C8A7A0 /* OTPVC.swift */,
+				137F6F48263EFBDD00C8A7A0 /* OTPVC.xib */,
 			);
 			path = AuthenticationVC;
 			sourceTree = "<group>";
@@ -433,6 +447,7 @@
 				135FEAE8262C465A0010844F /* plans.json in Resources */,
 				135FEADF262C429E0010844F /* PlanDetailHeader.xib in Resources */,
 				13536ECA262343AD00B3CEB0 /* PlanCell.xib in Resources */,
+				137F6F4A263EFBDD00C8A7A0 /* OTPVC.xib in Resources */,
 				13BB855C2625FF3F003FAB2D /* CalibrationSettings.xib in Resources */,
 				1313F39426235525003383FB /* ModeVC.xib in Resources */,
 				13B8C832262C9C8C001AB312 /* trainings.json in Resources */,
@@ -440,10 +455,11 @@
 				133FC14926206DAB0067B061 /* LaunchScreen.storyboard in Resources */,
 				133FC14626206DAB0067B061 /* Assets.xcassets in Resources */,
 				1313F39A2623676B003383FB /* AboutVC.xib in Resources */,
+				136BBA05263F08E900330C1D /* GoogleService-Info.plist in Resources */,
+				137F6F18263EF85200C8A7A0 /* VerifyPhoneNumber.xib in Resources */,
 				1322FFA626273B940042608B /* StatisticsVC.xib in Resources */,
 				133FC14426206DA60067B061 /* Main.storyboard in Resources */,
 				1347B80D263348290053CCD2 /* TrainingDetailHeader.xib in Resources */,
-				13BB85522625F3B9003FAB2D /* GoogleService-Info.plist in Resources */,
 				1322FFAD2627565E0042608B /* TrackTimeGraph.xib in Resources */,
 				135FEAE4262C42C40010844F /* YTVideoCell.xib in Resources */,
 				135FEAF3262C51430010844F /* PlayYTVideoVC.xib in Resources */,
@@ -507,7 +523,9 @@
 				135FEAEC262C46FB0010844F /* PlanModel.swift in Sources */,
 				13D3F3D82629EACC005AEE16 /* TrainningVC.swift in Sources */,
 				135FEADE262C429E0010844F /* PlanDetailHeader.swift in Sources */,
+				137F6F17263EF85200C8A7A0 /* VerifyPhoneNumber.swift in Sources */,
 				133FC13D26206DA60067B061 /* AppDelegate.swift in Sources */,
+				137F6F49263EFBDD00C8A7A0 /* OTPVC.swift in Sources */,
 				135FEAE3262C42C40010844F /* YTVideoCell.swift in Sources */,
 				13536EB92623405100B3CEB0 /* TabBarVC.swift in Sources */,
 				133FC13F26206DA60067B061 /* SceneDelegate.swift in Sources */,
@@ -672,15 +690,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BackAware/BackAware.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8TRWBBRCRY;
+				DEVELOPMENT_TEAM = CQ5AV8SV7S;
 				INFOPLIST_FILE = BackAware/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.devomech.backawareiOS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devomech.backaware;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -693,15 +712,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BackAware/BackAware.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8TRWBBRCRY;
+				DEVELOPMENT_TEAM = CQ5AV8SV7S;
 				INFOPLIST_FILE = BackAware/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.devomech.backawareiOS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devomech.backaware;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

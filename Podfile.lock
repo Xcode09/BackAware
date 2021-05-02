@@ -27,6 +27,9 @@ PODS:
   - FirebaseDatabase (7.4.0):
     - FirebaseCore (~> 7.0)
     - leveldb-library (~> 1.22)
+  - FlagPhoneNumber (0.8.0):
+    - FlagPhoneNumber/libPhoneNumberiOS (= 0.8.0)
+  - FlagPhoneNumber/libPhoneNumberiOS (0.8.0)
   - GoogleDataTransport (8.2.0):
     - nanopb (~> 2.30907.0)
   - GoogleUtilities/AppDelegateSwizzler (7.2.0):
@@ -52,6 +55,7 @@ PODS:
     - nanopb/encode (= 2.30907.0)
   - nanopb/decode (2.30907.0)
   - nanopb/encode (2.30907.0)
+  - OTPFieldView (1.0.1)
   - PromisesObjC (1.2.12)
   - RxCocoa (6.0.0):
     - RxRelay (= 6.0.0)
@@ -66,7 +70,9 @@ DEPENDENCIES:
   - Charts
   - Firebase/Auth
   - Firebase/Database
+  - FlagPhoneNumber
   - Kingfisher
+  - OTPFieldView
   - RxCocoa
   - RxSwift
   - Toast-Swift (~> 5.0.1)
@@ -80,12 +86,14 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseDatabase
+    - FlagPhoneNumber
     - GoogleDataTransport
     - GoogleUtilities
     - GTMSessionFetcher
     - Kingfisher
     - leveldb-library
     - nanopb
+    - OTPFieldView
     - PromisesObjC
     - RxCocoa
     - RxRelay
@@ -100,12 +108,14 @@ SPEC CHECKSUMS:
   FirebaseCore: 99c06e5a1e8d6952e75cb1f0a6d0b23c0f5ccdcf
   FirebaseCoreDiagnostics: 3770093ac4f2be4590fa03cfa1d3a6e5602d4557
   FirebaseDatabase: 0a619c887a9565bf4808eba37d2f0ed1d62f62d0
+  FlagPhoneNumber: 3712455b95f66cb0f2016fef7d9e34cddf8c7f9a
   GoogleDataTransport: 1024b1a4dfbd7a0e92cb20d7e0a6f1fb66b449a4
   GoogleUtilities: d866834472f1324d080496bc67ab3ce5d0d46027
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   Kingfisher: adde87a4f74f6a3845395769354efff593581740
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
+  OTPFieldView: 700a752fe62c41d1c4914c78aa500fb30d97c255
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   RxCocoa: 3f79328fafa3645b34600f37c31e64c73ae3a80e
   RxRelay: 8d593be109c06ea850df027351beba614b012ffb
@@ -113,6 +123,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
   ViewAnimator: 16435576cd44fca0b0d63147d5031fd3e91d295a
 
-PODFILE CHECKSUM: fefd48d3c0dcd2fe56f92fbd5509f098963865c6
+PODFILE CHECKSUM: af5fa3516e55e3c3bcd1ddbeb5f72119f128d7c8
 
 COCOAPODS: 1.8.4

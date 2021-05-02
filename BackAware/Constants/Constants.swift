@@ -12,7 +12,7 @@ let notifyNotification = Notification.Name(rawValue: "notifyTimer")
 let poorPositionCheckNotification = Notification.Name(rawValue: "poorPositionCheckNotification")
 
 struct FirebaseDbPaths{
-    static let baseUrl = "cJJoxX6SfRfSgoylos5KeFHL0SO2"
+    static var baseUrl = "cJJoxX6SfRfSgoylos5KeFHL0SO2"
     static let calibrate = "Calibrate"
     static let sensorData = "SensorData"
     static let statistics = "Statistics"

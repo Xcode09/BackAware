@@ -16,4 +16,6 @@ target 'BackAware' do
    pod 'Toast-Swift', '~> 5.0.1'
    pod 'ViewAnimator'
    pod 'Kingfisher'
+   pod 'FlagPhoneNumber'
+   pod 'OTPFieldView'
 end
