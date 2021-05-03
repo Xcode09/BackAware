@@ -19,8 +19,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
         FirebaseDataService.instance.checkUserSession { (result) in
             switch result{
-            case .success:
+            case .success(let uid):
                 // Go to Tab Bar
+                currentUserId = uid
+                FirebaseDataService.instance.configureReference()
                 window.rootViewController = TabBarVC()
                 window.makeKeyAndVisible()
             break

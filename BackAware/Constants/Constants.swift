@@ -11,6 +11,8 @@ let APP_DATE_FORMATE = "yyyy-MM-dd"
 let notifyNotification = Notification.Name(rawValue: "notifyTimer")
 let poorPositionCheckNotification = Notification.Name(rawValue: "poorPositionCheckNotification")
 
+var currentUserId = ""
+
 struct FirebaseDbPaths{
     static var baseUrl = "cJJoxX6SfRfSgoylos5KeFHL0SO2"
     static let calibrate = "Calibrate"

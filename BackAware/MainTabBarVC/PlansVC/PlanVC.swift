@@ -122,7 +122,7 @@ class PlanVC: UICollectionViewController,UICollectionViewDelegateFlowLayout
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = PlanDetailVC(collectionViewLayout: UICollectionViewFlowLayout())
         vc.plan = items[indexPath.item]
-        self.navigationItem.title = nil
+        self.navigationItem.title = ""
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

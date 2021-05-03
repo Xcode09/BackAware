@@ -111,26 +111,27 @@ class OTPVC: UIViewController {
                       else {return}
                 switch result{
                 case .success(let uid):
-                    FirebaseDbPaths.baseUrl = uid
-                    
-                    FirebaseDataService.instance.storeUserDevice(path: deviceId, value: ["login":true])
-                    FirebaseDataService.instance.setData(path: FirebaseDbPaths.calibrate, value: ["Flex1Limit":0,"Flex2Limit":0, "Time": TimeAndDateHelper.getDate()])
-                    FirebaseDataService.instance.setData(path: FirebaseDbPaths.sensorData, value: ["Data1":0,"Data2":0, "Time": TimeAndDateHelper.getDate()])
-                    FirebaseDataService.instance.setData(path: FirebaseDbPaths.statistics, value: ["good":0,"poorExtension":0, "poorFlex":110,"Time": TimeAndDateHelper.getDate()])
-                    FirebaseDataService.instance.setData(path: FirebaseDbPaths.trainingTest, value: ["good":0,"poorExt":0, "poorflex":110])
-                    DispatchQueue.main.asyncAfter(deadline: .now()+15) {
+                    currentUserId = uid
+                    FirebaseDataService.instance.configureReference()
+                    DispatchQueue.main.asyncAfter(deadline: .now()+3) {
                         [weak self] in
-                        guard let self =  self else {return}
-                        Toast.dismissActivity(superView: self.view)
-                        let scene = UIApplication.shared.connectedScenes.first
-                        if let sd : SceneDelegate = (scene?.delegate as? SceneDelegate),let window = sd.window
-                        {
-                            window.rootViewController = TabBarVC()
-                            window.makeKeyAndVisible()
+                        FirebaseDataService.instance.storeUserDevice(path: deviceId, value: ["login":true])
+                        FirebaseDataService.instance.setData(path: FirebaseDbPaths.calibrate, value: ["Flex1Limit":0,"Flex2Limit":0, "Time": TimeAndDateHelper.getDate()])
+                        FirebaseDataService.instance.setData(path: FirebaseDbPaths.sensorData, value: ["Data1":0,"Data2":0, "Time": TimeAndDateHelper.getDate()])
+                        FirebaseDataService.instance.setData(path: FirebaseDbPaths.statistics, value: ["good":0,"poorExtension":0, "poorFlex":0,"Time": TimeAndDateHelper.getDate()])
+                        FirebaseDataService.instance.setData(path: FirebaseDbPaths.trainingTest, value: ["good":0,"poorExt":0, "poorflex":0])
+                        DispatchQueue.main.asyncAfter(deadline: .now()+12) {
+                            [weak self] in
+                            guard let self =  self else {return}
+                            Toast.dismissActivity(superView: self.view)
+                            let scene = UIApplication.shared.connectedScenes.first
+                            if let sd : SceneDelegate = (scene?.delegate as? SceneDelegate),let window = sd.window
+                            {
+                                window.rootViewController = TabBarVC()
+                                window.makeKeyAndVisible()
+                            }
                         }
                     }
-                    
-                    break
                 case .failure(let er):
                     Toast.dismissActivity(superView: this.view)
                     Toast.showToast(superView: this.view, message: er.localizedDescription)

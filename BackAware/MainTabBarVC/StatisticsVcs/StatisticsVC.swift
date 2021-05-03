@@ -43,7 +43,7 @@ class StatisticsVC: UIViewController {
     
     @objc private func goToTrackTime(){
         let vc = TrackTimeGraph(nibName: "TrackTimeGraph", bundle: nil)
-        navigationItem.title = nil
+        navigationItem.title = ""
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -68,14 +68,13 @@ class ModeVC: UIViewController {
         poorPostionCheckBox.isTapped = {
             [weak self] (done) in
             if done{
-                self?.poorPostionlabel.textColor = self?.defualtColor
+                self?.poorPostionlabel.textColor = #colorLiteral(red: 0.4509803922, green: 0.4509803922, blue: 0.4509803922, alpha: 1)
                 self?.timePicker.isEnabled = true
                 self?.timePicker.textColor = #colorLiteral(red: 0.4509803922, green: 0.4509803922, blue: 0.4509803922, alpha: 1)
                 self?.timePicker.resignFirstResponder()
             }
             else
             {
-                self?.defualtColor = self?.poorPostionlabel.textColor
                 self?.timePicker.textColor = #colorLiteral(red: 0.4509803922, green: 0.4509803922, blue: 0.4509803922, alpha: 1).withAlphaComponent(0.2)
                 self?.poorPostionlabel.textColor = #colorLiteral(red: 0.4509803922, green: 0.4509803922, blue: 0.4509803922, alpha: 1).withAlphaComponent(0.2)
                 self?.timePicker.isEnabled = false
@@ -136,10 +135,10 @@ class ModeVC: UIViewController {
         // STEP 2: create a central to scan for, connect to,
         // manage, and collect data from peripherals
         manager = CBCentralManager(delegate: self, queue: centralQueue)
-        manager?.scanForPeripherals(withServices: nil)
+        //manager?.scanForPeripherals(withServices: nil)
         
         //stop scanning after 3 seconds
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
             self.stopScanForBLEDevices()
         }
     }
@@ -234,15 +233,7 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
             
         //bluetoothOffLabel.alpha = 1.0
         case .poweredOn:
-            
             print("Bluetooth status is POWERED ON")
-            
-            DispatchQueue.main.async { () -> Void in
-                
-                //                Toast.showToast(superView: self.view, message: "Bluetooth status is POWERED ON")
-            }
-            
-            // STEP 3.2: scan for peripherals that we're interested in
             manager?.scanForPeripherals(withServices:nil)
             
         @unknown default:
@@ -251,9 +242,8 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
         
     }
     
-    
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        if(peripherals.count > 0) {
+        if(!peripherals.contains(peripheral)) {
             peripherals.append(peripheral)
         }
         
@@ -435,7 +425,7 @@ class SettingCell:UITableViewCell{
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textColor = AppColors.connectStatus
-        lbl.font = UIFont.systemFont(ofSize: 16)
+        lbl.font = UIFont.systemFont(ofSize: 14)
         lbl.textAlignment = .left
         lbl.numberOfLines = 0
         return lbl

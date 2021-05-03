@@ -32,11 +32,13 @@ class TabBarVC: UITabBarController {
             let userInfo = ["t":Double(time)]
             timer = Timer.scheduledTimer(timeInterval: Double(time), target: self, selector: #selector(sendPoorNotifications(timer:)), userInfo:userInfo, repeats: true)
         }
-        if let isTrue = UserDefaults.standard.value(forKey: "1") as? String,isTrue == "true"
-        {
-//            NotificationService.shared.sendNotification(title: "", body: <#T##String#>, timeDuration: <#T##TimeInterval#>, repeats: <#T##Bool#>)
-        }
         
+        Timer.scheduledTimer(withTimeInterval: 60*60, repeats: true) { (_) in
+            if let isTrue = UserDefaults.standard.value(forKey: "1") as? String,isTrue == "true"
+            {
+                NotificationService.shared.sendNotificationWithCategory(title: "BackAware", body: "Have you stood in this hour?", timeDuration:1, repeats: false)
+            }
+        }
         NotificationCenter.default.addObserver(self, selector: #selector(updateTimerNotify), name: notifyNotification, object: nil)
         
     }

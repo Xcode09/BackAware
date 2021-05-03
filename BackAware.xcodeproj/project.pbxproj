@@ -18,7 +18,6 @@
 		132DDA5326318B5500DE53A1 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132DDA5226318B5500DE53A1 /* NotificationService.swift */; };
 		133FC13D26206DA60067B061 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133FC13C26206DA60067B061 /* AppDelegate.swift */; };
 		133FC13F26206DA60067B061 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133FC13E26206DA60067B061 /* SceneDelegate.swift */; };
-		133FC14126206DA60067B061 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133FC14026206DA60067B061 /* ViewController.swift */; };
 		133FC14426206DA60067B061 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 133FC14226206DA60067B061 /* Main.storyboard */; };
 		133FC14626206DAB0067B061 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 133FC14526206DAB0067B061 /* Assets.xcassets */; };
 		133FC14926206DAB0067B061 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 133FC14726206DAB0067B061 /* LaunchScreen.storyboard */; };
@@ -39,6 +38,7 @@
 		135FEAEC262C46FB0010844F /* PlanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135FEAEB262C46FB0010844F /* PlanModel.swift */; };
 		135FEAF2262C51430010844F /* PlayYTVideoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135FEAF0262C51430010844F /* PlayYTVideoVC.swift */; };
 		135FEAF3262C51430010844F /* PlayYTVideoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 135FEAF1262C51430010844F /* PlayYTVideoVC.xib */; };
+		13609CCE2640521200F792B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13609CCD2640521200F792B3 /* ViewController.swift */; };
 		136842A6263B254C0019D022 /* MotionDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136842A5263B254C0019D022 /* MotionDetection.swift */; };
 		136BBA05263F08E900330C1D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 136BBA04263F08E900330C1D /* GoogleService-Info.plist */; };
 		137F6F17263EF85200C8A7A0 /* VerifyPhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137F6F15263EF85200C8A7A0 /* VerifyPhoneNumber.swift */; };
@@ -70,7 +70,6 @@
 		133FC13926206DA60067B061 /* BackAware.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackAware.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		133FC13C26206DA60067B061 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		133FC13E26206DA60067B061 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		133FC14026206DA60067B061 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		133FC14326206DA60067B061 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		133FC14526206DAB0067B061 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		133FC14826206DAB0067B061 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -92,6 +91,7 @@
 		135FEAEB262C46FB0010844F /* PlanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanModel.swift; sourceTree = "<group>"; };
 		135FEAF0262C51430010844F /* PlayYTVideoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayYTVideoVC.swift; sourceTree = "<group>"; };
 		135FEAF1262C51430010844F /* PlayYTVideoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayYTVideoVC.xib; sourceTree = "<group>"; };
+		13609CCD2640521200F792B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		136842A5263B254C0019D022 /* MotionDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDetection.swift; sourceTree = "<group>"; };
 		136BBA04263F08E900330C1D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../BackAwareIcons/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		136BBA07263F19C600330C1D /* BackAware.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BackAware.entitlements; sourceTree = "<group>"; };
@@ -203,8 +203,8 @@
 				13536EB026233F9300B3CEB0 /* Constants */,
 				13536EAF26233F7700B3CEB0 /* AuthenticationVC */,
 				13536EB526233FED00B3CEB0 /* DelegateFiles */,
-				133FC14026206DA60067B061 /* ViewController.swift */,
 				133FC14226206DA60067B061 /* Main.storyboard */,
+				13609CCD2640521200F792B3 /* ViewController.swift */,
 				133FC14526206DAB0067B061 /* Assets.xcassets */,
 				133FC14726206DAB0067B061 /* LaunchScreen.storyboard */,
 				136BBA04263F08E900330C1D /* GoogleService-Info.plist */,
@@ -515,7 +515,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				133FC14126206DA60067B061 /* ViewController.swift in Sources */,
 				13536EBE2623410300B3CEB0 /* PlanVC.swift in Sources */,
 				135FEAD9262C42780010844F /* PlanDetailVC.swift in Sources */,
 				13BB855B2625FF3F003FAB2D /* CalibrationSettings.swift in Sources */,
@@ -534,6 +533,7 @@
 				13D3F3DD2629EB6B005AEE16 /* TrainingCell.swift in Sources */,
 				136842A6263B254C0019D022 /* MotionDetection.swift in Sources */,
 				135FEAF2262C51430010844F /* PlayYTVideoVC.swift in Sources */,
+				13609CCE2640521200F792B3 /* ViewController.swift in Sources */,
 				1347B80C263348290053CCD2 /* TrainingDetailHeader.swift in Sources */,
 				13BB856026260F0F003FAB2D /* Extensions.swift in Sources */,
 				1347B808263347EE0053CCD2 /* TrainingDetailVC.swift in Sources */,

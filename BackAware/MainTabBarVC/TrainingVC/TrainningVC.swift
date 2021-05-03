@@ -55,7 +55,7 @@ class TrainningVC: UICollectionViewController,UICollectionViewDelegateFlowLayout
         
         // Register cell classes
         //self.collectionView.delegate = nil
-        self.navigationItem.title = "Trainings"
+        
         //self.collectionView.dataSource = nil
         self.collectionView.backgroundColor = AppColors.bgColor
         self.collectionView!.register(UINib(nibName:reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
@@ -89,6 +89,10 @@ class TrainningVC: UICollectionViewController,UICollectionViewDelegateFlowLayout
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.title = "Trainings"
+    }
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -107,6 +111,7 @@ class TrainningVC: UICollectionViewController,UICollectionViewDelegateFlowLayout
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = TrainingDetailVC(collectionViewLayout: UICollectionViewFlowLayout())
         vc.plan = items[indexPath.item]
+        self.navigationItem.title = ""
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

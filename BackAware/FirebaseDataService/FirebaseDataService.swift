@@ -12,21 +12,23 @@ import FirebaseAuth
 final class FirebaseDataService{
     
     static let instance = FirebaseDataService()
-    private let ref = Database.database().reference(withPath: FirebaseDbPaths.baseUrl)
+    private var ref : DatabaseReference? = nil
     private init(){}
     
-    
+    func configureReference(){
+        ref = Database.database().reference(withPath: currentUserId)
+    }
     func getData(eventType:DataEventType = .value,complicationHandler:@escaping ((Int)->Void))
     {
         if eventType == .value {
-            ref.child(FirebaseDbPaths.sensorData).observe(eventType, with: { (snapshot) in
+            ref?.child(FirebaseDbPaths.sensorData).observe(eventType, with: { (snapshot) in
                 if let dic = snapshot.value as? [String:Any]{
                     let data1 = dic["Data1"] as? Int ?? 0
                     complicationHandler(data1)
                 }
             })
         }else{
-            ref.child(FirebaseDbPaths.sensorData).observe(eventType, with: { (snapshot) in
+            ref?.child(FirebaseDbPaths.sensorData).observe(eventType, with: { (snapshot) in
                 if let dic = snapshot.value as? Int{
                     //let data1 = dic["Data1"] as? Int ?? 0
                     complicationHandler(dic)
@@ -42,7 +44,7 @@ final class FirebaseDataService{
     func getCalibrationData(eventType:DataEventType = .value,complicationHandler:@escaping (((Int,Int))->Void))
     {
     
-        ref.child(FirebaseDbPaths.calibrate).observeSingleEvent(of: eventType, with: { (snapshot) in
+        ref?.child(FirebaseDbPaths.calibrate).observeSingleEvent(of: eventType, with: { (snapshot) in
             if let dic = snapshot.value as? [String:Any]{
                 let data1 = dic["Flex1Limit"] as? Int ?? 0
                 let data2 = dic["Flex2Limit"] as? Int ?? 0
@@ -54,11 +56,11 @@ final class FirebaseDataService{
     
     func setData(path:String=FirebaseDbPaths.sensorData,value:[String:Any])
     {
-      ref.child(path).setValue(value)
+        ref?.child(path).setValue(value)
     }
     func updateData(path:String=FirebaseDbPaths.sensorData,value:[String:Any])
     {
-        ref.child(path).updateChildValues(value)
+        ref?.child(path).updateChildValues(value)
     }
     
     
@@ -91,10 +93,12 @@ final class FirebaseDataService{
         }
     }
     
-    func checkUserSession(complicationHandler:@escaping ((Result<Bool,Error>)->Void)){
-        Database.database().reference(withPath: "+923049360080").observe(.value) { (snapshot) in
+    func checkUserSession(complicationHandler:@escaping ((Result<String,Error>)->Void)){
+        guard let id = UIDevice.current.identifierForVendor?.uuidString else {return}
+        Database.database().reference(withPath: id).observe(.value) { (snapshot) in
             if let _ = snapshot.value as? [String:Any]{
-                complicationHandler(.success(true))
+                let id = Auth.auth().currentUser?.uid ?? ""
+                complicationHandler(.success(id))
             }else{
                 let error = NSError(domain: "", code: 405, userInfo: [NSLocalizedDescriptionKey:"No User Found"])
                 complicationHandler(.failure(error))
@@ -108,7 +112,7 @@ final class FirebaseDataService{
     
     func getPieStatisticsData(complicationHandler:@escaping (([Int])->Void))
     {
-        ref.child(FirebaseDbPaths.statistics)
+        ref?.child(FirebaseDbPaths.statistics)
             .observe(.value, with: { (snapshot) in
                 if let dic = snapshot.value as? [String:Any]{
                     let data1 = dic["good"] as? Int ?? 0
@@ -123,7 +127,7 @@ final class FirebaseDataService{
     func getTracKTimeStatisticsData(complicationHandler:@escaping (([TrackModel])->Void))
     {
         var arrData = [TrackModel]()
-        ref.child(FirebaseDbPaths.trackingTime)
+        ref?.child(FirebaseDbPaths.trackingTime)
             .observe(.value, with: { (snapshot) in
                 if let dic = snapshot.value as? NSDictionary
                 {
@@ -139,7 +143,7 @@ final class FirebaseDataService{
     
     
     deinit {
-        ref.removeAllObservers()
+        ref?.removeAllObservers()
     }
 }
 

@@ -74,6 +74,7 @@ class CalibrationSettings: UIViewController {
         {
             let para : [String:Any] =  ["Flex1Limit":Int(pickerUpperLimit) ?? 0,"Flex2Limit":Int(pickerLowerLimit) ?? 0,"Time":TimeAndDateHelper.getDate()]
             FirebaseDataService.instance.setData(path: FirebaseDbPaths.calibrate, value: para)
+            Toast.showToast(superView: self.view, message: "Calibration Setup Successfully")
         }
     }
     @IBAction private func normalCalibrateTapped(_ sender:UIButton){
@@ -87,6 +88,7 @@ class CalibrationSettings: UIViewController {
             
             let para : [String:Any] =  ["Flex1Limit":upperLimit,"Flex2Limit":lowerLimit,"Time":TimeAndDateHelper.getDate()]
             FirebaseDataService.instance.setData(path: FirebaseDbPaths.calibrate, value: para)
+            Toast.showToast(superView: self.view, message: "Normal Calibration Setup Successfully")
         }else{
             Toast.showToast(superView: self.view, message: "No sensor data")
         }
@@ -102,6 +104,7 @@ class CalibrationSettings: UIViewController {
             }
             let para : [String:Any] =  ["Flex1Limit":upperLimit,"Flex2Limit":lowerLimit,"Time":TimeAndDateHelper.getDate()]
             FirebaseDataService.instance.setData(path: FirebaseDbPaths.calibrate, value:para)
+            Toast.showToast(superView: self.view, message: "Hard Calibration Setup Successfully")
         }else{
             Toast.showToast(superView: self.view, message: "No sensor data")
         }

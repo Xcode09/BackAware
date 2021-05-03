@@ -50,4 +50,43 @@ final class NotificationService{
             }
         }
     }
+    
+    
+    
+    func sendNotificationWithCategory(title:String = "",body:String = "",timeDuration: TimeInterval = 60,repeats:Bool = false) {
+        // Code here
+        
+        let notificationContent = UNMutableNotificationContent()
+        notificationContent.title = title
+        notificationContent.body = body
+        notificationContent.badge = nil
+        notificationContent.categoryIdentifier = "Yes_Category"
+        
+        if let url = Bundle.main.url(forResource: "dune",
+                                     withExtension: "png") {
+            if let attachment = try? UNNotificationAttachment(identifier: "dune",
+                                                              url: url,
+                                                              options: nil) {
+                notificationContent.attachments = [attachment]
+            }
+        }
+        
+        let action = UNNotificationAction(identifier: "Yes", title: "Yes", options: .init(rawValue: 0))
+        
+        let category = UNNotificationCategory(identifier: "Yes_Category", actions: [action], intentIdentifiers: [], options: .customDismissAction)
+        
+        UNUserNotificationCenter.current().setNotificationCategories([category])
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeDuration,
+                                                        repeats: repeats)
+        let request = UNNotificationRequest(identifier: "testNotification",
+                                            content: notificationContent,
+                                            trigger: trigger)
+        
+        userNotificationCenter.add(request) { (error) in
+            if let error = error {
+                print("Notification Error: ", error)
+            }
+        }
+    }
 }

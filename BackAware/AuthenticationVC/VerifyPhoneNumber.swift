@@ -30,29 +30,24 @@ class VerifyPhoneNumber: UIViewController {
             
         }
         let numberWithOutSpacing = phoneNumber.replacingOccurrences(of: " ", with: "")
-//        let vc = OTPVC(nibName: "OTPVC", bundle: nil)
-//        vc.id = ""
-//        vc.number = numberWithOutSpacing
-//        title = ""
-//        self.navigationController?.pushViewController(vc, animated: true)
-//        return
+
+        
             FirebaseDataService.instance.verifyPhoneNumber(with: numberWithOutSpacing) {[weak self](result) in
                 DispatchQueue.main.async {
                     [weak self] in
-                    //guard let this = self else  {return}
+                    guard let this = self else  {return}
                     switch result{
                     case .success(let id):
                         let vc = OTPVC(nibName: "OTPVC", bundle: nil)
                         vc.id = id
                         vc.number = numberWithOutSpacing
+                        self?.navigationItem.title = ""
                         self?.navigationController?.pushViewController(vc, animated: true)
-                       
                     case .failure(let er):
                         Toast.showToast(superView: self?.view ?? UIView(), message: er.localizedDescription)
                     }
                 }
                 
             }
-        
     }
 }
