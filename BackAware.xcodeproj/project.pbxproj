@@ -40,6 +40,8 @@
 		135FEAF3262C51430010844F /* PlayYTVideoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 135FEAF1262C51430010844F /* PlayYTVideoVC.xib */; };
 		13609CCE2640521200F792B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13609CCD2640521200F792B3 /* ViewController.swift */; };
 		136842A6263B254C0019D022 /* MotionDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136842A5263B254C0019D022 /* MotionDetection.swift */; };
+		136864C126446D3000D507C0 /* TextResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136864BF26446D3000D507C0 /* TextResultCell.swift */; };
+		136864C226446D3000D507C0 /* TextResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 136864C026446D3000D507C0 /* TextResultCell.xib */; };
 		136BBA05263F08E900330C1D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 136BBA04263F08E900330C1D /* GoogleService-Info.plist */; };
 		137F6F17263EF85200C8A7A0 /* VerifyPhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137F6F15263EF85200C8A7A0 /* VerifyPhoneNumber.swift */; };
 		137F6F18263EF85200C8A7A0 /* VerifyPhoneNumber.xib in Resources */ = {isa = PBXBuildFile; fileRef = 137F6F16263EF85200C8A7A0 /* VerifyPhoneNumber.xib */; };
@@ -93,6 +95,8 @@
 		135FEAF1262C51430010844F /* PlayYTVideoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayYTVideoVC.xib; sourceTree = "<group>"; };
 		13609CCD2640521200F792B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		136842A5263B254C0019D022 /* MotionDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDetection.swift; sourceTree = "<group>"; };
+		136864BF26446D3000D507C0 /* TextResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextResultCell.swift; sourceTree = "<group>"; };
+		136864C026446D3000D507C0 /* TextResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextResultCell.xib; sourceTree = "<group>"; };
 		136BBA04263F08E900330C1D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../BackAwareIcons/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		136BBA07263F19C600330C1D /* BackAware.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BackAware.entitlements; sourceTree = "<group>"; };
 		137F6F15263EF85200C8A7A0 /* VerifyPhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneNumber.swift; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 			children = (
 				1322FFAA2627565E0042608B /* TrackTimeGraph.swift */,
 				1322FFAB2627565E0042608B /* TrackTimeGraph.xib */,
+				136864BF26446D3000D507C0 /* TextResultCell.swift */,
+				136864C026446D3000D507C0 /* TextResultCell.xib */,
 			);
 			path = TrackGraphVC;
 			sourceTree = "<group>";
@@ -447,6 +453,7 @@
 				135FEAE8262C465A0010844F /* plans.json in Resources */,
 				135FEADF262C429E0010844F /* PlanDetailHeader.xib in Resources */,
 				13536ECA262343AD00B3CEB0 /* PlanCell.xib in Resources */,
+				136864C226446D3000D507C0 /* TextResultCell.xib in Resources */,
 				137F6F4A263EFBDD00C8A7A0 /* OTPVC.xib in Resources */,
 				13BB855C2625FF3F003FAB2D /* CalibrationSettings.xib in Resources */,
 				1313F39426235525003383FB /* ModeVC.xib in Resources */,
@@ -526,6 +533,7 @@
 				133FC13D26206DA60067B061 /* AppDelegate.swift in Sources */,
 				137F6F49263EFBDD00C8A7A0 /* OTPVC.swift in Sources */,
 				135FEAE3262C42C40010844F /* YTVideoCell.swift in Sources */,
+				136864C126446D3000D507C0 /* TextResultCell.swift in Sources */,
 				13536EB92623405100B3CEB0 /* TabBarVC.swift in Sources */,
 				133FC13F26206DA60067B061 /* SceneDelegate.swift in Sources */,
 				1322FFA526273B940042608B /* StatisticsVC.swift in Sources */,

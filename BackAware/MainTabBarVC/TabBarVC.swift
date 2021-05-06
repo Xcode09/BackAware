@@ -26,6 +26,16 @@ class TabBarVC: UITabBarController {
         FirebaseDataService.instance.getData(eventType: .childChanged) { [weak self]  (sensorValue) in
             self?.getCalibrationData(sensorValue: sensorValue)
         }
+        FirebaseDataService.instance.getCalibrationData(eventType: .value)  { (lower,upper) in
+            upperLimit = lower
+            lowerLimit = upper
+        }
+        
+        FirebaseDataService.instance.getCalibrationData(eventType: .childChanged) { (lower,upper) in
+            upperLimit = lower
+            lowerLimit = upper
+        }
+        
         if let isTrue = UserDefaults.standard.value(forKey: "0") as? String,isTrue == "true"{
             let time = (UserDefaults.standard.value(forKey: "notify") as? Int ?? 60) * 60
             

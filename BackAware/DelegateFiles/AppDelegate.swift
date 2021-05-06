@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationService.shared.requestNotificationAuthorization(delegate: self)
         
         FirebaseApp.configure()
+        
         return true
     }
 

@@ -13,6 +13,9 @@ let poorPositionCheckNotification = Notification.Name(rawValue: "poorPositionChe
 
 var currentUserId = ""
 
+var upperLimit = 0
+var lowerLimit = 0
+
 struct FirebaseDbPaths{
     static var baseUrl = "cJJoxX6SfRfSgoylos5KeFHL0SO2"
     static let calibrate = "Calibrate"

@@ -9,11 +9,11 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
-final class FirebaseDataService{
+final class FirebaseDataService:NSObject{
     
     static let instance = FirebaseDataService()
     private var ref : DatabaseReference? = nil
-    private init(){}
+    private override init(){}
     
     func configureReference(){
         ref = Database.database().reference(withPath: currentUserId)
@@ -37,6 +37,16 @@ final class FirebaseDataService{
         }
         
     }
+    func getSingalData(eventType:DataEventType = .value,complicationHandler:@escaping ((Int)->Void))
+    {
+        ref?.child(FirebaseDbPaths.sensorData)
+            .observeSingleEvent(of: eventType, with: { (snapshot) in
+                if let dic = snapshot.value as? [String:Any]{
+                    let data1 = dic["Data1"] as? Int ?? 0
+                    complicationHandler(data1)
+                }
+            })
+    }
     func storeUserDevice(path:String,value:[String:Any])
     {
         Database.database().reference(withPath: path).childByAutoId().setValue(value)
@@ -44,7 +54,7 @@ final class FirebaseDataService{
     func getCalibrationData(eventType:DataEventType = .value,complicationHandler:@escaping (((Int,Int))->Void))
     {
     
-        ref?.child(FirebaseDbPaths.calibrate).observeSingleEvent(of: eventType, with: { (snapshot) in
+        ref?.child(FirebaseDbPaths.calibrate).observe(eventType, with: { (snapshot) in
             if let dic = snapshot.value as? [String:Any]{
                 let data1 = dic["Flex1Limit"] as? Int ?? 0
                 let data2 = dic["Flex2Limit"] as? Int ?? 0
@@ -139,6 +149,10 @@ final class FirebaseDataService{
                     complicationHandler(arrData)
                 }
             })
+    }
+    
+    func removeSensorObserver(){
+        ref?.removeObserver(self, forKeyPath: FirebaseDbPaths.sensorData)
     }
     
     

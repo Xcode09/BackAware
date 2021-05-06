@@ -30,3 +30,10 @@ struct Step: Codable {
         case video
     }
 }
+
+struct TrackTimeModel{
+    let testName:String
+    let good:String
+    let poorFlex:String
+    let poorExt:String
+}
