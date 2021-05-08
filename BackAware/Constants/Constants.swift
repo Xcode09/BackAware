@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Charts
 let APP_DATE_FORMATE = "yyyy-MM-dd"
 let notifyNotification = Notification.Name(rawValue: "notifyTimer")
 let poorPositionCheckNotification = Notification.Name(rawValue: "poorPositionCheckNotification")
@@ -25,7 +25,7 @@ struct FirebaseDbPaths{
     static let trainingTest = "TrainingTest"
 }
 
-public struct AppColors {
+struct AppColors {
     static let bgColor = UIColor(named: "BGColor", in: Bundle.main, compatibleWith: .current)
     static let tabBarColor = UIColor(named: "TabBarColor")
     static let navBarColor = UIColor.white
@@ -36,6 +36,16 @@ public struct AppColors {
     static let settingPageColor = UIColor(named: "SettingPageColor")
     static let tableViewColor = UIColor(named: "TableViewColor")
     static let labelColor = UIColor(named: "LabelTitle")
+    
+    static let green = NSUIColor(cgColor: UIColor(red: 0, green: 255, blue: 0, alpha: 1).cgColor)
+        
+    static let red = NSUIColor(cgColor: UIColor(red: 254, green: 0, blue: 0, alpha: 1).cgColor)
+        
+    static let black = NSUIColor(cgColor: UIColor.black.cgColor)
+    //static let lightTextColor = nil
+    static let chartColors : [NSUIColor] = [green,red,black]
+    
+    static let lightTextColor = #colorLiteral(red: 0.4509803922, green: 0.4509803922, blue: 0.4509803922, alpha: 1)
 }
 
 

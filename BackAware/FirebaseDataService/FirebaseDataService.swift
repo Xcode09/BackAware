@@ -123,12 +123,19 @@ final class FirebaseDataService:NSObject{
     func getPieStatisticsData(complicationHandler:@escaping (([Int])->Void))
     {
         ref?.child(FirebaseDbPaths.statistics)
-            .observe(.value, with: { (snapshot) in
+            .observeSingleEvent(of: .value, with: { (snapshot) in
                 if let dic = snapshot.value as? [String:Any]{
                     let data1 = dic["good"] as? Int ?? 0
                     let data2 = dic["poorExtension"] as? Int ?? 0
                     let data3 = dic["poorFlex"] as? Int ?? 0
-                    complicationHandler([data1,data2,data3])
+                    let total = data1 + data2 + data3
+                    guard total > 0 else {
+                        return complicationHandler([0,0,0])
+                    }
+                    let goodPercentage = data1 * 100 / total
+                    let poorExtPercentage = data2 * 100 / total
+                    let poorFlexPercentage = data3 * 100 / total
+                    complicationHandler([goodPercentage,poorExtPercentage,poorFlexPercentage])
                 }
             })
     }
@@ -151,6 +158,28 @@ final class FirebaseDataService:NSObject{
             })
     }
     
+    
+    func getTrainingTestData(complicationHandler:@escaping (([Int])->Void))
+    {
+        ref?.child(FirebaseDbPaths.trainingTest)
+            .observeSingleEvent(of: .value, with: { (snapshot) in
+                if let dic = snapshot.value as? NSDictionary
+                {
+                    let data1 = dic["good"] as? Int ?? 0
+                    let data2 = dic["poorExt"] as? Int ?? 0
+                    let data3 = dic["poorflex"] as? Int ?? 0
+                    
+                    let total = data1 + data2 + data3
+                    guard total > 0 else {
+                        return complicationHandler([0,0,0])
+                    }
+                    let goodPercentage = data1 * 100 / total
+                    let poorExtPercentage = data2 * 100 / total
+                    let poorFlexPercentage = data3 * 100 / total
+                    complicationHandler([goodPercentage,poorExtPercentage,poorFlexPercentage])
+                }
+            })
+    }
     func removeSensorObserver(){
         ref?.removeObserver(self, forKeyPath: FirebaseDbPaths.sensorData)
     }

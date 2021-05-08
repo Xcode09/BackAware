@@ -68,15 +68,15 @@ class ModeVC: UIViewController {
         poorPostionCheckBox.isTapped = {
             [weak self] (done) in
             if done{
-                self?.poorPostionlabel.textColor = #colorLiteral(red: 0.4509803922, green: 0.4509803922, blue: 0.4509803922, alpha: 1)
+                self?.poorPostionlabel.textColor = AppColors.lightTextColor
                 self?.timePicker.isEnabled = true
-                self?.timePicker.textColor = #colorLiteral(red: 0.4509803922, green: 0.4509803922, blue: 0.4509803922, alpha: 1)
+                self?.timePicker.textColor = AppColors.lightTextColor
                 self?.timePicker.resignFirstResponder()
             }
             else
             {
-                self?.timePicker.textColor = #colorLiteral(red: 0.4509803922, green: 0.4509803922, blue: 0.4509803922, alpha: 1).withAlphaComponent(0.2)
-                self?.poorPostionlabel.textColor = #colorLiteral(red: 0.4509803922, green: 0.4509803922, blue: 0.4509803922, alpha: 1).withAlphaComponent(0.2)
+                self?.timePicker.textColor = AppColors.lightTextColor.withAlphaComponent(0.2)
+                self?.poorPostionlabel.textColor = AppColors.lightTextColor.withAlphaComponent(0.2)
                 self?.timePicker.isEnabled = false
                 self?.timePicker.resignFirstResponder()
             }

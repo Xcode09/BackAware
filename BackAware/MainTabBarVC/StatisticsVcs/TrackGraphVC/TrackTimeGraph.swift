@@ -16,12 +16,24 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
     private var testResults = [TrackTimeModel]()
     private var timer : Timer?
     private let cellString = "TextResultCell"
+    private var isGoPress = false
     @IBOutlet weak private var testName:UITextField!{
         didSet{
             testName.delegate = self
             testName.returnKeyType = .go
         }
     }
+
+    @IBOutlet var btns: [UIButton]!{
+        didSet{
+            btns.forEach { (b) in
+                b.layer.cornerRadius = 20
+                b.layer.borderColor = AppColors.lightTextColor.cgColor
+                b.layer.borderWidth = 2
+            }
+        }
+    }
+    
     
     @IBOutlet weak private var tableView:UITableView!{
         didSet{
@@ -59,7 +71,7 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
         xAxis.drawAxisLineEnabled = false
         
         let leftAxis = lineChart.leftAxis
-        leftAxis.labelTextColor = UIColor(red: 51/255, green: 181/255, blue: 229/255, alpha: 1)
+        leftAxis.labelTextColor = UIColor.white
         leftAxis.axisMaximum = Double(upperLimit + 200)
         leftAxis.axisMinimum = Double(lowerLimit - 200)
         //leftAxis.drawGridLinesEnabled = true
@@ -95,14 +107,25 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
     
     @IBAction func goBtnTapped(_ sender:UIButton)
     {
+        isGoPress = !isGoPress
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Go"), object: self)
     }
     
     @IBAction func stopBtnTapped(_ sender:UIButton)
     {
+        guard isGoPress != false else {return}
         timer?.invalidate()
-        testResults.append(TrackTimeModel(testName:testName.text ?? "",good: "34%", poorFlex: "44%", poorExt: "55%"))
-        tableView.reloadData()
+        isGoPress = false
+        FirebaseDataService.instance.getTrainingTestData{
+            [weak self] dataSet in
+            let trainingModel = TrackTimeModel(testName: self?.testName.text ?? "", good: "\(dataSet[0])%", poorFlex: "\(dataSet[2])%", poorExt: "\(dataSet[1])%")
+            self?.testResults.append(trainingModel)
+            DispatchQueue.main.async {
+                [weak self] in
+                self?.tableView.reloadData()
+            }
+            
+        }
     }
     
     @objc func updateGraphValues(){
@@ -122,17 +145,16 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
     
     func setData(data:[Int]){
         var enteris = [ChartDataEntry]()
+        
         for i in 0..<data.count{
             enteris.append(ChartDataEntry(x: Double(i), y: Double(data[i])))
         }
-        print("Enteris",enteris.debugDescription)
-        let set1 = LineChartDataSet(entries: enteris, label: "Sensor Data")
-        set1.lineWidth = 3
-        set1.valueTextColor = .clear
-        set1.mode = .horizontalBezier
-        set1.drawCirclesEnabled = false
-        set1.drawCircleHoleEnabled = false
-        let data = LineChartData(dataSet: set1)
+        let upperSet = ChartDataEntry(x: Double(upperLimit + 200), y: Double(upperLimit + 200))
+        let lowerSet = ChartDataEntry(x: Double(lowerLimit - 200), y: Double(lowerLimit - 200))
+        let set1 = setupSetUI(set: LineChartDataSet(entries: enteris, label: "Sensor Data"), color: .red)
+        let set2 = setupSetUI(set: LineChartDataSet(entries: [upperSet], label: "Upper Limit"), color: .red)
+        let set3 = setupSetUI(set: LineChartDataSet(entries: [lowerSet], label: "Lower Limit"), color:AppColors.black)
+        let data = LineChartData(dataSets: [set1,set2,set3])
         lineChart.data = data
         
     }
@@ -149,6 +171,18 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
 //            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Go"), object: self)
         }
         return true
+    }
+    
+    private func setupSetUI(set:LineChartDataSet,color:NSUIColor = .black)->LineChartDataSet{
+        set.lineWidth = 3
+        set.setColor(color)
+        set.lineCapType = .square
+        set.valueTextColor = .clear
+        set.mode = .linear
+        set.drawCirclesEnabled = false
+        set.drawCircleHoleEnabled = false
+        
+        return set
     }
     
 }

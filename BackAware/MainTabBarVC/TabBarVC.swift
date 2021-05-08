@@ -111,17 +111,23 @@ class TabBarVC: UITabBarController {
             let rangeNumber = tuple.1...tuple.0
             if rangeNumber ~= sensorValue {
                 let para : [String:Any] = ["Time":TimeAndDateHelper.getDate(),"good":sensorValue]
+                let para1 : [String:Any] = ["good":sensorValue]
                 FirebaseDataService.instance.updateData(path: FirebaseDbPaths.statistics, value: para)
+                FirebaseDataService.instance.updateData(path: FirebaseDbPaths.trainingTest, value: para1)
             }
             else if tuple.0 > sensorValue{
                 let para : [String:Any] = ["Time":TimeAndDateHelper.getDate(),"poorFlex":sensorValue]
+                let para1 : [String:Any] = ["poorflex":sensorValue]
                 FirebaseDataService.instance.updateData(path: FirebaseDbPaths.statistics, value: para)
+                FirebaseDataService.instance.updateData(path: FirebaseDbPaths.trainingTest, value: para1)
                 
             }
             else if tuple.1 < sensorValue
             {
                 let para : [String:Any] = ["Time":TimeAndDateHelper.getDate(),"poorExtension":sensorValue]
+                let para1 : [String:Any] = ["poorExt":sensorValue]
                 FirebaseDataService.instance.updateData(path: FirebaseDbPaths.statistics, value: para)
+                FirebaseDataService.instance.updateData(path: FirebaseDbPaths.trainingTest, value: para1)
             }
         }
     }
