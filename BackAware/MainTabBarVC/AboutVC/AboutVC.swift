@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import StoreKit
 class AboutVC: UITableViewController {
         
     private let identifer = "cell"
@@ -47,7 +47,7 @@ class AboutVC: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: identifer, for: indexPath)
 
             cell.textLabel?.text = AboutUsModel.contactItems[indexPath.row].title
-            cell.imageView?.tintColor = .white
+            cell.imageView?.tintColor = AppColors.labelColor
             cell.imageView?.image = AboutUsModel.contactItems[indexPath.row].ImageView
             cell.backgroundColor = AppColors.bgColor
             cell.contentView.backgroundColor = AppColors.bgColor
@@ -64,7 +64,7 @@ class AboutVC: UITableViewController {
             cell.backgroundColor = AppColors.bgColor
             cell.contentView.backgroundColor = AppColors.bgColor
             cell.textLabel?.text = AboutUsModel.developByItems[indexPath.row].title
-            cell.imageView?.tintColor = .white
+            cell.imageView?.tintColor = AppColors.labelColor
             cell.imageView?.image = AboutUsModel.developByItems[indexPath.row].ImageView
             if indexPath.row == 1{
                 cell.textLabel?.textAlignment = .center
@@ -95,8 +95,7 @@ class AboutVC: UITableViewController {
                 UIApplication.shared.open(url)
             }
         case 1:
-            guard let url = URL(string:AboutUsModel.rateAppItems[indexPath.row].link) else { return }
-            UIApplication.shared.open(url)
+            SKStoreReviewController.requestReview()
         case 2:
             guard let url = URL(string:AboutUsModel.developByItems[indexPath.row].link) else { return }
             UIApplication.shared.open(url)

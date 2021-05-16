@@ -17,6 +17,7 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
     private var timer : Timer?
     private let cellString = "TextResultCell"
     private var isGoPress = false
+    private var sensorValue = 0
     @IBOutlet weak private var testName:UITextField!{
         didSet{
             testName.delegate = self
@@ -27,9 +28,22 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
     @IBOutlet var btns: [UIButton]!{
         didSet{
             btns.forEach { (b) in
+                  
                 b.layer.cornerRadius = 20
-                b.layer.borderColor = AppColors.lightTextColor.cgColor
-                b.layer.borderWidth = 2
+                if b.tag == 0 {
+                    b.layer.borderColor = AppColors.bgColor?.cgColor
+                }else{
+                    if self.traitCollection.userInterfaceStyle == .dark {
+                        b.layer.borderColor = UIColor.lightGray.cgColor
+                        b.layer.borderWidth = 1
+                                // User Interface is Dark
+                            } else {
+                                // User Interface is Light
+                                b.layer.borderColor = UIColor.white.cgColor
+                                b.layer.borderWidth = 3
+                            }
+                }
+                
             }
         }
     }
@@ -54,10 +68,10 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
         lineChart.setScaleEnabled(true)
         lineChart.zoomOut()
         lineChart.pinchZoomEnabled = true
-//        let l = lineChart.legend
-//        l.form = .empty
-//        l.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-//        l.textColor = .red
+        let l = lineChart.legend
+        l.form = .line
+        l.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        l.textColor = .white
 //        l.horizontalAlignment = .left
 //        l.verticalAlignment = .bottom
 //        l.orientation = .horizontal
@@ -66,8 +80,8 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
         
         let xAxis = lineChart.xAxis
         xAxis.labelFont = .systemFont(ofSize: 11)
-        //xAxis.labelTextColor = .red
-        xAxis.labelTextColor = .clear
+        xAxis.labelTextColor = UIColor.white
+        
         xAxis.drawAxisLineEnabled = false
         
         let leftAxis = lineChart.leftAxis
@@ -95,6 +109,7 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
                                 , message: "No sensor data found")
                 return
             }
+            this.sensorValue = sensorValue
             this.sensorValues.append(sensorValue)
         }
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "Go"), object: self, queue: .main) { [weak self](_) in
@@ -107,6 +122,11 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
     
     @IBAction func goBtnTapped(_ sender:UIButton)
     {
+        guard sensorValue > 0 else {
+            Toast.showToast(superView: self.view
+                            , message: "No sensor data found")
+            return
+        }
         isGoPress = !isGoPress
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Go"), object: self)
     }
@@ -141,7 +161,24 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
         }
     }
     
-
+    
+    @IBAction func autoCalibrateBtnTapped(_ sender:UIButton)
+    {
+        if sensorValue > 0 {
+            let upperlimit = upperLimit + 200
+            let lowerlimit = lowerLimit - 150
+            guard upperlimit > lowerlimit else {
+                Toast.showToast(superView: self.view, message: "Upper Limit should be getter than lower limit")
+                return
+            }
+            
+            let para : [String:Any] =  ["Flex1Limit":upperlimit,"Flex2Limit":lowerlimit,"Time":TimeAndDateHelper.getDate()]
+            FirebaseDataService.instance.setData(path: FirebaseDbPaths.calibrate, value: para)
+            Toast.showToast(superView: self.view, message: "Auto Calibration Setup Successfully")
+        }else{
+            Toast.showToast(superView: self.view, message: "No sensor data")
+        }
+    }
     
     func setData(data:[Int]){
         var enteris = [ChartDataEntry]()
@@ -149,13 +186,14 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
         for i in 0..<data.count{
             enteris.append(ChartDataEntry(x: Double(i), y: Double(data[i])))
         }
-        let upperSet = ChartDataEntry(x: Double(upperLimit + 200), y: Double(upperLimit + 200))
-        let lowerSet = ChartDataEntry(x: Double(lowerLimit - 200), y: Double(lowerLimit - 200))
-        let set1 = setupSetUI(set: LineChartDataSet(entries: enteris, label: "Sensor Data"), color: .red)
-        let set2 = setupSetUI(set: LineChartDataSet(entries: [upperSet], label: "Upper Limit"), color: .red)
-        let set3 = setupSetUI(set: LineChartDataSet(entries: [lowerSet], label: "Lower Limit"), color:AppColors.black)
+//        let upperSet = ChartDataEntry(x: Double(upperLimit + 200), y: Double(upperLimit + 200))
+//        let lowerSet = ChartDataEntry(x: Double(lowerLimit - 200), y: Double(lowerLimit - 200))
+        let set1 = setupSetUI(set: LineChartDataSet(entries: enteris, label: "Sensor Data"), color: .purple)
+        let set2 = setupSetUI(set: LineChartDataSet(entries: [ChartDataEntry(x: Double(0), y: Double(0))], label: "Upper Limit"), color: .white)
+        let set3 = setupSetUI(set: LineChartDataSet(entries: [ChartDataEntry(x: Double(0), y: Double(0))], label: "Lower Limit"), color:.red)
         let data = LineChartData(dataSets: [set1,set2,set3])
         lineChart.data = data
+        
         
     }
 
@@ -173,10 +211,12 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
         return true
     }
     
-    private func setupSetUI(set:LineChartDataSet,color:NSUIColor = .black)->LineChartDataSet{
+    private func setupSetUI(set:LineChartDataSet,color:NSUIColor? = nil)->LineChartDataSet{
         set.lineWidth = 3
-        set.setColor(color)
-        set.lineCapType = .square
+        if color != nil{
+            set.setColor(color!)
+        }
+        set.lineCapType = .butt
         set.valueTextColor = .clear
         set.mode = .linear
         set.drawCirclesEnabled = false

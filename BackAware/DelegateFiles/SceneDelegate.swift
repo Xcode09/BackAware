@@ -66,10 +66,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
-//        (UIApplication.shared.delegate as! AppDelegate).scheduleBackgroundFetch()
+      
+        Timer.scheduledTimer(withTimeInterval: 60*60, repeats: true) { (_) in
+            if let isTrue = UserDefaults.standard.value(forKey: "1") as? String,isTrue == "true"
+            {
+                NotificationService.shared.sendNotificationWithCategory(title: "Microbreak!", body: "Have you stood up for one minute this hour?", timeDuration:1, repeats: false)
+            }
+        }
     }
 
 

@@ -39,7 +39,7 @@
                                 <action selector="didTappedVerfiyBtn:" destination="-1" eventType="touchUpInside" id="Lua-gA-Tll"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By tapping &quot;Verfiy Phone Number&quot;,an SMS may be sent. Message &amp; data rates may apply" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dP-GS-MQU">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By tapping &quot;Verify Phone Number&quot;,an SMS may be sent. Message &amp; data rates may apply" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dP-GS-MQU">
                             <rect key="frame" x="0.0" y="120" width="335" height="40"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <color key="textColor" name="LabelTitle"/>

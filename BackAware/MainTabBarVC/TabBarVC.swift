@@ -46,7 +46,7 @@ class TabBarVC: UITabBarController {
         Timer.scheduledTimer(withTimeInterval: 60*60, repeats: true) { (_) in
             if let isTrue = UserDefaults.standard.value(forKey: "1") as? String,isTrue == "true"
             {
-                NotificationService.shared.sendNotificationWithCategory(title: "BackAware", body: "Have you stood in this hour?", timeDuration:1, repeats: false)
+                NotificationService.shared.sendNotificationWithCategory(title: "Microbreak!", body: "Have you stood up for one minute this hour?", timeDuration:1, repeats: false)
             }
         }
         NotificationCenter.default.addObserver(self, selector: #selector(updateTimerNotify), name: notifyNotification, object: nil)
