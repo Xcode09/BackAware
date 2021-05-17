@@ -89,7 +89,13 @@ class AboutVC: UITableViewController {
             if indexPath.row == 0 {
                 // Email
                 guard let url = URL(string:AboutUsModel.contactItems[indexPath.row].link) else { return }
-                UIApplication.shared.open(url)
+                UIApplication.shared.open(url, options: [:]) { [weak self](Completed) in
+                    print(Completed)
+                    guard let self = self else {return}
+                    if !Completed{
+                        Toast.showToast(superView: self.view, message: "Gmail app is not installed")
+                    }
+                }
             }else{
                 guard let url = URL(string:AboutUsModel.contactItems[indexPath.row].link) else { return }
                 UIApplication.shared.open(url)

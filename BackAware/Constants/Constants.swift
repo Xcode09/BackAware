@@ -16,6 +16,9 @@ var currentUserId = ""
 var upperLimit = 0
 var lowerLimit = 0
 
+fileprivate let componets = Calendar.current.dateComponents([.year], from: Date())
+fileprivate let currentYear = "\(componets.year ?? 0)"
+
 struct FirebaseDbPaths{
     static var baseUrl = "cJJoxX6SfRfSgoylos5KeFHL0SO2"
     static let calibrate = "Calibrate"
@@ -55,8 +58,10 @@ struct InfoModel {
     let link:String
 }
 struct AboutUsModel {
+    
     static let contactItems = [
-        InfoModel(title: "Email", ImageView: UIImage.init(systemName: "envelope.fill")!,link:"backawarebelt@gmail.com"),
+        InfoModel(title: "Email", ImageView: UIImage.init(systemName: "envelope.fill")!,link:"googlegmail:///co?subject=Subject&body=some text&to=devomechsolutions06@gmail.com"
+                    .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!),
         InfoModel(title: "Facebook", ImageView: UIImage(named: "fab")?.withRenderingMode(.alwaysOriginal) ?? UIImage(),link: ""),
         InfoModel(title: "Instagram", ImageView: UIImage(named: "insta")?.withRenderingMode(.alwaysOriginal) ?? UIImage(),link: ""),
         InfoModel(title: "Visit our site", ImageView: UIImage.init(systemName: "link")!,link: "https://everardpilates.com/")
@@ -67,6 +72,6 @@ struct AboutUsModel {
     ]
     static let developByItems = [
         InfoModel(title: "Devomech Solutions", ImageView: UIImage.init(systemName: "link")!,link: "https://devomech.com/"),
-        InfoModel(title: "© Copyrights © 2021", ImageView: UIImage(),link: "")
+        InfoModel(title: "© Copyrights © \(currentYear)", ImageView: UIImage(),link: "")
     ]
 }

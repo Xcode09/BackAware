@@ -80,6 +80,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UITabBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        return true
+    }
+    
     
 }
 
