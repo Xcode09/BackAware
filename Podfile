@@ -18,4 +18,5 @@ target 'BackAware' do
    pod 'Kingfisher'
    pod 'FlagPhoneNumber'
    pod 'OTPFieldView'
+   pod 'DLRadioButton', '~> 1.4'
 end

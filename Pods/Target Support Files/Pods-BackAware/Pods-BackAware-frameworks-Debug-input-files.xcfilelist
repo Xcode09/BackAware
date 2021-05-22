@@ -1,5 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-BackAware/Pods-BackAware-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Charts/Charts.framework
+${BUILT_PRODUCTS_DIR}/DLRadioButton/DLRadioButton.framework
 ${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework
 ${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework
 ${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework

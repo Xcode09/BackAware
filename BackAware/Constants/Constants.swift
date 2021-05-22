@@ -16,6 +16,10 @@ var currentUserId = ""
 var upperLimit = 0
 var lowerLimit = 0
 
+
+let checkedImage = UIImage(named: "checkradio")!
+let uncheckedImage = UIImage(named: "uncheckradio")!
+
 fileprivate let componets = Calendar.current.dateComponents([.year], from: Date())
 fileprivate let currentYear = "\(componets.year ?? 0)"
 

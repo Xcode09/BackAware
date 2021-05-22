@@ -52,6 +52,8 @@
 		13BB855B2625FF3F003FAB2D /* CalibrationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB85592625FF3F003FAB2D /* CalibrationSettings.swift */; };
 		13BB855C2625FF3F003FAB2D /* CalibrationSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13BB855A2625FF3F003FAB2D /* CalibrationSettings.xib */; };
 		13BB856026260F0F003FAB2D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB855F26260F0F003FAB2D /* Extensions.swift */; };
+		13BB857D265943FD000D249D /* CustomPrivacyAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13BB857C265943FD000D249D /* CustomPrivacyAlert.xib */; };
+		13BB8580265946FD000D249D /* CustomPrivacyAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BB857F265946FD000D249D /* CustomPrivacyAlert.swift */; };
 		13D3F3D82629EACC005AEE16 /* TrainningVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D3F3D72629EACC005AEE16 /* TrainningVC.swift */; };
 		13D3F3DD2629EB6B005AEE16 /* TrainingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D3F3DB2629EB6B005AEE16 /* TrainingCell.swift */; };
 		13D3F3DE2629EB6B005AEE16 /* TrainingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13D3F3DC2629EB6B005AEE16 /* TrainingCell.xib */; };
@@ -108,6 +110,8 @@
 		13BB85592625FF3F003FAB2D /* CalibrationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrationSettings.swift; sourceTree = "<group>"; };
 		13BB855A2625FF3F003FAB2D /* CalibrationSettings.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalibrationSettings.xib; sourceTree = "<group>"; };
 		13BB855F26260F0F003FAB2D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		13BB857C265943FD000D249D /* CustomPrivacyAlert.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomPrivacyAlert.xib; sourceTree = "<group>"; };
+		13BB857F265946FD000D249D /* CustomPrivacyAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPrivacyAlert.swift; sourceTree = "<group>"; };
 		13D3F3D72629EACC005AEE16 /* TrainningVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainningVC.swift; sourceTree = "<group>"; };
 		13D3F3DB2629EB6B005AEE16 /* TrainingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingCell.swift; sourceTree = "<group>"; };
 		13D3F3DC2629EB6B005AEE16 /* TrainingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainingCell.xib; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 		133FC13B26206DA60067B061 /* BackAware */ = {
 			isa = PBXGroup;
 			children = (
+				13BB857B265943D8000D249D /* CustomPrivacyAlert */,
 				136BBA07263F19C600330C1D /* BackAware.entitlements */,
 				136842A4263B24C70019D022 /* MotionDetecting */,
 				132DDA5126318B2900DE53A1 /* Notification */,
@@ -363,6 +368,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		13BB857B265943D8000D249D /* CustomPrivacyAlert */ = {
+			isa = PBXGroup;
+			children = (
+				13BB857C265943FD000D249D /* CustomPrivacyAlert.xib */,
+				13BB857F265946FD000D249D /* CustomPrivacyAlert.swift */,
+			);
+			path = CustomPrivacyAlert;
+			sourceTree = "<group>";
+		};
 		13D3F3D62629EA7F005AEE16 /* TrainingVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -464,6 +478,7 @@
 				1313F39A2623676B003383FB /* AboutVC.xib in Resources */,
 				136BBA05263F08E900330C1D /* GoogleService-Info.plist in Resources */,
 				137F6F18263EF85200C8A7A0 /* VerifyPhoneNumber.xib in Resources */,
+				13BB857D265943FD000D249D /* CustomPrivacyAlert.xib in Resources */,
 				1322FFA626273B940042608B /* StatisticsVC.xib in Resources */,
 				133FC14426206DA60067B061 /* Main.storyboard in Resources */,
 				1347B80D263348290053CCD2 /* TrainingDetailHeader.xib in Resources */,
@@ -522,6 +537,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13BB8580265946FD000D249D /* CustomPrivacyAlert.swift in Sources */,
 				13536EBE2623410300B3CEB0 /* PlanVC.swift in Sources */,
 				135FEAD9262C42780010844F /* PlanDetailVC.swift in Sources */,
 				13BB855B2625FF3F003FAB2D /* CalibrationSettings.swift in Sources */,
@@ -700,7 +716,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BackAware/BackAware.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.2;
 				DEVELOPMENT_TEAM = CQ5AV8SV7S;
 				INFOPLIST_FILE = BackAware/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -723,7 +739,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = BackAware/BackAware.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.2;
 				DEVELOPMENT_TEAM = CQ5AV8SV7S;
 				INFOPLIST_FILE = BackAware/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

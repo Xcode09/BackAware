@@ -12,11 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-       
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        let window = UIWindow(windowScene: windowScene)
-        self.window = window
+    fileprivate func checkUserActivity(_ window: UIWindow) {
         FirebaseDataService.instance.checkUserSession { (result) in
             switch result{
             case .success(let uid):
@@ -25,16 +21,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 FirebaseDataService.instance.configureReference()
                 window.rootViewController = TabBarVC()
                 window.makeKeyAndVisible()
-            break
+                break
             case .failure:
                 // Go to Authentication Screen
                 let verifyVc = VerifyPhoneNumber(nibName: "VerifyPhoneNumber", bundle: nil)
                 window.rootViewController = UINavigationController(rootViewController: verifyVc)
                 window.makeKeyAndVisible()
-            break
-               
+                break
+                
             }
         }
+    }
+    
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+       
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        let window = UIWindow(windowScene: windowScene)
+        self.window = window
+        if let pricvySelected = UserDefaults.standard.value(forKey: "Pi") as? Bool, pricvySelected == true {
+            checkUserActivity(window)
+        }
+        else{
+            let alert = CustomPrivacyAlert(nibName: "CustomPrivacyAlert", bundle: nil)
+            alert.delegate = self
+            window.rootViewController = alert
+            window.makeKeyAndVisible()
+        }
+        
+        //checkUserActivity(window)
         
         
         
@@ -78,3 +92,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+extension SceneDelegate:CustomPrivacyAlertDelegate{
+    func didTappedYes() {
+        if let window = self.window{
+            UserDefaults.standard.setValue(true, forKey: "Pi")
+            UserDefaults.standard.synchronize()
+            checkUserActivity(window)
+        }
+        
+    }
+    func didTappedNo() {
+        UserDefaults.standard.setValue(false, forKey: "Pi")
+        UserDefaults.standard.synchronize()
+        print("No")
+    }
+}

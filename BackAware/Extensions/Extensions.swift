@@ -50,6 +50,76 @@ class CheckBox: UIButton {
 }
 
 
+// Radio Button Class
+
+class RadioBox: UIButton {
+    // Images
+    let checkedImage = UIImage(named: "checkradio")!
+    let uncheckedImage = UIImage(named: "uncheckradio")!
+    
+    // Bool property
+    var isChecked: Bool = false {
+        didSet {
+            if isChecked == true {
+                self.setImage(checkedImage, for: UIControl.State.selected)
+            } else {
+                self.setImage(uncheckedImage, for: UIControl.State.normal)
+            }
+        }
+    }
+    
+    
+    override var isSelected: Bool {
+
+            willSet {
+
+               self.setImage(checkedImage, for: .normal)
+            }
+
+            didSet {
+                self.setImage(uncheckedImage, for: .normal)
+            }
+        }
+    
+    var isTapped:((Bool)->Void)?
+    
+    
+    override func awakeFromNib() {
+        self.addTarget(self, action:#selector(buttonClicked(sender:)), for: UIControl.Event.touchUpInside)
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if let isTrue = UserDefaults.standard.value(forKey: "\(self.tag)") as? String,isTrue == "true"{
+            self.setImage(checkedImage, for: .normal)
+            self.isChecked = true
+        }else{
+            self.isChecked = false
+        }
+    }
+    
+    @objc func buttonClicked(sender: UIButton) {
+        guard let image = self.imageView else {return}
+        
+        if sender == self {
+            
+            UIView.animate(withDuration: 0.1, delay: 0.1, options: .curveLinear, animations: {
+                image.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                
+            }) { (success) in
+                UIView.animate(withDuration: 0.1, delay: 0, options: .curveLinear, animations: {
+                    //self.isSelected = !self.isSelected
+                    self.isChecked = !self.isChecked
+                    UserDefaults.standard.set("\(self.isChecked)", forKey: "\(self.tag)")
+                    UserDefaults.standard.synchronize()
+                    image.transform = .identity
+                    self.isTapped?(self.isChecked)
+                }, completion: nil)
+            }
+            
+        }
+    }
+}
+
 struct TimeAndDateHelper {
     static func getDate(date:Date=Date())->String{
         let currentDateTime = date
@@ -100,13 +170,16 @@ extension String{
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = alignment
         paragraphStyle.firstLineHeadIndent = 5.0
-
+        
         let attributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: color,
             .paragraphStyle: paragraphStyle
         ]
-
+        
         let attributedQuote = NSAttributedString(string: self, attributes: attributes)
         return attributedQuote
     }
 }
+
+
+

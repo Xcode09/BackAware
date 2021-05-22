@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreBluetooth
+import DLRadioButton
 class ModeVC: UIViewController {
     private var serviceId = CBUUID(string:"AB0828B1-198E-4351-B779-901FA0E0371E")
     private var characteristicUUID = CBUUID(string: "4AC8A682-9736-4E5D-932B-E9B31405049C")
@@ -19,9 +20,28 @@ class ModeVC: UIViewController {
     private var secondsArr = [Int]()
     private var defualtColor : UIColor?
     private var isConnected = false
-    @IBOutlet weak private var poorPostionCheckBox:CheckBox!
+    private var isSelectTag = 0
+    private var _peripheral : CBPeripheral?
+    private var _characteristics: [CBCharacteristic]?
+    @IBOutlet weak private var gymRadioBox:UIButton!{
+        didSet{
+            if let isTrue = UserDefaults.standard.value(forKey: "\(gymRadioBox.tag)") as? String,isTrue == "true"{
+                gymRadioBox.setImage(checkedImage, for: .normal)
+            }else{
+                gymRadioBox.setImage(uncheckedImage, for: .normal)
+            }
+        }
+    }
     @IBOutlet weak private var poorPostionlabel:UILabel!
-    @IBOutlet weak private var microBreakCheckBox:CheckBox!
+    @IBOutlet private var officeRadioRox:UIButton!{
+        didSet{
+            if let isTrue = UserDefaults.standard.value(forKey: "\(officeRadioRox.tag)") as? String,isTrue == "true"{
+                officeRadioRox.setImage(checkedImage, for: .normal)
+            }else{
+                officeRadioRox.setImage(uncheckedImage, for: .normal)
+            }
+        }
+    }
     @IBOutlet weak var timePicker:UITextField!{
         didSet{
             let picker = UIPickerView()
@@ -65,30 +85,46 @@ class ModeVC: UIViewController {
             secondsArr.append(i)
         }
         
-        poorPostionCheckBox.isTapped = {
-            [weak self] (done) in
-            if done{
-                self?.poorPostionlabel.textColor = AppColors.lightTextColor
-                self?.timePicker.isEnabled = true
-                self?.timePicker.textColor = AppColors.lightTextColor
-                self?.timePicker.resignFirstResponder()
-            }
-            else
-            {
-                self?.timePicker.textColor = AppColors.lightTextColor.withAlphaComponent(0.2)
-                self?.poorPostionlabel.textColor = AppColors.lightTextColor.withAlphaComponent(0.2)
-                self?.timePicker.isEnabled = false
-                self?.timePicker.resignFirstResponder()
-            }
-            
-        }
         
-        microBreakCheckBox.isTapped = {
-            [weak self] (done) in
-            if done{
-                self?.showAlert()
-            }
-        }
+//        officeRadioBox.addTarget(self, action: #selector(setConfigurationOfficeMode(sender:)), for: .touchUpInside)
+        
+//        gymRadioBox.isTapped = {
+//            [weak self] (done) in
+//            if done{
+//                self?.officeRadioBox.isChecked = false
+////                self?.poorPostionlabel.textColor = AppColors.lightTextColor
+////                self?.timePicker.isEnabled = true
+////                self?.timePicker.textColor = AppColors.lightTextColor
+////                self?.timePicker.resignFirstResponder()
+//            }
+//            else
+//            {
+//
+////                self?.timePicker.textColor = AppColors.lightTextColor.withAlphaComponent(0.2)
+////                self?.poorPostionlabel.textColor = AppColors.lightTextColor.withAlphaComponent(0.2)
+////                self?.timePicker.isEnabled = false
+////                self?.timePicker.resignFirstResponder()
+//            }
+//
+//        }
+        
+//        officeRadioBox.isTapped = {
+//            [weak self] (done) in
+//            if done{
+//                self?.gymRadioBox.isChecked = false
+//                self?.poorPostionlabel.textColor = AppColors.lightTextColor
+//                self?.timePicker.isEnabled = true
+//                self?.timePicker.textColor = AppColors.lightTextColor
+//                self?.timePicker.resignFirstResponder()
+//            }
+//            else
+//            {
+//                self?.timePicker.textColor = AppColors.lightTextColor.withAlphaComponent(0.2)
+//                self?.poorPostionlabel.textColor = AppColors.lightTextColor.withAlphaComponent(0.2)
+//                self?.timePicker.isEnabled = false
+//                self?.timePicker.resignFirstResponder()
+//            }
+//        }
         
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(setData), userInfo:nil, repeats: true)
         
@@ -123,6 +159,91 @@ class ModeVC: UIViewController {
         let vc = CalibrationSettings(nibName: "CalibrationSettings", bundle: nil)
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction private func setConfigurationGymMode(_ sender:UIButton)
+    {
+        
+         officeRadioRox.setImage(uncheckedImage, for: .normal)
+         gymRadioBox.setImage(checkedImage, for: .normal)
+        self.timePicker.textColor = AppColors.lightTextColor.withAlphaComponent(0.2)
+        self.poorPostionlabel.textColor = AppColors.lightTextColor.withAlphaComponent(0.2)
+        self.timePicker.isEnabled = false
+        self.timePicker.resignFirstResponder()
+        UserDefaults.standard.removeObject(forKey: "0")
+        UserDefaults.standard.removeObject(forKey: "1")
+        UserDefaults.standard.set("true", forKey: "\(sender.tag)")
+        UserDefaults.standard.synchronize()
+        
+        let dataString = "\(upperLimit),\(lowerLimit),1,0,0"
+        if let charas = _characteristics,let per = _peripheral,let data = dataString.data(using: .utf8)
+        {
+            for characteristic in charas{
+                if characteristic.uuid == writeUUID{
+                    per.writeValue(data, for: characteristic, type: .withResponse)
+                }
+            }
+            
+        }
+        
+//        isSelectTag = s
+//        if isSelectTag != 0 {
+//           officeRadioRox.setImage(uncheckedImage, for: .normal)
+//            gymRadioBox.setImage(checkedImage, for: .selected)
+//
+//        }else{
+//            gymRadioBox.setImage(uncheckedImage, for: .normal)
+//
+//        }
+      
+    }
+    @IBAction private func setConfigurationOfficeMode(sender:UIButton){
+        gymRadioBox.setImage(uncheckedImage, for: .normal)
+        officeRadioRox.setImage(checkedImage, for: .normal)
+        self.poorPostionlabel.textColor = AppColors.lightTextColor
+        self.timePicker.isEnabled = true
+        self.timePicker.textColor = AppColors.lightTextColor
+        self.timePicker.resignFirstResponder()
+        UserDefaults.standard.removeObject(forKey: "0")
+        UserDefaults.standard.removeObject(forKey: "1")
+        UserDefaults.standard.set("true", forKey: "\(sender.tag)")
+        UserDefaults.standard.synchronize()
+        
+        
+        let dataString = "\(upperLimit),\(lowerLimit),1,0,1"
+        if let charas = _characteristics,let per = _peripheral,let data = dataString.data(using: .utf8)
+        {
+            for characteristic in charas{
+                if characteristic.uuid == writeUUID{
+                    per.writeValue(data, for: characteristic, type: .withResponse)
+                }
+            }
+            
+        }
+      
+        
+        
+//        if isSelectTag == 0 {
+//            gymRadioBox.setImage(uncheckedImage, for: .normal)
+//            sender.setImage(checkedImage, for: .selected)
+//        }else{
+//            sender.setImage(uncheckedImage, for: .normal)
+//        }
+//        if sender.isSelected{
+//            //self?.gymRadioBox.isChecked = false
+//            self.gymRadioBox.setImage(uncheckedImage, for: .normal)
+//            self.poorPostionlabel.textColor = AppColors.lightTextColor
+//            self.timePicker.isEnabled = true
+//            self.timePicker.textColor = AppColors.lightTextColor
+//            self.timePicker.resignFirstResponder()
+//        }
+//        else
+//        {
+//            self.timePicker.textColor = AppColors.lightTextColor.withAlphaComponent(0.2)
+//            self.poorPostionlabel.textColor = AppColors.lightTextColor.withAlphaComponent(0.2)
+//            self.timePicker.isEnabled = false
+//            self.timePicker.resignFirstResponder()
+//        }
     }
     
     // MARK: BLE Scanning
@@ -315,10 +436,11 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         
         guard let characteristics = service.characteristics else { return }
-        
+        _peripheral = peripheral
+        _characteristics = characteristics
         for characteristic in characteristics {
             if characteristic.properties.contains(.read) {
-                print("DDDD",characteristic.value)
+                //print("DDDD",characteristic.value)
                 peripheral.readValue(for: characteristic)
             }
             if characteristic.properties.contains(.notify) {
