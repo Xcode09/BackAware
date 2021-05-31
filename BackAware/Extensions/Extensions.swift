@@ -183,3 +183,8 @@ extension String{
 
 
 
+extension UIDevice {
+    static func vibrate() {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+    }
+}

@@ -180,6 +180,24 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
         }
     }
     
+    @IBAction func softCalibrateBtnTapped(_ sender:UIButton)
+    {
+        if sensorValue > 0 {
+            let upperlimit = upperLimit + 115
+            let lowerlimit = lowerLimit - 75
+            guard upperlimit > lowerlimit else {
+                Toast.showToast(superView: self.view, message: "Upper Limit should be getter than lower limit")
+                return
+            }
+            
+            let para : [String:Any] =  ["Flex1Limit":upperlimit,"Flex2Limit":lowerlimit,"Time":TimeAndDateHelper.getDate()]
+            FirebaseDataService.instance.setData(path: FirebaseDbPaths.calibrate, value: para)
+            Toast.showToast(superView: self.view, message: "Auto Calibration Setup Successfully")
+        }else{
+            Toast.showToast(superView: self.view, message: "No sensor data")
+        }
+    }
+    
     func setData(data:[Int]){
         var enteris = [ChartDataEntry]()
         

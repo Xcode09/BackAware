@@ -47,7 +47,8 @@ class ModeVC: UIViewController {
             let picker = UIPickerView()
             picker.delegate = self
             picker.dataSource = self
-            if let tr = UserDefaults.standard.value(forKey: "0") as? String,tr == "true"
+            
+            if let tr = UserDefaults.standard.value(forKey: "1") as? String,tr == "true"
             {
                 timePicker.isEnabled = true
                 timePicker.textColor = #colorLiteral(red: 0.4509803922, green: 0.4509803922, blue: 0.4509803922, alpha: 1)
@@ -150,6 +151,7 @@ class ModeVC: UIViewController {
             manager?.cancelPeripheralConnection(peripheral)
         }
         isConnected = false
+        connectedDevices = 0
         peripherals.removeAll()
         tableView.reloadData()
         
@@ -174,7 +176,11 @@ class ModeVC: UIViewController {
         UserDefaults.standard.removeObject(forKey: "1")
         UserDefaults.standard.set("true", forKey: "\(sender.tag)")
         UserDefaults.standard.synchronize()
-        
+        guard connectedDevices > 0 else {
+            Toast.showToast(superView: self.view, message:noConnectedDevice)
+            return
+            
+        }
         let dataString = "\(upperLimit),\(lowerLimit),1,0,0"
         if let charas = _characteristics,let per = _peripheral,let data = dataString.data(using: .utf8)
         {
@@ -208,8 +214,11 @@ class ModeVC: UIViewController {
         UserDefaults.standard.removeObject(forKey: "1")
         UserDefaults.standard.set("true", forKey: "\(sender.tag)")
         UserDefaults.standard.synchronize()
-        
-        
+        guard connectedDevices > 0 else {
+            Toast.showToast(superView: self.view, message:noConnectedDevice)
+            return
+            
+        }
         let dataString = "\(upperLimit),\(lowerLimit),1,0,1"
         if let charas = _characteristics,let per = _peripheral,let data = dataString.data(using: .utf8)
         {
@@ -272,6 +281,7 @@ class ModeVC: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.tableView.endEditing(true)
         self.view.endEditing(true)
+        timePicker.resignFirstResponder()
     }
 }
 
@@ -303,6 +313,10 @@ extension ModeVC:UITableViewDelegate,UITableViewDataSource{
         
         manager?.connect(peripheral, options: nil)
     }
+    
+    
+    
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
@@ -365,6 +379,7 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         if(!peripherals.contains(peripheral)) {
+            connectedDevices += 1
             peripherals.append(peripheral)
         }
         

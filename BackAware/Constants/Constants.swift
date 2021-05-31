@@ -20,6 +20,10 @@ var lowerLimit = 0
 let checkedImage = UIImage(named: "checkradio")!
 let uncheckedImage = UIImage(named: "uncheckradio")!
 
+var connectedDevices = 0
+
+let noConnectedDevice = "No connected device"
+
 fileprivate let componets = Calendar.current.dateComponents([.year], from: Date())
 fileprivate let currentYear = "\(componets.year ?? 0)"
 
