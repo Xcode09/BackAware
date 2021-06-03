@@ -103,9 +103,9 @@ final class FirebaseDataService:NSObject{
         }
     }
     
-    func checkUserSession(complicationHandler:@escaping ((Result<String,Error>)->Void)){
-        guard let id = UIDevice.current.identifierForVendor?.uuidString else {return}
-        Database.database().reference(withPath: id).observe(.value) { (snapshot) in
+    func checkUserSession(withPath:String,complicationHandler:@escaping ((Result<String,Error>)->Void)){
+//        guard let id = UIDevice.current.identifierForVendor?.uuidString else {return}
+        Database.database().reference(withPath: withPath).observe(.value) { (snapshot) in
             if let _ = snapshot.value as? [String:Any]{
                 let id = Auth.auth().currentUser?.uid ?? ""
                 complicationHandler(.success(id))

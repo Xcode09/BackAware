@@ -43,6 +43,16 @@ class CalibrationSettings: UIViewController {
         navigationItem.title = "Calibration Settings"
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let upperIndex = limitArr.firstIndex(of: "\(upperLimit)") ?? 0
+        pickerUpperLimit = "\(upperLimit)"
+        let lowerIndex = limitArr.firstIndex(of: "\(lowerLimit)") ?? 0
+        pickerLowerLimit = "\(lowerLimit)"
+        upperLimitPicker.selectRow(upperIndex, inComponent: 0, animated: true)
+        lowerLimitPicker.selectRow(lowerIndex, inComponent: 0, animated: true)
+    }
+    
     @IBAction private func showLiveDataTapped(_ sender:UIButton){
         FirebaseDataService.instance.getData(eventType: .value) { [weak self]  (sensorValue) in
             guard let this = self else {return}

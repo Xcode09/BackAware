@@ -8,7 +8,7 @@
 import UIKit
 import Charts
 class TrackTimeGraph: UIViewController,UITextFieldDelegate{
-
+    
     @IBOutlet weak private var lineChart:LineChartView!
     
     //var options = Opt
@@ -24,24 +24,33 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
             testName.returnKeyType = .go
         }
     }
-
+    var goBtn:UIButton?
     @IBOutlet var btns: [UIButton]!{
         didSet{
             btns.forEach { (b) in
-                  
+                
                 b.layer.cornerRadius = 20
                 if b.tag == 0 {
-                    b.layer.borderColor = AppColors.bgColor?.cgColor
+                    goBtn = b
+                    if self.traitCollection.userInterfaceStyle == .dark {
+                        b.layer.borderColor = UIColor.lightGray.cgColor
+                        b.layer.borderWidth = 1
+                        // User Interface is Dark
+                    } else {
+                        // User Interface is Light
+                        b.layer.borderColor = UIColor.white.cgColor
+                        b.layer.borderWidth = 3
+                    }
                 }else{
                     if self.traitCollection.userInterfaceStyle == .dark {
                         b.layer.borderColor = UIColor.lightGray.cgColor
                         b.layer.borderWidth = 1
-                                // User Interface is Dark
-                            } else {
-                                // User Interface is Light
-                                b.layer.borderColor = UIColor.white.cgColor
-                                b.layer.borderWidth = 3
-                            }
+                        // User Interface is Dark
+                    } else {
+                        // User Interface is Light
+                        b.layer.borderColor = UIColor.white.cgColor
+                        b.layer.borderWidth = 3
+                    }
                 }
                 
             }
@@ -72,16 +81,16 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
         l.form = .line
         l.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         l.textColor = .white
-//        l.horizontalAlignment = .left
-//        l.verticalAlignment = .bottom
-//        l.orientation = .horizontal
-//        l.drawInside = false
+        //        l.horizontalAlignment = .left
+        //        l.verticalAlignment = .bottom
+        //        l.orientation = .horizontal
+        //        l.drawInside = false
         
         
         let xAxis = lineChart.xAxis
         xAxis.labelFont = .systemFont(ofSize: 11)
         xAxis.labelTextColor = UIColor.white
-        
+        xAxis.avoidFirstLastClippingEnabled = true
         xAxis.drawAxisLineEnabled = false
         
         let leftAxis = lineChart.leftAxis
@@ -90,10 +99,10 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
         leftAxis.axisMinimum = Double(lowerLimit - 200)
         //leftAxis.drawGridLinesEnabled = true
         //leftAxis.getRequiredHeightSpace()
-//        leftAxis.calculate(min: Double(lowerLimit), max: Double(upperLimit))
+        //        leftAxis.calculate(min: Double(lowerLimit), max: Double(upperLimit))
         leftAxis.granularityEnabled = true
         
-       
+        
         let rightAxis = lineChart.rightAxis
         //rightAxis.drawri
         rightAxis.labelTextColor = .clear
@@ -117,8 +126,8 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
             self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateGraphValues), userInfo: nil, repeats: true)
         }
     }
-
-
+    
+    
     
     @IBAction func goBtnTapped(_ sender:UIButton)
     {
@@ -128,6 +137,7 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
             return
         }
         isGoPress = !isGoPress
+        goBtn?.isEnabled = false
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Go"), object: self)
     }
     
@@ -135,6 +145,7 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
     {
         guard isGoPress != false else {return}
         timer?.invalidate()
+        goBtn?.isEnabled = true
         isGoPress = false
         FirebaseDataService.instance.getTrainingTestData{
             [weak self] dataSet in
@@ -174,7 +185,7 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
             
             let para : [String:Any] =  ["Flex1Limit":upperlimit,"Flex2Limit":lowerlimit,"Time":TimeAndDateHelper.getDate()]
             FirebaseDataService.instance.setData(path: FirebaseDbPaths.calibrate, value: para)
-            Toast.showToast(superView: self.view, message: "Auto Calibration Setup Successfully")
+            Toast.showToast(superView: self.view, message: "Hard Calibration Setup Successfully")
         }else{
             Toast.showToast(superView: self.view, message: "No sensor data")
         }
@@ -192,7 +203,7 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
             
             let para : [String:Any] =  ["Flex1Limit":upperlimit,"Flex2Limit":lowerlimit,"Time":TimeAndDateHelper.getDate()]
             FirebaseDataService.instance.setData(path: FirebaseDbPaths.calibrate, value: para)
-            Toast.showToast(superView: self.view, message: "Auto Calibration Setup Successfully")
+            Toast.showToast(superView: self.view, message: "Soft Calibration Setup Successfully")
         }else{
             Toast.showToast(superView: self.view, message: "No sensor data")
         }
@@ -204,17 +215,29 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
         for i in 0..<data.count{
             enteris.append(ChartDataEntry(x: Double(i), y: Double(data[i])))
         }
-//        let upperSet = ChartDataEntry(x: Double(upperLimit + 200), y: Double(upperLimit + 200))
-//        let lowerSet = ChartDataEntry(x: Double(lowerLimit - 200), y: Double(lowerLimit - 200))
+        //        let upperSet = ChartDataEntry(x: Double(upperLimit + 200), y: Double(upperLimit + 200))
+        //        let lowerSet = ChartDataEntry(x: Double(lowerLimit - 200), y: Double(lowerLimit - 200))
         let set1 = setupSetUI(set: LineChartDataSet(entries: enteris, label: "Sensor Data"), color: .purple)
         let set2 = setupSetUI(set: LineChartDataSet(entries: [ChartDataEntry(x: Double(0), y: Double(0))], label: "Upper Limit"), color: .white)
         let set3 = setupSetUI(set: LineChartDataSet(entries: [ChartDataEntry(x: Double(0), y: Double(0))], label: "Lower Limit"), color:.red)
         let data = LineChartData(dataSets: [set1,set2,set3])
+        //        let leftAxis = lineChart.leftAxis
+        //        leftAxis.labelTextColor = UIColor.white
+        //        leftAxis.axisMaximum = Double(sensorValue + 200)
+        //        leftAxis.axisMinimum = Double(lowerLimit - 200)
+        lineChart.setScaleEnabled(false)
+        
+        lineChart.leftAxis.resetCustomAxisMax()
+        lineChart.leftAxis.resetCustomAxisMin()
+        lineChart.notifyDataSetChanged()
+        
         lineChart.data = data
         
         
+        
+        
     }
-
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.view.endEditing(true)
         testName.resignFirstResponder()
@@ -224,7 +247,7 @@ class TrackTimeGraph: UIViewController,UITextFieldDelegate{
         if textField == testName{
             self.view.endEditing(true)
             testName.resignFirstResponder()
-//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Go"), object: self)
+            //            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Go"), object: self)
         }
         return true
     }

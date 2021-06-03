@@ -8,6 +8,7 @@
 import UIKit
 import UserNotifications
 import BackgroundTasks
+import CoreLocation
 import FirebaseCore
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,14 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        //sleep(2)
         
         setupNavigationAppearance()
         setupTabBarAppearance()
-       
         NotificationService.shared.requestNotificationAuthorization(delegate: self)
-        
         FirebaseApp.configure()
-        
         return true
     }
 
@@ -83,6 +82,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         return true
     }
+    
+    
+    
     
     
 }

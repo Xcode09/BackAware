@@ -438,10 +438,19 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
     }
     
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
-        DispatchQueue.main.async {
-            
-            Toast.showToast(superView: self.view, message: error?.localizedDescription ?? "Error")
+        
+        if error != nil {
+            DispatchQueue.main.async {
+                
+                Toast.showToast(superView: self.view, message: error?.localizedDescription ?? "Error")
+            }
+        }else{
+            DispatchQueue.main.async {
+                Toast.showToast(superView: self.view, message:"Successfully Write Value")
+            }
         }
+        
+        
     }
     
     
@@ -480,6 +489,9 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
             
             
             
+        }
+        if characteristic.uuid == writeUUID{
+            print("Data is writed")
         }
         // END if characteristic.uuid ==..
     }

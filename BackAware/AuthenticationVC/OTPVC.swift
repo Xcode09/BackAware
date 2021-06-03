@@ -106,16 +106,18 @@ class OTPVC: UIViewController {
         FirebaseDataService.instance.verifyOTP(with: id, verificationCode: verificationCode) { (result) in
             DispatchQueue.main.async {
                 [weak self] in
-                guard let this = self,
-                      let deviceId = UIDevice.current.identifierForVendor?.uuidString
+                guard let this = self
                       else {return}
                 switch result{
                 case .success(let uid):
                     currentUserId = uid
+                    UserDefaults.standard.setValue(this.number, forKey: "login")
+                    UserDefaults.standard.synchronize()
                     FirebaseDataService.instance.configureReference()
                     DispatchQueue.main.asyncAfter(deadline: .now()+3) {
                         [weak self] in
-                        FirebaseDataService.instance.storeUserDevice(path: deviceId, value: ["login":true])
+                        guard let self = self else {return}
+                        FirebaseDataService.instance.storeUserDevice(path: self.number, value: ["login":true])
                         FirebaseDataService.instance.setData(path: FirebaseDbPaths.calibrate, value: ["Flex1Limit":0,"Flex2Limit":0, "Time": TimeAndDateHelper.getDate()])
                         FirebaseDataService.instance.setData(path: FirebaseDbPaths.sensorData, value: ["Data1":0,"Data2":0, "Time": TimeAndDateHelper.getDate()])
                         FirebaseDataService.instance.setData(path: FirebaseDbPaths.statistics, value: ["good":0,"poorExtension":0, "poorFlex":0,"Time": TimeAndDateHelper.getDate()])

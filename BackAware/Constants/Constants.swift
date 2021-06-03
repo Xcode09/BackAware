@@ -16,7 +16,7 @@ var currentUserId = ""
 var upperLimit = 0
 var lowerLimit = 0
 
-
+var mainWindow = UIWindow()
 let checkedImage = UIImage(named: "checkradio")!
 let uncheckedImage = UIImage(named: "uncheckradio")!
 

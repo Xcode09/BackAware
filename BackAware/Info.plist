@@ -79,6 +79,18 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>BackAware requires location permissions for connectivity with Belt all the time.
+
+BackAware will use location in a foreground to scan nearby belt for tracking your posture.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>BackAware requires location permissions for connectivity with Belt all the time.
+
+BackAware will use location in a foreground to scan nearby belt for tracking your posture.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>BackAware requires location permissions for connectivity with Belt all the time.
+
+BackAware will use location in a foreground to scan nearby belt for tracking your posture.</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
