@@ -20,6 +20,9 @@ class ModeVC: UIViewController {
     private var secondsArr = [Int]()
     private var defualtColor : UIColor?
     private var isConnected = false
+    private var centralBLEDeviceName = "Unknown Device"
+    private lazy var selectedIndexPath : IndexPath = IndexPath()
+//    private lazy var deSelectedIndexPath : IndexPath = IndexPath()
     private var isSelectTag = 0
     private var _peripheral : CBPeripheral?
     private var _characteristics: [CBCharacteristic]?
@@ -153,6 +156,7 @@ class ModeVC: UIViewController {
         isConnected = false
         connectedDevices = 0
         peripherals.removeAll()
+        selectedIndexPath = IndexPath()
         tableView.reloadData()
         
     }
@@ -181,7 +185,8 @@ class ModeVC: UIViewController {
             return
             
         }
-        let dataString = "\(upperLimit),\(lowerLimit),1,0,0"
+        // Flag value is at after forthComma
+        let dataString = "\(upperLimit),\(lowerLimit),1,0,6"
         if let charas = _characteristics,let per = _peripheral,let data = dataString.data(using: .utf8)
         {
             for characteristic in charas{
@@ -219,7 +224,7 @@ class ModeVC: UIViewController {
             return
             
         }
-        let dataString = "\(upperLimit),\(lowerLimit),1,0,1"
+        let dataString = "\(upperLimit),\(lowerLimit),1,0,5"
         if let charas = _characteristics,let per = _peripheral,let data = dataString.data(using: .utf8)
         {
             for characteristic in charas{
@@ -265,10 +270,10 @@ class ModeVC: UIViewController {
         // STEP 2: create a central to scan for, connect to,
         // manage, and collect data from peripherals
         manager = CBCentralManager(delegate: self, queue: centralQueue)
-        //manager?.scanForPeripherals(withServices: nil)
+//        manager?.scanForPeripherals(withServices: [serviceId], options: nil)
         
         //stop scanning after 3 seconds
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
             self.stopScanForBLEDevices()
         }
     }
@@ -297,21 +302,21 @@ extension ModeVC:UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SettingCell
         cell.backgroundColor = AppColors.tableViewColor
         let peripheral = peripherals[indexPath.row]
-        cell.bleNameLabel.text = "\(peripheral.name ?? "Unknown Device")"
-        cell.bleAddressLabel.text = "80:7D:3A:B7:6E:82"
-        cell.detailLabel.text = "Disconnected"
-        if isConnected{
-            cell.bleNameLabel.text = "\(peripheral.name ?? "Unknown Device")"
-            cell.bleAddressLabel.text = "80:7D:3A:B7:6E:82"
+        cell.tag = indexPath.row
+        cell.bleNameLabel.text = "\(centralBLEDeviceName)"
+        cell.bleAddressLabel.text = peripheral.identifier.uuidString
+        if selectedIndexPath == indexPath {
             cell.detailLabel.text = "Connected"
+            let selectPeripheral = peripherals[selectedIndexPath.row]
+            manager?.connect(selectPeripheral, options: nil)
+        }else{
+            cell.detailLabel.text = "Disconnected"
         }
-        
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let peripheral = peripherals[indexPath.row]
-        
-        manager?.connect(peripheral, options: nil)
+        selectedIndexPath = indexPath
+        tableView.reloadData()
     }
     
     
@@ -378,11 +383,19 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        if(!peripherals.contains(peripheral)) {
+        
+//        debugPrint(peripheral)
+//        debugPrint(advertisementData)
+//        if(!peripherals.contains(peripheral)) {
+//            connectedDevices += 1
+//            peripherals.append(peripheral)
+//        }
+        if let localName = advertisementData["kCBAdvDataLocalName"] as? String,localName == bleDeviceName
+        {
             connectedDevices += 1
+            centralBLEDeviceName = advertisementData["kCBAdvDataLocalName"] as! String
             peripherals.append(peripheral)
         }
-        
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -393,15 +406,15 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
         //pass reference to connected peripheral to parent view
         //            parentView?.mainPeripheral = peripheral
         peripheral.delegate = self
-        peripheral.discoverServices(nil)
-        
-        //set the manager's delegate view to parent so it can call relevant disconnect methods
-        //        manager?.delegate = self
-        DispatchQueue.main.async {
-            [weak self] in
-            self?.isConnected = true
-            self?.tableView.reloadData()
+        DispatchQueue.global(qos: .background).async {
+            peripheral.discoverServices(nil)
         }
+        manager?.delegate = self
+//        DispatchQueue.main.async {
+//            [weak self] in
+//            self?.isConnected = true
+//            self?.tableView.reloadData()
+//        }
         print("Connected to " +  peripheral.name!)
     }
     
@@ -477,8 +490,6 @@ extension ModeVC:CBCentralManagerDelegate,CBPeripheralDelegate{
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         
-        
-        
         if characteristic.uuid == readUUID {
             
             // STEP 13: we generally have to decode BLE
@@ -553,6 +564,7 @@ extension ModeVC:UIPickerViewDelegate,UIPickerViewDataSource{
 
 
 class SettingCell:UITableViewCell{
+    var didTappedConnectDevice:((SettingCell)->Void)?
     let bleNameLabel : UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -566,6 +578,8 @@ class SettingCell:UITableViewCell{
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textColor = AppColors.labelColor
         lbl.font = UIFont.systemFont(ofSize: 12)
+        lbl.numberOfLines = 0
+        lbl.minimumScaleFactor = 0.6
         lbl.textAlignment = .left
         return lbl
     }()
@@ -574,8 +588,10 @@ class SettingCell:UITableViewCell{
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textColor = AppColors.connectStatus
-        lbl.font = UIFont.systemFont(ofSize: 14)
+        lbl.font = UIFont.systemFont(ofSize: 12)
         lbl.textAlignment = .left
+        lbl.isUserInteractionEnabled = true
+//        lbl.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapConnect)))
         lbl.numberOfLines = 0
         return lbl
     }()
@@ -614,4 +630,14 @@ class SettingCell:UITableViewCell{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    @objc private func didTapConnect(){
+        didTappedConnectDevice?(self)
+    }
+    
 }
+//if isConnected{
+//    cell.bleNameLabel.text = "\(peripheral.name ?? "Unknown Device")"
+//    cell.bleAddressLabel.text = ""
+//    cell.detailLabel.text = "Connected"
+//}

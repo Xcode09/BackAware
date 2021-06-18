@@ -8,6 +8,7 @@
 import UIKit
 import Charts
 let APP_DATE_FORMATE = "yyyy-MM-dd"
+
 let notifyNotification = Notification.Name(rawValue: "notifyTimer")
 let poorPositionCheckNotification = Notification.Name(rawValue: "poorPositionCheckNotification")
 
@@ -15,7 +16,7 @@ var currentUserId = ""
 
 var upperLimit = 0
 var lowerLimit = 0
-
+var bleDeviceName = "BackAware00001"
 var mainWindow = UIWindow()
 let checkedImage = UIImage(named: "checkradio")!
 let uncheckedImage = UIImage(named: "uncheckradio")!
